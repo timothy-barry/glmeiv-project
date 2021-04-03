@@ -11,7 +11,7 @@ for (dir in data_results_logs) {
   # create (if necessary)
   if (!dir.exists(dir)) dir.create(dir)
   # delete contents
-  file.remove(list.files(data_results_logs[[1]], full.names = TRUE))
+  file.remove(list.files(dir, full.names = TRUE))
 }
 
 # load package
