@@ -3,6 +3,8 @@
 # script is being run; the optional boolean indicates whether to run on a small
 # test example (TRUE) or the full data (FALSE).
 
+# ex: bash run_simulation.bash local TRUE
+
 case $1 in
   local)
   simulation_dir="/Users/timbarry/Box/glm-eiv/simulation_dir"

@@ -16,7 +16,7 @@ g <- readRDS(paste0(data_results_logs[["data"]], "/parameter_df.rds"))
 curr_row <- g[run_id,]
 sink(file = paste0(data_results_logs[["logs"]], "/log_", curr_row$run_id, ".Rout"))
 data <- readRDS(file = paste0(data_results_logs[["data"]], "/data_", curr_row$run_id, ".rds"))
-ground_truth <- readRDS(file = paste0(data_results_logs[["data"]], "/ground_truth_", curr_row$run_id, ".rds"))
+ground_truth <- readRDS(file = paste0(data_results_logs[["data"]], "/ground_truth_", curr_row$param_id, ".rds"))
 covariate_matrix <- readRDS(file = paste0(data_results_logs[["data"]], "/covariate_matrix_", curr_row$dataset_id, ".rds"))
 
 # run the em length(data) times
@@ -26,7 +26,7 @@ result_list <- lapply(X = seq(1, length(data)), FUN = function(i) {
   em_fit <- run_glmeiv_known_p(m = curr_data$m, g = curr_data$g,
                      m_fam = ground_truth$m_fam, g_fam = ground_truth$g_fam,
                      covariate_matrix = covariate_matrix, p = curr_data$p, n_runs = 5) %>%
-    mutate(rep_id = paste0(curr_row$run_id, "-", i), parm_id = curr_row$param_id)
+    mutate(rep_id = paste0(curr_row$run_id, "-", i), param_id = curr_row$param_id)
   return(em_fit)
 })
 
