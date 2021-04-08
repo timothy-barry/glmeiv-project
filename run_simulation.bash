@@ -20,3 +20,6 @@ n_row=$(Rscript "setup_simulation.R" $simulation_dir ${2:-TRUE})
 
 # 2. run the simulation in parallel with xargs
 seq 1 $n_row | xargs -n 1 -P 40 -I {} Rscript "fit_simulated_data.R" $simulation_dir {}
+
+# 3. combine the results
+Rscript "combine_results.R" $simulation_dir

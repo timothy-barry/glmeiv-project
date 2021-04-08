@@ -4,7 +4,7 @@ simulation_dir <- if (is.na(args[1])) "~/Box/glm-eiv/simulation_dir" else args[1
 run_id <- if (is.na(args[2])) 1 else as.integer(args[2])
 
 # Load required packages
-library(dplyr)
+library(magrittr)
 library(glmeiv)
 
 # set file paths and load parameter grid; sik results
@@ -25,8 +25,9 @@ result_list <- lapply(X = seq(1, length(data)), FUN = function(i) {
   curr_data <- data[[i]]
   em_fit <- run_glmeiv_known_p(m = curr_data$m, g = curr_data$g,
                      m_fam = ground_truth$m_fam, g_fam = ground_truth$g_fam,
-                     covariate_matrix = covariate_matrix, p = curr_data$p, n_runs = 5) %>%
-    mutate(rep_id = paste0(curr_row$run_id, "-", i), param_id = curr_row$param_id)
+                     covariate_matrix = covariate_matrix, p = curr_data$p, n_runs = 5,
+                     alpha = 0.9) %>% dplyr::mutate(rep_id = paste0(curr_row$run_id, "-", i),
+                                                    param_id = curr_row$param_id)
   return(em_fit)
 })
 
