@@ -37,7 +37,8 @@ g <- expand.grid(partition_id = seq(1, 10),
   mutate(param_id = rep(1:(length(partition_id)/n_partitions), each = n_partitions),
                 run_id = paste0(param_id, "-", partition_id),
                 dataset_id = factor(n, data_sizes, 1:length(data_sizes))) %>%
-  select(param_id, partition_id, run_id, dataset_id, everything())
+  select(param_id, partition_id, run_id, dataset_id, everything()) %>%
+  filter((n < 100000) | (n == 100000 & beta_m0 == 1 & beta_g1 == 2)) 
 saveRDS(object = g, file = paste0(data_results_logs[["data"]], "/parameter_df.rds"))
 if (small_example) g <- slice(g, seq(1, 20))
 cat(nrow(g))
@@ -59,7 +60,7 @@ m_slope <- -2
 g_intercept <- -2
 
 # generate the data in parallel
-plan(multicore(workers = 10))
+plan(multicore(workers = 40))
 
 suppressWarnings(future_map(.x = unique(g$param_id), .f = function(i) {
   # set seed within each param setting
