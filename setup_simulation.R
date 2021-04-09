@@ -59,7 +59,8 @@ m_slope <- -2
 g_intercept <- -2
 
 # generate the data in parallel
-plan(multicore)
+plan(multicore(workers = 10))
+
 suppressWarnings(future_map(.x = unique(g$param_id), .f = function(i) {
   # set seed within each param setting
   set.seed(16)
