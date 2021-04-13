@@ -1,4 +1,4 @@
-# coefficients: m_intercept 0, 1, 2, 3
+# coefficients: m_intercept 1, 2, 3
 # m_slope: -2
 # g_intercept: -2
 # g_slope: 1, 2, 3, 4
@@ -28,17 +28,16 @@ library(furrr)
 
 # define parameter data frame
 n_partitions <- 10
-data_sizes <- c(1000, 10000, 100000)
+data_sizes <- c(1000, 10000)
 n_reps_per_row <- if (small_example) 5 else 100
 g <- expand.grid(partition_id = seq(1, 10),
-                 beta_m0 = seq(0, 3),
+                 beta_m0 = seq(1, 3),
                  n = data_sizes,
                  beta_g1 = seq(1, 4)) %>%
   mutate(param_id = rep(1:(length(partition_id)/n_partitions), each = n_partitions),
                 run_id = paste0(param_id, "-", partition_id),
                 dataset_id = factor(n, data_sizes, 1:length(data_sizes))) %>%
-  select(param_id, partition_id, run_id, dataset_id, everything()) %>%
-  filter((n < 100000) | (n == 100000 & beta_m0 == 1 & beta_g1 == 2)) 
+  select(param_id, partition_id, run_id, dataset_id, everything())
 saveRDS(object = g, file = paste0(data_results_logs[["data"]], "/parameter_df.rds"))
 if (small_example) g <- slice(g, seq(1, 20))
 cat(nrow(g))
@@ -74,7 +73,6 @@ suppressWarnings(future_map(.x = unique(g$param_id), .f = function(i) {
   data <- replicate(n_reps_per_row * n_partitions, generate_data_from_model(m_fam = m_fam, g_fam = g_fam,
                                                      m_coef = m_coef, g_coef = g_coef,
                                                      pi = pi, covariate_matrix = covariate_matrix, n = n), simplify = FALSE)
-  
   v <- seq(0, n_reps_per_row * n_partitions, n_reps_per_row)
   for (j in seq(1, n_partitions)) {
    run_id <- curr_param_subset$run_id[j]
