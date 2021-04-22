@@ -28,8 +28,8 @@ library(furrr)
 
 # define parameter data frame
 n_partitions <- 10
-data_sizes <- c(1000, 10000)
-n_reps_per_row <- if (small_example) 5 else 100
+data_sizes <- c(1000, 5000)
+n_reps_per_row <- if (small_example) 5 else 200
 g <- expand.grid(partition_id = seq(1, 10),
                  beta_m0 = seq(1, 3),
                  n = data_sizes,

@@ -10,14 +10,19 @@ library(ggplot2)
 library(dplyr)
 library(gridExtra)
 
-colnames(results)[colnames(results) == "m_perturbation"] <- "m_pert"
-colnames(results)[colnames(results) == "g_perturbation"] <- "g_pert"
+colnames(results)[colnames(results) == "m_(Intercept)"] <- "m_intercept"
+colnames(results)[colnames(results) == "g_(Intercept)"] <- "g_intercept"
 
 summary_plot_for_var <- function(variable, results) {
 res_var <- filter(results, variable == !!variable)
-to_plot <- res_var %>% mutate(n = factor(n))
+to_plot <- res_var %>% mutate(n = factor(n),
+                              m_intercept = paste("m-int=", m_intercept),
+                              g_perturbation = paste("g-pert=", g_perturbation))
+free <- if (variable %in% c("g_perturbation", "m_(Intercept)")) "free_y" else "fixed"
+form <- if (variable == "g_perturbation") "g_perturbation ~ m_intercept" else "m_intercept ~ g_perturbation"
+
 p1 <- ggplot(data = to_plot, aes(x = n, y = mean_estimate)) + 
-  facet_grid(m_pert ~ g_pert, labeller = label_context, scales = "free_y") +
+  facet_grid(form, labeller = label_context, scales = free) +
   geom_hline(mapping = aes(yintercept = gt_value), col = "blue") + 
   geom_point() + geom_errorbar(aes(ymin = mean_lower_ci, ymax = mean_upper_ci, width = 0.2), col = "red") +
   theme_bw() +
@@ -26,11 +31,11 @@ p1 <- ggplot(data = to_plot, aes(x = n, y = mean_estimate)) +
   theme(plot.title = element_text(hjust = 0.5))
 
 p2 <- ggplot(data = to_plot, aes(x = n, y = coverage)) + 
-  facet_wrap(. ~ m_pert + g_pert, labeller = label_context) +
+  facet_grid(form, labeller = label_context) +
   geom_point() + theme_bw() + 
   ggtitle(paste0("CI coverage rate for ", variable)) + 
   ylab("Coverage probability") +
-  geom_hline(mapping = aes(yintercept = 0.95), col = "blue") +
+  geom_hline(mapping = aes(yintercept = 0.90), col = "blue") +
   geom_errorbar(aes(ymin = coverage_lower_ci, ymax = coverage_upper_ci, width = 0.2), col = "red") +
   theme(plot.title = element_text(hjust = 0.5))
   

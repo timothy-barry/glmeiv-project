@@ -10,8 +10,7 @@ library(tidyr)
 res_dir <- paste0(simulation_dir, "/results")
 fs <- list.files(res_dir, full.names = TRUE)[ grep(pattern = "^result_*", x = list.files(res_dir))]
 all_res <- lapply(fs, readRDS) %>% do.call(what = rbind, args = .)
-if ("parm_id" %in% colnames(all_res)) all_res <- mutate(all_res, param_id = parm_id)
-var_names <- filter(all_res, rep_id == "1-1-1") %>% pull(variable)
+var_names <- filter(all_res, rep_id == "1-1-1") %>% pull(variable) %>% unique()
 
 # load the ground truth
 data_dir <- paste0(simulation_dir, "/data")
@@ -23,27 +22,21 @@ all_gt <- lapply(fs_load, readRDS) %>% lapply(., function(gt) {
   return(m)
 }) %>% do.call(what = rbind, args = .) %>% as.data.frame()
 
-# recall the number of reps per row and number of partitions
-n_reps_per_row <- if (small_example) 5 else 500
-n_partitions <- 10
-n_reps_total <- n_reps_per_row * n_partitions
-
 # a function to compute the coverage across all param_ids of a given variable
 compute_statistics_for_variable <- function(variable, all_res, all_gt) {
   gt_var <- select(all_gt, param_id, !!variable)
-  res_var <- filter(all_res, variable == !!variable) %>% select(estimate, confint_lower, confint_higher, rep_id, param_id)
+  res_var <- filter(all_res, variable == !!variable) %>% select(estimate, confint_lower, confint_higher, rep_id, param_id, method)
   res_var$gt_value <- pull(gt_var, !!variable)[match(x = res_var$param_id, table = gt_var$param_id)]
-  n <- 
   out <- res_var %>% mutate(covered = (gt_value >= confint_lower & gt_value <= confint_higher)) %>%
-    group_by(param_id) %>% summarize(coverage = mean(covered),
+    group_by(param_id, method) %>% summarize(coverage = mean(covered),
                                      mean_estimate = mean(estimate),
                                      mean_lower_ci = mean(confint_lower),
                                      mean_upper_ci = mean(confint_higher),
                                      variable = variable,
                                      gt_value = gt_value[1],
-                                     coverage_lower_ci = coverage - 1.96 * sqrt(coverage * (1-coverage)/n_reps_total),
-                                     coverage_upper_ci = coverage + 1.96 * sqrt(coverage * (1-coverage)/n_reps_total)) %>%
-    select(variable, param_id, gt_value, everything())
+                                     coverage_lower_ci = coverage - 1.96 * sqrt(coverage * (1-coverage)/n()),
+                                     coverage_upper_ci = coverage + 1.96 * sqrt(coverage * (1-coverage)/n())) %>% 
+    ungroup() %>% select(variable, param_id, method, gt_value, everything())
   return(out)
 }
 

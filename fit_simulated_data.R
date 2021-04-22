@@ -23,12 +23,26 @@ covariate_matrix <- readRDS(file = paste0(data_results_logs[["data"]], "/covaria
 result_list <- lapply(X = seq(1, length(data)), FUN = function(i) {
   print(paste0("Running rep ", i, " of ", length(data)))
   curr_data <- data[[i]]
+  
+  # first, obtain the optimal threshold
+  p_hat <- threshold_counts_no_covariates(g_intercept = ground_truth$g_coef[1],
+                                          g_pert =  ground_truth$g_coef[2],
+                                          g = curr_data$g,
+                                          g_fam = ground_truth$g_fam,
+                                          pi = ground_truth$pi)
   em_fit <- run_glmeiv_known_p(m = curr_data$m, g = curr_data$g,
                      m_fam = ground_truth$m_fam, g_fam = ground_truth$g_fam,
-                     covariate_matrix = covariate_matrix, p = curr_data$p, n_runs = 5,
-                     max_it = 100, alpha = 0.9) %>% dplyr::mutate(rep_id = paste0(curr_row$run_id, "-", i),
-                                                    param_id = curr_row$param_id)
-  return(em_fit)
+                     covariate_matrix = covariate_matrix, p = p_hat, n_runs = 5,
+                     max_it = 100, alpha = 0.9) %>% dplyr::mutate(method = "em")
+  thresh_fit <- run_thresholding_method(m = curr_data$m,
+                                        m_fam = ground_truth$m_fam,
+                                        covariate_matrix = covariate_matrix,
+                                        p_hat = p_hat,
+                                        alpha = 0.9) %>% dplyr::mutate(method = "threshold")
+  out <- rbind(em_fit, thresh_fit) %>% dplyr::mutate(rep_id = paste0(curr_row$run_id, "-", i),
+                                                     param_id = curr_row$param_id)
+  
+  return(out)
 })
 
 # combine results into a data frame and save in results dir
