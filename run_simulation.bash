@@ -8,18 +8,20 @@
 case $1 in
   local)
   simulation_dir="/Users/timbarry/Box/glm-eiv/simulation_dir"
+  scripts_dir="/Users/timbarry/Box/glm-eiv/glmeiv_scripts"
   ;;
   uberduo)
   simulation_dir="/raid6/Tim/glmeiv_offsite/simulation_dir"
+  scripts_dir="/home/tbarry2/glmeiv_scripts"
   ;;
 esac
 
 
 # 1. generate the synthetic data
-n_row=$(Rscript "setup_simulation.R" $simulation_dir ${2:-TRUE})
+n_row=$(Rscript "setup_simulation.R" $simulation_dir $scripts_dir ${2:-TRUE})
 
 # 2. run the simulation in parallel with xargs
-seq 1 $n_row | xargs -n 1 -P 50 -I {} Rscript "fit_simulated_data.R" $simulation_dir {}
+seq 1 $n_row | xargs -n 1 -P 50 -I {} Rscript "fit_simulated_data.R" $simulation_dir $scripts_dir {}
 
 # 3. combine the results
-Rscript "combine_results.R" $simulation_dir
+# Rscript "combine_results.R" $simulation_dir

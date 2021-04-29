@@ -28,14 +28,16 @@ compute_statistics_for_variable <- function(variable, all_res, all_gt) {
   res_var <- filter(all_res, variable == !!variable) %>% select(estimate, confint_lower, confint_higher, rep_id, param_id, method)
   res_var$gt_value <- pull(gt_var, !!variable)[match(x = res_var$param_id, table = gt_var$param_id)]
   out <- res_var %>% mutate(covered = (gt_value >= confint_lower & gt_value <= confint_higher)) %>%
-    group_by(param_id, method) %>% summarize(coverage = mean(covered),
-                                     mean_estimate = mean(estimate),
-                                     mean_lower_ci = mean(confint_lower),
-                                     mean_upper_ci = mean(confint_higher),
-                                     variable = variable,
-                                     gt_value = gt_value[1],
-                                     coverage_lower_ci = coverage - 1.96 * sqrt(coverage * (1-coverage)/n()),
-                                     coverage_upper_ci = coverage + 1.96 * sqrt(coverage * (1-coverage)/n())) %>% 
+    group_by(param_id, method) %>% summarize(
+      n_success_ci = sum(!is.na(confint_lower)),
+      coverage = mean(covered, na.rm = TRUE),
+      mean_estimate = mean(estimate, na.rm = TRUE),
+      mean_lower_ci = mean(confint_lower, na.rm = TRUE),
+      mean_upper_ci = mean(confint_higher, na.rm = TRUE),
+      variable = variable,
+      gt_value = gt_value[1],
+      coverage_lower_ci = coverage - 1.96 * sqrt(coverage * (1-coverage)/n_success_ci),
+      coverage_upper_ci = coverage + 1.96 * sqrt(coverage * (1-coverage)/n_success_ci)) %>% 
     ungroup() %>% select(variable, param_id, method, gt_value, everything())
   return(out)
 }
