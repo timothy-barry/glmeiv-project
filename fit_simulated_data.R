@@ -2,7 +2,7 @@
 args <- commandArgs(trailingOnly = TRUE)
 simulation_dir <- if (is.na(args[1])) "~/Box/glm-eiv/simulation_dir" else args[1]
 scripts_dir <- if (is.na(args[2])) "~/Box/glm-eiv/glmeiv_scripts" else args[2]
-run_id <- if (is.na(args[3])) 1 else as.integer(args[2])
+run_id <- if (is.na(args[3])) 1 else as.integer(args[3])
 
 # Load required packages
 library(magrittr)
@@ -19,7 +19,7 @@ data <- readRDS(file = paste0(data_results_logs[["data"]], "/data_", curr_row$ru
 
 # load the covariate matrix
 curr_n <- if (n_fixed) fixed_params[["n"]] else curr_row[["n"]]
-curr_covariate_matrix <- readRDS(paste0(data_results_logs[["data"]], "/covariate_matrix_", curr_n, ".rds"))
+curr_covariate_matrix <- if (no_covariates) NULL else readRDS(paste0(data_results_logs[["data"]], "/covariate_matrix_", curr_n, ".rds"))
 
 g_coefs <- get_param_vector(fixed_params, curr_row, g_coef_names)
 m_coefs <- get_param_vector(fixed_params, curr_row, g_coef_names)

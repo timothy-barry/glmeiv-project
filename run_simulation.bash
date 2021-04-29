@@ -24,4 +24,4 @@ n_row=$(Rscript "setup_simulation.R" $simulation_dir $scripts_dir ${2:-TRUE})
 seq 1 $n_row | xargs -n 1 -P 50 -I {} Rscript "fit_simulated_data.R" $simulation_dir $scripts_dir {}
 
 # 3. combine the results
-# Rscript "combine_results.R" $simulation_dir
+Rscript "combine_results.R" $simulation_dir $scripts_dir

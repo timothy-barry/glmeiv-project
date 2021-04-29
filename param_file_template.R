@@ -20,15 +20,19 @@
 
 m_fam <- poisson()
 g_fam <- poisson()
-m_coef_names <- c("m_intercept", "m_perturbation")
-g_coef_names <- c("g_intercept", "g_perturbation")
+m_coef_names <- c("m_intercept", "m_perturbation", "m_p_mito")
+g_coef_names <- c("g_intercept", "g_perturbation", "g_p_mito")
 fixed_params <- c(m_intercept = 2,
+                  m_p_mito = 1,
                   g_intercept = 1,
-                  n = 5000)
-varying_params <- expand.grid(pi = seq(0.1, 0.5, 0.1),
+                  g_p_mito = 0.5)
+varying_params <- expand.grid(n = c(1000, 5000),
+                              pi = seq(0.1, 0.5, 0.1),
                               m_perturbation = seq(0, -1, -0.1),
-                              g_perturbation = seq(0, 1, 0.1))
-covariate_sampler <- NULL
+                              g_perturbation = seq(0.1, 1, 0.1))
+covariate_sampler <- list(
+  p_mito = function(n) runif(n = n, min = 0, max = 10)
+)
 n_outer_reps <- 10
 n_inner_reps <- 200
 ci_coverage <- 0.9
