@@ -10,6 +10,7 @@ library(tidyr)
 source(paste0(scripts_dir, "/param_file.R"))
 var_names <- colnames(varying_params)
 g <- readRDS(paste0(data_results_logs[["data"]], "/parameter_df.rds"))
+for (fixed_param in names(fixed_params)) g[[fixed_param]] <- fixed_params[[fixed_param]]
 gt_long <- g %>% select(-partition_id, -run_id) %>% distinct() %>%
   pivot_longer(cols = -param_id, names_to = "variable", values_to = "gt_value")
 
@@ -17,6 +18,8 @@ gt_long <- g %>% select(-partition_id, -run_id) %>% distinct() %>%
 res_dir <- paste0(simulation_dir, "/results")
 fs <- list.files(res_dir, full.names = TRUE)[grep(pattern = "^result_*", x = list.files(res_dir))]
 all_res <- lapply(fs, readRDS) %>% do.call(what = rbind, args = .)
+all_res$variable[all_res$variable == "m_(Intercept)"] <- "m_intercept"
+all_res$variable[all_res$variable == "g_(Intercept)"] <- "g_intercept"
 
 # for the varying parameters, compute the summary statistics
 x <- all_res %>% left_join(x = ., y = gt_long, by = c("param_id", "variable")) %>%
