@@ -25,9 +25,9 @@ g_coef_names <- c("g_intercept", "g_perturbation")
 fixed_params <- c(m_intercept = 2,
                   g_intercept = 1,
                   n = 5000)
-varying_params <- expand.grid(pi = seq(0.1, 0.5, 0.1),
-                              m_perturbation = seq(0, -1, -0.1),
-                              g_perturbation = seq(0, 1, 0.1))
+varying_params <- rbind(data.frame(pi = 0.2, m_perturbation = seq(0, -1, -0.1), g_perturbation = 1),
+                        data.frame(pi = 0.2, m_perturbation = -1, g_perturbation = seq(0, 1, 0.1)),
+                        data.frame(pi = seq(0.05, 0.5, 0.05), m_perturbation = -1, g_perturbation = 1)) %>% dplyr::distinct()
 covariate_sampler <- NULL
 n_outer_reps <- 10
 n_inner_reps <- 200

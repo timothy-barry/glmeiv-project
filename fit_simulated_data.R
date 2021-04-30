@@ -29,7 +29,7 @@ result_list <- lapply(X = seq(1, length(data)), FUN = function(i) {
   print(paste0("Running rep ", i, " of ", length(data)))
   curr_data <- data[[i]]
   
-  # first, obtain the optimal threshold (just ignore covariates -- thresholding method cannot really handle this)
+  # first, obtain the optimal threshold (just ignore covariates -- thresholding method cannot really handle those)
   p_hat <- threshold_counts_no_covariates(g_intercept = g_coefs[["g_intercept"]],
                                           g_pert = g_coefs[["g_perturbation"]],
                                           g = curr_data$g,

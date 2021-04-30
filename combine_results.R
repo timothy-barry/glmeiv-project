@@ -8,11 +8,10 @@ library(tidyr)
 
 # load the set of parameters
 source(paste0(scripts_dir, "/param_file.R"))
-var_names <- colnames(varying_params)
-g <- readRDS(paste0(data_results_logs[["data"]], "/parameter_df.rds"))
-for (fixed_param in names(fixed_params)) g[[fixed_param]] <- fixed_params[[fixed_param]]
-gt_long <- g %>% select(-partition_id, -run_id) %>% distinct() %>%
-  pivot_longer(cols = -param_id, names_to = "variable", values_to = "gt_value")
+g <- readRDS(paste0(data_results_logs[["data"]], "/parameter_df.rds")) %>% select(-partition_id, -run_id) %>% distinct()
+g_full <- g
+for (fixed_param in names(fixed_params)) g_full[[fixed_param]] <- fixed_params[[fixed_param]]
+gt_long <- g_full %>% pivot_longer(cols = -param_id, names_to = "variable", values_to = "gt_value")
 
 # load the results
 res_dir <- paste0(simulation_dir, "/results")
@@ -34,9 +33,7 @@ x <- all_res %>% left_join(x = ., y = gt_long, by = c("param_id", "variable")) %
     coverage_lower_ci = coverage - 1.96 * sqrt(coverage * (1-coverage)/n_success_ci),
     coverage_upper_ci = coverage + 1.96 * sqrt(coverage * (1-coverage)/n_success_ci),
     gt_value = gt_value[1]) %>% ungroup()
-# append n, if necessary
-if (!n_fixed) {
-  x <- gt_long %>% filter(variable == "n") %>% select(param_id, "n" = "gt_value") %>% left_join(x = x, y = ., by = "param_id")
-}
 
-saveRDS(object = x, file = paste0(data_results_logs[["results"]], "/combined_results.rds"))
+# Finally, append all varying params
+x_final <- x %>% left_join(x = ., y = g, by = "param_id")
+saveRDS(object = x_final, file = paste0(data_results_logs[["results"]], "/combined_results.rds"))
