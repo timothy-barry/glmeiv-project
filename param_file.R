@@ -17,6 +17,7 @@
 
 # The following params should be declared across fixed_params and varying_params:
 # m_intercept, m_perturbation, g_intercept, g_perturbation, n, pi.
+library(magrittr)
 
 m_fam <- poisson()
 g_fam <- poisson()
