@@ -25,7 +25,7 @@ m_coef_names <- c("m_intercept", "m_perturbation")
 g_coef_names <- c("g_intercept", "g_perturbation")
 fixed_params <- c(m_intercept = 2,
                   g_intercept = 1,
-                  n = 5000)
+                  n = 1000)
 varying_params <- rbind(data.frame(pi = 0.2, m_perturbation = seq(0, -1, -0.1), g_perturbation = 1),
                         data.frame(pi = 0.2, m_perturbation = -1, g_perturbation = seq(0, 1, 0.1)),
                         data.frame(pi = seq(0.05, 0.5, 0.05), m_perturbation = -1, g_perturbation = 1)) %>% dplyr::distinct()
