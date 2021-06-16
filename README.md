@@ -1,2 +1,2 @@
-# glmeiv_scripts
+# glmeiv-project
 Scripts for the glmeiv manuscript
