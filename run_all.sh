@@ -21,4 +21,4 @@ mkdir -p $sim_dir $LOCAL_GLMEIV_DATA_DIR"public"
 # i. Create the simulatr_specifier objects
 Rscript simulations/create_simulatr_spec_objects.R
 # ii. Run the simulations
-$SIMULATR -f $sim_dir"/sim_spec_1.rds" -b 10
+$SIMULATR -f $sim_dir"/sim_spec_1.rds" -b 10 -r $sim_dir"/raw_result_1.rds"
