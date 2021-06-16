@@ -8,10 +8,11 @@ source ~/.research_config
 
 # 1. Create a nextflow config file. Create a "work" directory in
 # the top-level glmeiv data directory.
-if [ ! -f nextflow.config ]; then
-  touch nextflow.config
-  echo workDir = \"$LOCAL_GLMEIV_DATA_DIR\work\" >> nextflow.config
+if [ -f nextflow.config ]; then
+  rm nextflow.config
 fi
+touch nextflow.config
+echo workDir = \"$LOCAL_GLMEIV_DATA_DIR\work\" >> nextflow.config
 
 # 2. Initialize the offsite directory structure
 sim_dir=$LOCAL_GLMEIV_DATA_DIR"private/simulations"
