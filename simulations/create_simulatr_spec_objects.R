@@ -40,9 +40,7 @@ saveRDS(object = sim_spec_1, to_save)
 # 2. A test example
 sim_spec_ex <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid[1:5,],
                                                         fixed_params = fixed_params,
-                                                        one_rep_times = list(generate_data_function = NA_real_,
-                                                                              thresholding = NA_real_,
-                                                                              em = NA_real_),
+                                                        one_rep_times = list(one_rep_times),
                                                         covariate_sampler = NULL)
 saveRDS(object = sim_spec_ex, paste0(sim_dir, "/sim_spec_ex.rds"))
 
