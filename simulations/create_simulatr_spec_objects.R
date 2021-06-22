@@ -13,7 +13,7 @@ fixed_params <- list(
   seed = 4,
   n = 2000,
   B = 2000,
-  n_processors = 5,
+  n_processors = 10,
   m_intercept = 1,
   g_intercept = -2,
   m_fam = poisson(),
@@ -28,8 +28,8 @@ fixed_params <- list(
   g_offset = NULL
 )
 one_rep_times <- list(generate_data_function = 0.1,
-                      thresholding = 0.3,
-                      em = 42.5)
+                      thresholding = 1,
+                      em = 60)
 sim_spec_1 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
                                                        fixed_params = fixed_params,
                                                        one_rep_times = one_rep_times,
