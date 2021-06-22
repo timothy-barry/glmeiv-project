@@ -38,11 +38,11 @@ sim_spec_1 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
 saveRDS(object = sim_spec_1, to_save)
 
 # 2. A test example
-sim_spec_ex <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid[1:5,],
-                                                        fixed_params = fixed_params,
-                                                        one_rep_times = list(one_rep_times),
-                                                        covariate_sampler = NULL)
-saveRDS(object = sim_spec_ex, paste0(sim_dir, "/sim_spec_ex.rds"))
+# sim_spec_ex <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid[1:5,],
+#                                                        fixed_params = fixed_params,
+#                                                        one_rep_times = list(one_rep_times),
+#                                                        covariate_sampler = NULL)
+# saveRDS(object = sim_spec_ex, paste0(sim_dir, "/sim_spec_ex.rds"))
 
 # 2. Study 2: covariates present, varying m_pert, g_pert, and pi; poisson family objects.
 # to_save <- paste0(sim_dir, "/sim_spec_2.rds")
