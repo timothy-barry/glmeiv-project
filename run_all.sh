@@ -16,21 +16,23 @@ echo workDir = \"$LOCAL_GLMEIV_DATA_DIR\work\" >> nextflow.config
 
 # 2. Initialize the offsite directory structure
 sim_dir=$LOCAL_GLMEIV_DATA_DIR"private/simulations"
+remote_sim_dir=$REMOTE_GLMEIV_DATA_DIR"private/simulations"
 mkdir -p $sim_dir $LOCAL_GLMEIV_DATA_DIR"public"
 
-# 3. Create the simulatr specifier object
+# 3. rclone sync remote to local
+rclone sync -i $remote_sim_dir $sim_dir
+
+# 4. Create the simulatr specifier objects
 Rscript simulations/create_simulatr_spec_objects.R
-# 4. Run the simulations
+
+# 5. Run the simulations
 # i.
 if [[ ! -f $sim_dir"/raw_result_1.rds" ]]
 then
 $SIMULATR -f $sim_dir"/sim_spec_1.rds" -r $sim_dir"/raw_result_1.rds"
 fi
 
-# 5. Copy all simulation objects and results to Box
-remote_sim_dir=$REMOTE_GLMEIV_DATA_DIR"private/simulations"
-rclone copy $sim_dir $remote_sim_dir 
+# 5. rclone copy results to remote
+rclone copy $sim_dir $remote_sim_dir
 
-# iii. Analyze the simulations.
-
-
+# 6. Analyze the simulations

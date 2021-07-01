@@ -1,0 +1,81 @@
+---
+title: "Analysis of simulations"
+author: "Tim B"
+date: "7/1/2021"
+output: html_document
+---
+
+```{r set-options, echo=FALSE, cache=FALSE}
+options(width = 200)
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, fig.width=4, fig.height=5) 
+```
+
+## Exploratory simulation studies
+
+This writeup examines some of the exploratory `glmeiv` simulations. First, we load the package `simulatr`. In addition to helping power the simulations, `simulatr` provides some functions to summarize and plot simulation study results.
+
+```{r}
+library(simulatr)
+library(magrittr)
+```
+
+## Simulation study 1: No covariates
+
+We examine the results of the first simulation study. We load the `simulatr_specifier` object, which contains the full specification of the simulation, as well as the raw simulation results outputted by `simulatr`. 
+
+```{r}
+sim_dir <- paste0(.get_config_path("LOCAL_GLMEIV_DATA_DIR"), "private/simulations")
+sim_spec <- readRDS(paste0(sim_dir, "/sim_spec_1.rds")) # simulatr specifier object
+sim_res <- readRDS(paste0(sim_dir, "/raw_result_1.rds")) # raw results
+```
+
+This simulation study has three "arms": one in which `pi` is varied, one in which `m_perturbation` is varied, and one in which `g_perturbation` is varied. The parameters `n = 2000` (number of cells), `m_intercept = 1`, and `g_intercept = -2` are fixed. We use Poisson GLMs to model both the mRNA and gRNA counts. Finally, we use `B=2000` replicates for each parameter setting.
+
+Below, we print the parameter grid and fixed parameters. Note that the parameter grid contains additional columns identifying the "arm" or "arms" to which a parameter setting belongs.
+
+```{r}
+sim_spec@parameter_grid
+sim_spec@fixed_parameters
+```
+
+Using the `summarize_results` function from `simulatr`, we compute the metrics "bias" and "confidence interval coverage rate" for the parameters `m_perturbation` and `pi`. 
+
+```{r, cache=TRUE}
+summarized_results <- summarize_results(sim_spec = sim_spec,
+                                        sim_res = sim_res,
+                                        metrics = c("coverage", "bias"),
+                                        parameters = c("m_perturbation", "pi"))
+```
+
+Next, we plot the results, comparing the EM method to the thresholding method.
+
+**Bias in estimating `m_perturbation`**:
+
+```{r}
+plot_all_arms(summarized_results = summarized_results,
+              metric = "bias",
+              parameter = "m_perturbation")
+```
+
+**Bias in estimating `pi`** (thresholding method does not estimate `pi`):
+
+```{r}
+plot_all_arms(summarized_results = summarized_results,
+              metric = "bias",
+              parameter = "pi")
+```
+
+**Confidence interval coverage rate**:
+
+```{r}
+plot_all_arms(summarized_results = summarized_results,
+              metric = "coverage",
+              parameter = "m_perturbation")
+```
+
+The EM method is less biased than the thresholding method. Both have poor confidence interval coverage rate, likely due to a glitch in the code.
