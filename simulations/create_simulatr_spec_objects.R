@@ -27,9 +27,9 @@ fixed_params <- list(
   m_offset = NULL,
   g_offset = NULL
 )
-one_rep_times <- list(generate_data_function = 0.1,
-                      thresholding = 1,
-                      em = 60)
+one_rep_times <- list(generate_data_function = 1,
+                      thresholding = 10,
+                      em = 90)
 sim_spec_1 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
                                                        fixed_params = fixed_params,
                                                        one_rep_times = one_rep_times,

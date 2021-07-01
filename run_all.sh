@@ -18,9 +18,19 @@ echo workDir = \"$LOCAL_GLMEIV_DATA_DIR\work\" >> nextflow.config
 sim_dir=$LOCAL_GLMEIV_DATA_DIR"private/simulations"
 mkdir -p $sim_dir $LOCAL_GLMEIV_DATA_DIR"public"
 
-# 3. Simulations section
-# i. Create the simulatr_specifier objects
+# 3. Create the simulatr specifier object
 Rscript simulations/create_simulatr_spec_objects.R
-# ii. Run the simulations
-$SIMULATR -f $sim_dir"/sim_spec_1.rds" -b 100 -r $sim_dir"/raw_result_1.rds"
+# 4. Run the simulations
+# i.
+if [[ ! -f $sim_dir"/raw_result_1.rds" ]]
+then
+$SIMULATR -f $sim_dir"/sim_spec_1.rds" -r $sim_dir"/raw_result_1.rds"
+fi
+
+# 5. Copy all simulation objects and results to Box
+remote_sim_dir=$REMOTE_GLMEIV_DATA_DIR"private/simulations"
+rclone copy $sim_dir $remote_sim_dir 
+
 # iii. Analyze the simulations.
+
+
