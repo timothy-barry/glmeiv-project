@@ -1,7 +1,7 @@
-# This script sets up all analyses reported in the glmeiv paper. It 1) creates
+# This script sets up and runs all analyses. It 1) creates
 # a nextflow.config file in the current directory (which can be used to set several
-# advanced options to simulatr) and 2) sets up to offsite (or data) directory
-# structure.
+# advanced options to simulatr), 2) sets up the offsite (or data) directory
+# structure, and 3) runs the simulations.
 
 # source LOCAL_GLMEIV_DATA_DIR and REMOTE_GLMEIV_DATA_DIR
 source ~/.research_config
