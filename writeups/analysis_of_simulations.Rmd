@@ -5,7 +5,7 @@ date: "7/1/2021"
 output: html_document
 ---
 
-```{r set-options, echo=FALSE, cache=FALSE}
+```{r set-options, echo=FALSE}
 options(width = 200)
 ```
 
@@ -45,7 +45,7 @@ sim_spec@fixed_parameters
 
 Using the `summarize_results` function from `simulatr`, we compute the metrics "bias" and "confidence interval coverage rate" for the parameters `m_perturbation` and `pi`. 
 
-```{r, cache=TRUE}
+```{r}
 summarized_results <- summarize_results(sim_spec = sim_spec,
                                         sim_res = sim_res,
                                         metrics = c("coverage", "bias"),
