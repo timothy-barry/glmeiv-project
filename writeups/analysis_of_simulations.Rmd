@@ -12,7 +12,7 @@ options(width = 200)
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_chunk$set(echo = TRUE, fig.width=4, fig.height=5) 
+knitr::opts_chunk$set(echo = TRUE, fig.width=5, fig.height=6) 
 ```
 
 ## Exploratory simulation studies
@@ -48,8 +48,8 @@ Using the `summarize_results` function from `simulatr`, we compute the metrics "
 ```{r}
 summarized_results <- summarize_results(sim_spec = sim_spec,
                                         sim_res = sim_res,
-                                        metrics = c("coverage", "bias"),
-                                        parameters = c("m_perturbation", "pi"))
+                                        metrics = c("coverage", "bias", "rejection_probability"),
+                                        parameters = c("m_perturbation"))
 ```
 
 Next, we plot the results, comparing the EM method to the thresholding method.
@@ -62,15 +62,15 @@ plot_all_arms(summarized_results = summarized_results,
               parameter = "m_perturbation")
 ```
 
-**Bias in estimating `pi`** (thresholding method does not estimate `pi`):
+**Rejection probability for `m_perturbation`**:
 
 ```{r}
 plot_all_arms(summarized_results = summarized_results,
-              metric = "bias",
-              parameter = "pi")
+              metric = "rejection_probability",
+              parameter = "m_perturbation")
 ```
 
-**Confidence interval coverage rate**:
+**Confidence interval coverage rate for `m_perturbation`**:
 
 ```{r}
 plot_all_arms(summarized_results = summarized_results,
@@ -78,4 +78,4 @@ plot_all_arms(summarized_results = summarized_results,
               parameter = "m_perturbation")
 ```
 
-The EM method is less biased than the thresholding method. Both have poor confidence interval coverage rate, likely due to a glitch in the code.
+The EM method is less biased than the thresholding method.
