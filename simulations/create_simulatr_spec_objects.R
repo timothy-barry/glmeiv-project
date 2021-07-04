@@ -13,15 +13,16 @@ if (!file.exists(to_save)) {
   fixed_params <- list(
     seed = 4,
     n = 2000,
-    B = 2000,
+    B = 1000,
     n_processors = 10,
-    m_intercept = 1,
+    m_intercept = 2,
     g_intercept = -2,
     m_fam = poisson(),
     g_fam = poisson(),
     alpha = 0.95,
     n_em_rep = 5,
-    p_flip = 0.01,
+    lambda = NULL,
+    sd = 0.15,
     m_covariate_coefs = NULL,
     g_covariate_coefs = NULL,
     covariate_matrix = NULL,
@@ -29,12 +30,12 @@ if (!file.exists(to_save)) {
     g_offset = NULL
   )
   one_rep_times <- list(generate_data_function = 1,
-                        thresholding = 10,
-                        em = 90)
+                        thresholding = 1,
+                        em = 11)
   sim_spec_1 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
                                                          fixed_params = fixed_params,
                                                          one_rep_times = one_rep_times,
                                                          covariate_sampler = NULL)
-  
+
   saveRDS(object = sim_spec_1, to_save)
 }

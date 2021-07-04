@@ -2,3 +2,5 @@ nextflow.config
 .old
 .DS_Store
 .Rhistory
+simulations/.Rhistory
+simulations/.DS_Store
