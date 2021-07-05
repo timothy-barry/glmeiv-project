@@ -5,7 +5,7 @@ sim_dir <- paste0(.get_config_path("LOCAL_GLMEIV_DATA_DIR"), "private/simulation
 
 # 1. Study 1: no covariates; varying m_pert, g_pert, and pi; poisson family objects.
 to_save <- paste0(sim_dir, "/sim_spec_1.rds")
-if (!file.exists(to_save)) {
+# if (!file.exists(to_save)) {
   param_grid <- simulatr::create_param_grid(varying_values = list(pi = seq(0.05, 0.5, 0.05),
                                                                   m_perturbation = seq(0.0, -2, -0.2),
                                                                   g_perturbation = seq(0.0, 3, 0.25)),
@@ -14,7 +14,7 @@ if (!file.exists(to_save)) {
     seed = 4,
     n = 2000,
     B = 1000,
-    n_processors = 10,
+    n_processors = 2,
     m_intercept = 2,
     g_intercept = -2,
     m_fam = poisson(),
@@ -36,6 +36,6 @@ if (!file.exists(to_save)) {
                                                          fixed_params = fixed_params,
                                                          one_rep_times = one_rep_times,
                                                          covariate_sampler = NULL)
-
+  sim_spec_1@parameter_grid <- sim_spec_1@parameter_grid[1:5,]                                          
   saveRDS(object = sim_spec_1, to_save)
-}
+# }

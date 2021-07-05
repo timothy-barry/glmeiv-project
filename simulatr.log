@@ -1,0 +1,32 @@
+N E X T F L O W  ~  version 20.10.0
+Launching `/Users/timbarry/research_code/simulatr-command-line/simulatr.nf` [nasty_shockley] - revision: e6e1897b70
+[c9/6ae33d] Submitted process > generate_data (5)
+[19/033641] Submitted process > generate_data (4)
+[99/42c6c0] Submitted process > generate_data (1)
+[12/db8b71] Submitted process > generate_data (2)
+[6d/34f393] Submitted process > generate_data (3)
+[db/81c4ad] Submitted process > run_methods (7)
+[a8/075cb0] Submitted process > run_methods (6)
+[ce/9b6383] Submitted process > run_methods (3)
+[9a/ecd587] Submitted process > run_methods (2)
+[ea/2fb1eb] Submitted process > run_methods (8)
+[11/8679be] Submitted process > run_methods (5)
+[4a/5a1b79] Submitted process > run_methods (1)
+[05/28e2b5] Submitted process > run_methods (4)
+**********
+Number of methods processes: 20 
+**********
+[c3/b4c2b3] Submitted process > run_methods (9)
+[c7/7db527] Submitted process > run_methods (11)
+[1a/a6e507] Submitted process > run_methods (10)
+[78/35035e] Submitted process > run_methods (13)
+[5d/473dd7] Submitted process > run_methods (12)
+[81/b55233] Submitted process > run_methods (15)
+[50/c027aa] Submitted process > run_methods (14)
+[e3/8fdf5e] Submitted process > run_methods (16)
+[dc/71ee7d] Submitted process > run_methods (18)
+[50/57e883] Submitted process > run_methods (17)
+[39/26d22c] Submitted process > run_methods (19)
+[38/af31eb] Submitted process > run_methods (20)
+[03/3ce1ce] Submitted process > collate_results
+[0d/082a12] Submitted process > cleanup
