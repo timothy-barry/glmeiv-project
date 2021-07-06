@@ -1,0 +1,355 @@
+task_id	name	status	exit	time	realtime
+5	generate_data (grid row: 6)	COMPLETED	0	5m 10s	1s
+6	generate_data (grid row: 5)	COMPLETED	0	5m 10s	1s
+1	generate_data (grid row: 2)	COMPLETED	0	5m 10s	1s
+4	generate_data (grid row: 4)	COMPLETED	0	5m 10s	1s
+7	generate_data (grid row: 7)	COMPLETED	0	5m 10s	1s
+3	generate_data (grid row: 3)	COMPLETED	0	5m 10s	1s
+8	generate_data (grid row: 8)	COMPLETED	0	5m 10s	1s
+2	generate_data (grid row: 1)	COMPLETED	0	5m 10s	1s
+9	generate_data (grid row: 9)	COMPLETED	0	5m 10s	1s
+10	generate_data (grid row: 10)	COMPLETED	0	5m 10s	1s
+13	generate_data (grid row: 13)	COMPLETED	0	5m 10s	1s
+12	generate_data (grid row: 12)	COMPLETED	0	5m 10s	1s
+11	generate_data (grid row: 11)	COMPLETED	0	5m 10s	1s
+22	generate_data (grid row: 22)	COMPLETED	0	5m 10s	1s
+14	generate_data (grid row: 14)	COMPLETED	0	5m 10s	1s
+15	generate_data (grid row: 15)	COMPLETED	0	5m 10s	1s
+17	generate_data (grid row: 17)	COMPLETED	0	5m 10s	0ms
+18	generate_data (grid row: 18)	COMPLETED	0	5m 10s	0ms
+16	generate_data (grid row: 16)	COMPLETED	0	5m 10s	0ms
+19	generate_data (grid row: 19)	COMPLETED	0	5m 10s	0ms
+20	generate_data (grid row: 20)	COMPLETED	0	5m 10s	0ms
+21	generate_data (grid row: 21)	COMPLETED	0	5m 10s	0ms
+28	generate_data (grid row: 28)	COMPLETED	0	5m 10s	0ms
+23	generate_data (grid row: 23)	COMPLETED	0	5m 10s	1s
+24	generate_data (grid row: 24)	COMPLETED	0	5m 10s	1s
+25	generate_data (grid row: 25)	COMPLETED	0	5m 10s	1s
+26	generate_data (grid row: 26)	COMPLETED	0	5m 10s	1s
+27	generate_data (grid row: 27)	COMPLETED	0	5m 10s	1s
+29	generate_data (grid row: 29)	COMPLETED	0	5m 10s	1s
+30	generate_data (grid row: 30)	COMPLETED	0	5m 10s	1s
+31	generate_data (grid row: 31)	COMPLETED	0	5m 10s	1s
+32	generate_data (grid row: 32)	COMPLETED	0	5m 10s	0ms
+39	run_methods (method: thresholding; grid row: 6)	COMPLETED	0	1m 50s	2s
+36	run_methods (method: thresholding; grid row: 6)	COMPLETED	0	1m 50s	2s
+33	run_methods (method: thresholding; grid row: 6)	COMPLETED	0	1m 50s	2s
+35	run_methods (method: thresholding; grid row: 6)	COMPLETED	0	1m 50s	2s
+41	run_methods (method: thresholding; grid row: 6)	COMPLETED	0	1m 50s	1s
+43	run_methods (method: thresholding; grid row: 5)	COMPLETED	0	1m 50s	1s
+45	run_methods (method: thresholding; grid row: 5)	COMPLETED	0	1m 50s	1s
+47	run_methods (method: thresholding; grid row: 5)	COMPLETED	0	1m 50s	2s
+38	run_methods (method: em; grid row: 6)	COMPLETED	0	4m 20s	6s
+40	run_methods (method: em; grid row: 6)	COMPLETED	0	4m 20s	6s
+37	run_methods (method: em; grid row: 6)	COMPLETED	0	4m 20s	7s
+34	run_methods (method: em; grid row: 6)	COMPLETED	0	4m 20s	7s
+42	run_methods (method: em; grid row: 6)	COMPLETED	0	4m 20s	6s
+49	run_methods (method: thresholding; grid row: 5)	COMPLETED	0	1m 50s	2s
+51	run_methods (method: thresholding; grid row: 5)	COMPLETED	0	1m 50s	1s
+57	run_methods (method: thresholding; grid row: 2)	COMPLETED	0	1m 50s	1s
+53	run_methods (method: thresholding; grid row: 2)	COMPLETED	0	1m 50s	2s
+55	run_methods (method: thresholding; grid row: 2)	COMPLETED	0	1m 50s	1s
+46	run_methods (method: em; grid row: 5)	COMPLETED	0	4m 20s	7s
+44	run_methods (method: em; grid row: 5)	COMPLETED	0	4m 20s	7s
+59	run_methods (method: thresholding; grid row: 2)	COMPLETED	0	1m 50s	2s
+48	run_methods (method: em; grid row: 5)	COMPLETED	0	4m 20s	6s
+61	run_methods (method: thresholding; grid row: 2)	COMPLETED	0	1m 50s	1s
+63	run_methods (method: thresholding; grid row: 4)	COMPLETED	0	1m 50s	2s
+65	run_methods (method: thresholding; grid row: 4)	COMPLETED	0	1m 50s	1s
+52	run_methods (method: em; grid row: 5)	COMPLETED	0	4m 20s	6s
+67	run_methods (method: thresholding; grid row: 4)	COMPLETED	0	1m 50s	2s
+60	run_methods (method: em; grid row: 2)	COMPLETED	0	4m 20s	8s
+54	run_methods (method: em; grid row: 2)	COMPLETED	0	4m 20s	9s
+56	run_methods (method: em; grid row: 2)	COMPLETED	0	4m 20s	9s
+69	run_methods (method: thresholding; grid row: 4)	COMPLETED	0	1m 50s	1s
+62	run_methods (method: em; grid row: 2)	COMPLETED	0	4m 20s	9s
+58	run_methods (method: em; grid row: 2)	COMPLETED	0	4m 20s	9s
+64	run_methods (method: em; grid row: 4)	COMPLETED	0	4m 20s	7s
+71	run_methods (method: thresholding; grid row: 4)	COMPLETED	0	1m 50s	2s
+77	run_methods (method: thresholding; grid row: 7)	COMPLETED	0	1m 50s	1s
+73	run_methods (method: thresholding; grid row: 7)	COMPLETED	0	1m 50s	2s
+66	run_methods (method: em; grid row: 4)	COMPLETED	0	4m 20s	7s
+75	run_methods (method: thresholding; grid row: 7)	COMPLETED	0	1m 50s	1s
+68	run_methods (method: em; grid row: 4)	COMPLETED	0	4m 20s	7s
+72	run_methods (method: em; grid row: 4)	COMPLETED	0	4m 20s	7s
+70	run_methods (method: em; grid row: 4)	COMPLETED	0	4m 20s	7s
+79	run_methods (method: thresholding; grid row: 7)	COMPLETED	0	1m 50s	2s
+80	run_methods (method: em; grid row: 7)	COMPLETED	0	4m 20s	6s
+50	run_methods (method: em; grid row: 5)	COMPLETED	0	4m 20s	7s
+82	run_methods (method: thresholding; grid row: 7)	COMPLETED	0	1m 50s	1s
+81	run_methods (method: em; grid row: 7)	COMPLETED	0	4m 20s	6s
+83	run_methods (method: thresholding; grid row: 3)	COMPLETED	0	1m 50s	1s
+74	run_methods (method: em; grid row: 7)	COMPLETED	0	4m 20s	6s
+87	run_methods (method: thresholding; grid row: 3)	COMPLETED	0	1m 50s	2s
+89	run_methods (method: thresholding; grid row: 3)	COMPLETED	0	1m 50s	1s
+78	run_methods (method: em; grid row: 7)	COMPLETED	0	4m 20s	6s
+76	run_methods (method: em; grid row: 7)	COMPLETED	0	4m 20s	6s
+93	run_methods (method: thresholding; grid row: 8)	COMPLETED	0	1m 50s	1s
+91	run_methods (method: thresholding; grid row: 3)	COMPLETED	0	1m 50s	2s
+97	run_methods (method: thresholding; grid row: 8)	COMPLETED	0	1m 50s	2s
+86	run_methods (method: thresholding; grid row: 3)	COMPLETED	0	1m 50s	1s
+95	run_methods (method: thresholding; grid row: 8)	COMPLETED	0	1m 50s	1s
+85	run_methods (method: em; grid row: 3)	COMPLETED	0	4m 20s	8s
+90	run_methods (method: em; grid row: 3)	COMPLETED	0	4m 20s	8s
+84	run_methods (method: em; grid row: 3)	COMPLETED	0	4m 20s	8s
+88	run_methods (method: em; grid row: 3)	COMPLETED	0	4m 20s	8s
+99	run_methods (method: thresholding; grid row: 8)	COMPLETED	0	1m 50s	1s
+101	run_methods (method: thresholding; grid row: 8)	COMPLETED	0	1m 50s	1s
+92	run_methods (method: em; grid row: 3)	COMPLETED	0	4m 20s	8s
+96	run_methods (method: em; grid row: 8)	COMPLETED	0	4m 20s	6s
+103	run_methods (method: thresholding; grid row: 1)	COMPLETED	0	1m 50s	1s
+94	run_methods (method: em; grid row: 8)	COMPLETED	0	4m 20s	7s
+98	run_methods (method: em; grid row: 8)	COMPLETED	0	4m 20s	6s
+107	run_methods (method: thresholding; grid row: 1)	COMPLETED	0	1m 50s	2s
+106	run_methods (method: thresholding; grid row: 1)	COMPLETED	0	1m 50s	2s
+109	run_methods (method: thresholding; grid row: 1)	COMPLETED	0	1m 50s	1s
+100	run_methods (method: em; grid row: 8)	COMPLETED	0	4m 20s	6s
+111	run_methods (method: thresholding; grid row: 1)	COMPLETED	0	1m 50s	1s
+113	run_methods (method: thresholding; grid row: 9)	COMPLETED	0	1m 50s	1s
+115	run_methods (method: thresholding; grid row: 9)	COMPLETED	0	1m 50s	2s
+110	run_methods (method: em; grid row: 1)	COMPLETED	0	4m 20s	7s
+117	run_methods (method: thresholding; grid row: 9)	COMPLETED	0	1m 50s	1s
+119	run_methods (method: thresholding; grid row: 9)	COMPLETED	0	1m 50s	1s
+104	run_methods (method: em; grid row: 1)	COMPLETED	0	4m 20s	10s
+102	run_methods (method: em; grid row: 8)	COMPLETED	0	4m 20s	6s
+125	run_methods (method: thresholding; grid row: 10)	COMPLETED	0	1m 50s	1s
+114	run_methods (method: em; grid row: 9)	COMPLETED	0	4m 20s	6s
+121	run_methods (method: thresholding; grid row: 9)	COMPLETED	0	1m 50s	2s
+105	run_methods (method: em; grid row: 1)	COMPLETED	0	4m 20s	12s
+118	run_methods (method: em; grid row: 9)	COMPLETED	0	4m 20s	6s
+123	run_methods (method: thresholding; grid row: 10)	COMPLETED	0	1m 50s	1s
+108	run_methods (method: em; grid row: 1)	COMPLETED	0	4m 20s	12s
+116	run_methods (method: em; grid row: 9)	COMPLETED	0	4m 20s	6s
+120	run_methods (method: em; grid row: 9)	COMPLETED	0	4m 20s	6s
+127	run_methods (method: thresholding; grid row: 10)	COMPLETED	0	1m 50s	2s
+112	run_methods (method: em; grid row: 1)	COMPLETED	0	4m 20s	12s
+129	run_methods (method: thresholding; grid row: 10)	COMPLETED	0	1m 50s	2s
+131	run_methods (method: thresholding; grid row: 10)	COMPLETED	0	1m 50s	1s
+133	run_methods (method: thresholding; grid row: 13)	COMPLETED	0	1m 50s	1s
+122	run_methods (method: em; grid row: 9)	COMPLETED	0	4m 20s	6s
+137	run_methods (method: thresholding; grid row: 13)	COMPLETED	0	1m 50s	2s
+126	run_methods (method: em; grid row: 10)	COMPLETED	0	4m 20s	6s
+124	run_methods (method: em; grid row: 10)	COMPLETED	0	4m 20s	7s
+128	run_methods (method: em; grid row: 10)	COMPLETED	0	4m 20s	6s
+140	run_methods (method: thresholding; grid row: 13)	COMPLETED	0	1m 50s	1s
+130	run_methods (method: em; grid row: 10)	COMPLETED	0	4m 20s	7s
+132	run_methods (method: em; grid row: 10)	COMPLETED	0	4m 20s	7s
+135	run_methods (method: thresholding; grid row: 13)	COMPLETED	0	1m 50s	2s
+141	run_methods (method: thresholding; grid row: 13)	COMPLETED	0	1m 50s	2s
+145	run_methods (method: thresholding; grid row: 12)	COMPLETED	0	1m 50s	1s
+143	run_methods (method: thresholding; grid row: 12)	COMPLETED	0	1m 50s	1s
+147	run_methods (method: thresholding; grid row: 12)	COMPLETED	0	1m 50s	2s
+136	run_methods (method: em; grid row: 13)	COMPLETED	0	4m 20s	10s
+138	run_methods (method: em; grid row: 13)	COMPLETED	0	4m 20s	10s
+149	run_methods (method: thresholding; grid row: 12)	COMPLETED	0	1m 50s	2s
+134	run_methods (method: em; grid row: 13)	COMPLETED	0	4m 20s	14s
+153	run_methods (method: thresholding; grid row: 11)	COMPLETED	0	1m 50s	1s
+144	run_methods (method: em; grid row: 12)	COMPLETED	0	4m 20s	9s
+151	run_methods (method: thresholding; grid row: 12)	COMPLETED	0	1m 50s	2s
+142	run_methods (method: em; grid row: 13)	COMPLETED	0	4m 20s	14s
+139	run_methods (method: em; grid row: 13)	COMPLETED	0	4m 20s	14s
+146	run_methods (method: em; grid row: 12)	COMPLETED	0	4m 20s	8s
+156	run_methods (method: thresholding; grid row: 11)	COMPLETED	0	1m 50s	1s
+148	run_methods (method: em; grid row: 12)	COMPLETED	0	4m 20s	8s
+159	run_methods (method: thresholding; grid row: 11)	COMPLETED	0	1m 50s	1s
+157	run_methods (method: thresholding; grid row: 11)	COMPLETED	0	1m 50s	2s
+161	run_methods (method: thresholding; grid row: 11)	COMPLETED	0	1m 50s	2s
+163	run_methods (method: thresholding; grid row: 22)	COMPLETED	0	1m 50s	1s
+158	run_methods (method: em; grid row: 11)	COMPLETED	0	4m 20s	8s
+150	run_methods (method: em; grid row: 12)	COMPLETED	0	4m 20s	12s
+154	run_methods (method: em; grid row: 11)	COMPLETED	0	4m 20s	10s
+165	run_methods (method: thresholding; grid row: 22)	COMPLETED	0	1m 50s	1s
+160	run_methods (method: em; grid row: 11)	COMPLETED	0	4m 20s	8s
+167	run_methods (method: thresholding; grid row: 22)	COMPLETED	0	1m 50s	1s
+152	run_methods (method: em; grid row: 12)	COMPLETED	0	4m 20s	12s
+169	run_methods (method: thresholding; grid row: 22)	COMPLETED	0	1m 50s	1s
+171	run_methods (method: thresholding; grid row: 22)	COMPLETED	0	1m 50s	1s
+155	run_methods (method: em; grid row: 11)	COMPLETED	0	4m 20s	12s
+173	run_methods (method: thresholding; grid row: 14)	COMPLETED	0	1m 50s	1s
+162	run_methods (method: em; grid row: 11)	COMPLETED	0	4m 20s	11s
+175	run_methods (method: thresholding; grid row: 14)	COMPLETED	0	1m 50s	1s
+164	run_methods (method: em; grid row: 22)	COMPLETED	0	4m 20s	11s
+177	run_methods (method: thresholding; grid row: 14)	COMPLETED	0	1m 50s	2s
+166	run_methods (method: em; grid row: 22)	COMPLETED	0	4m 20s	10s
+179	run_methods (method: thresholding; grid row: 14)	COMPLETED	0	1m 50s	1s
+168	run_methods (method: em; grid row: 22)	COMPLETED	0	4m 20s	10s
+181	run_methods (method: thresholding; grid row: 14)	COMPLETED	0	1m 50s	2s
+176	run_methods (method: em; grid row: 14)	COMPLETED	0	4m 20s	9s
+172	run_methods (method: em; grid row: 22)	COMPLETED	0	4m 20s	11s
+170	run_methods (method: em; grid row: 22)	COMPLETED	0	4m 20s	12s
+174	run_methods (method: em; grid row: 14)	COMPLETED	0	4m 20s	10s
+186	run_methods (method: thresholding; grid row: 15)	COMPLETED	0	1m 50s	1s
+184	run_methods (method: thresholding; grid row: 15)	COMPLETED	0	1m 50s	1s
+180	run_methods (method: em; grid row: 14)	COMPLETED	0	4m 20s	9s
+178	run_methods (method: em; grid row: 14)	COMPLETED	0	4m 20s	10s
+190	run_methods (method: thresholding; grid row: 15)	COMPLETED	0	1m 50s	1s
+188	run_methods (method: thresholding; grid row: 15)	COMPLETED	0	1m 50s	1s
+191	run_methods (method: thresholding; grid row: 15)	COMPLETED	0	1m 50s	2s
+182	run_methods (method: em; grid row: 14)	COMPLETED	0	4m 20s	10s
+195	run_methods (method: thresholding; grid row: 17)	COMPLETED	0	1m 50s	1s
+192	run_methods (method: em; grid row: 15)	COMPLETED	0	4m 20s	9s
+183	run_methods (method: em; grid row: 15)	COMPLETED	0	4m 20s	11s
+187	run_methods (method: em; grid row: 15)	COMPLETED	0	4m 20s	9s
+189	run_methods (method: em; grid row: 15)	COMPLETED	0	4m 20s	10s
+193	run_methods (method: thresholding; grid row: 17)	COMPLETED	0	1m 50s	2s
+185	run_methods (method: em; grid row: 15)	COMPLETED	0	4m 20s	9s
+197	run_methods (method: thresholding; grid row: 17)	COMPLETED	0	1m 50s	2s
+198	run_methods (method: thresholding; grid row: 17)	COMPLETED	0	1m 50s	2s
+201	run_methods (method: thresholding; grid row: 17)	COMPLETED	0	1m 50s	1s
+203	run_methods (method: thresholding; grid row: 18)	COMPLETED	0	1m 50s	1s
+205	run_methods (method: thresholding; grid row: 18)	COMPLETED	0	1m 50s	1s
+196	run_methods (method: em; grid row: 17)	COMPLETED	0	4m 20s	8s
+207	run_methods (method: thresholding; grid row: 18)	COMPLETED	0	1m 50s	1s
+209	run_methods (method: thresholding; grid row: 18)	COMPLETED	0	1m 50s	1s
+194	run_methods (method: em; grid row: 17)	COMPLETED	0	4m 20s	9s
+211	run_methods (method: thresholding; grid row: 18)	COMPLETED	0	1m 50s	2s
+199	run_methods (method: em; grid row: 17)	COMPLETED	0	4m 20s	8s
+202	run_methods (method: em; grid row: 17)	COMPLETED	0	4m 20s	8s
+200	run_methods (method: em; grid row: 17)	COMPLETED	0	4m 20s	9s
+204	run_methods (method: em; grid row: 18)	COMPLETED	0	4m 20s	8s
+206	run_methods (method: em; grid row: 18)	COMPLETED	0	4m 20s	8s
+215	run_methods (method: thresholding; grid row: 16)	COMPLETED	0	1m 50s	1s
+213	run_methods (method: thresholding; grid row: 16)	COMPLETED	0	1m 50s	1s
+217	run_methods (method: thresholding; grid row: 16)	COMPLETED	0	1m 50s	1s
+208	run_methods (method: em; grid row: 18)	COMPLETED	0	4m 20s	9s
+219	run_methods (method: thresholding; grid row: 16)	COMPLETED	0	1m 50s	2s
+221	run_methods (method: thresholding; grid row: 16)	COMPLETED	0	1m 50s	2s
+210	run_methods (method: em; grid row: 18)	COMPLETED	0	4m 20s	9s
+212	run_methods (method: em; grid row: 18)	COMPLETED	0	4m 20s	9s
+223	run_methods (method: thresholding; grid row: 19)	COMPLETED	0	1m 50s	2s
+216	run_methods (method: em; grid row: 16)	COMPLETED	0	4m 20s	10s
+218	run_methods (method: em; grid row: 16)	COMPLETED	0	4m 20s	10s
+225	run_methods (method: thresholding; grid row: 19)	COMPLETED	0	1m 50s	1s
+227	run_methods (method: thresholding; grid row: 19)	COMPLETED	0	1m 50s	2s
+233	run_methods (method: thresholding; grid row: 20)	COMPLETED	0	1m 50s	2s
+214	run_methods (method: em; grid row: 16)	COMPLETED	0	4m 20s	11s
+229	run_methods (method: thresholding; grid row: 19)	COMPLETED	0	1m 50s	1s
+224	run_methods (method: em; grid row: 19)	COMPLETED	0	4m 20s	9s
+231	run_methods (method: thresholding; grid row: 19)	COMPLETED	0	1m 50s	2s
+220	run_methods (method: em; grid row: 16)	COMPLETED	0	4m 20s	10s
+222	run_methods (method: em; grid row: 16)	COMPLETED	0	4m 20s	10s
+235	run_methods (method: thresholding; grid row: 20)	COMPLETED	0	1m 50s	2s
+237	run_methods (method: thresholding; grid row: 20)	COMPLETED	0	1m 50s	2s
+226	run_methods (method: em; grid row: 19)	COMPLETED	0	4m 20s	9s
+241	run_methods (method: thresholding; grid row: 20)	COMPLETED	0	1m 50s	1s
+228	run_methods (method: em; grid row: 19)	COMPLETED	0	4m 20s	9s
+243	run_methods (method: thresholding; grid row: 21)	COMPLETED	0	1m 50s	1s
+239	run_methods (method: thresholding; grid row: 20)	COMPLETED	0	1m 50s	2s
+230	run_methods (method: em; grid row: 19)	COMPLETED	0	4m 20s	9s
+232	run_methods (method: em; grid row: 19)	COMPLETED	0	4m 20s	8s
+245	run_methods (method: thresholding; grid row: 21)	COMPLETED	0	1m 50s	1s
+234	run_methods (method: em; grid row: 20)	COMPLETED	0	4m 20s	9s
+244	run_methods (method: thresholding; grid row: 21)	COMPLETED	0	1m 50s	1s
+248	run_methods (method: thresholding; grid row: 21)	COMPLETED	0	1m 50s	1s
+238	run_methods (method: em; grid row: 20)	COMPLETED	0	4m 20s	7s
+240	run_methods (method: em; grid row: 20)	COMPLETED	0	4m 20s	7s
+236	run_methods (method: em; grid row: 20)	COMPLETED	0	4m 20s	7s
+251	run_methods (method: thresholding; grid row: 21)	COMPLETED	0	1m 50s	2s
+254	run_methods (method: thresholding; grid row: 28)	COMPLETED	0	1m 50s	1s
+255	run_methods (method: thresholding; grid row: 28)	COMPLETED	0	1m 50s	2s
+242	run_methods (method: em; grid row: 20)	COMPLETED	0	4m 20s	8s
+257	run_methods (method: thresholding; grid row: 28)	COMPLETED	0	1m 50s	1s
+246	run_methods (method: em; grid row: 21)	COMPLETED	0	4m 20s	10s
+259	run_methods (method: thresholding; grid row: 28)	COMPLETED	0	1m 50s	2s
+247	run_methods (method: em; grid row: 21)	COMPLETED	0	4m 20s	10s
+249	run_methods (method: em; grid row: 21)	COMPLETED	0	4m 20s	10s
+261	run_methods (method: thresholding; grid row: 28)	COMPLETED	0	1m 50s	1s
+252	run_methods (method: em; grid row: 21)	COMPLETED	0	4m 20s	10s
+265	run_methods (method: thresholding; grid row: 23)	COMPLETED	0	1m 50s	2s
+250	run_methods (method: em; grid row: 21)	COMPLETED	0	4m 20s	12s
+253	run_methods (method: em; grid row: 28)	COMPLETED	0	4m 20s	11s
+267	run_methods (method: thresholding; grid row: 23)	COMPLETED	0	1m 50s	1s
+268	run_methods (method: thresholding; grid row: 23)	COMPLETED	0	1m 50s	2s
+264	run_methods (method: thresholding; grid row: 23)	COMPLETED	0	1m 50s	1s
+256	run_methods (method: em; grid row: 28)	COMPLETED	0	4m 20s	13s
+271	run_methods (method: thresholding; grid row: 23)	COMPLETED	0	1m 50s	1s
+262	run_methods (method: em; grid row: 28)	COMPLETED	0	4m 20s	10s
+260	run_methods (method: em; grid row: 28)	COMPLETED	0	4m 20s	12s
+258	run_methods (method: em; grid row: 28)	COMPLETED	0	4m 20s	12s
+275	run_methods (method: thresholding; grid row: 24)	COMPLETED	0	1m 50s	1s
+269	run_methods (method: em; grid row: 23)	COMPLETED	0	4m 20s	13s
+277	run_methods (method: thresholding; grid row: 24)	COMPLETED	0	1m 50s	2s
+266	run_methods (method: em; grid row: 23)	COMPLETED	0	4m 20s	10s
+263	run_methods (method: em; grid row: 23)	COMPLETED	0	4m 20s	11s
+284	run_methods (method: thresholding; grid row: 25)	COMPLETED	0	1m 50s	2s
+279	run_methods (method: thresholding; grid row: 24)	COMPLETED	0	1m 50s	1s
+270	run_methods (method: em; grid row: 23)	COMPLETED	0	4m 20s	10s
+273	run_methods (method: thresholding; grid row: 24)	COMPLETED	0	1m 50s	2s
+281	run_methods (method: thresholding; grid row: 24)	COMPLETED	0	1m 50s	1s
+272	run_methods (method: em; grid row: 23)	COMPLETED	0	4m 20s	10s
+278	run_methods (method: em; grid row: 24)	COMPLETED	0	4m 20s	10s
+285	run_methods (method: thresholding; grid row: 25)	COMPLETED	0	1m 50s	2s
+280	run_methods (method: em; grid row: 24)	COMPLETED	0	4m 20s	12s
+282	run_methods (method: em; grid row: 24)	COMPLETED	0	4m 20s	10s
+287	run_methods (method: thresholding; grid row: 25)	COMPLETED	0	1m 50s	1s
+289	run_methods (method: thresholding; grid row: 25)	COMPLETED	0	1m 50s	1s
+286	run_methods (method: em; grid row: 25)	COMPLETED	0	4m 20s	11s
+291	run_methods (method: thresholding; grid row: 25)	COMPLETED	0	1m 50s	2s
+276	run_methods (method: em; grid row: 24)	COMPLETED	0	4m 20s	13s
+297	run_methods (method: thresholding; grid row: 26)	COMPLETED	0	1m 50s	1s
+274	run_methods (method: em; grid row: 24)	COMPLETED	0	4m 20s	11s
+283	run_methods (method: em; grid row: 25)	COMPLETED	0	4m 20s	11s
+290	run_methods (method: em; grid row: 25)	COMPLETED	0	4m 20s	12s
+299	run_methods (method: thresholding; grid row: 26)	COMPLETED	0	1m 50s	2s
+288	run_methods (method: em; grid row: 25)	COMPLETED	0	4m 20s	10s
+295	run_methods (method: thresholding; grid row: 26)	COMPLETED	0	1m 50s	1s
+293	run_methods (method: thresholding; grid row: 26)	COMPLETED	0	1m 50s	1s
+292	run_methods (method: em; grid row: 25)	COMPLETED	0	4m 20s	10s
+294	run_methods (method: em; grid row: 26)	COMPLETED	0	4m 20s	10s
+301	run_methods (method: thresholding; grid row: 26)	COMPLETED	0	1m 50s	2s
+303	run_methods (method: thresholding; grid row: 27)	COMPLETED	0	1m 50s	1s
+300	run_methods (method: em; grid row: 26)	COMPLETED	0	4m 20s	11s
+298	run_methods (method: em; grid row: 26)	COMPLETED	0	4m 20s	12s
+296	run_methods (method: em; grid row: 26)	COMPLETED	0	4m 20s	10s
+305	run_methods (method: thresholding; grid row: 27)	COMPLETED	0	1m 50s	2s
+307	run_methods (method: thresholding; grid row: 27)	COMPLETED	0	1m 50s	1s
+309	run_methods (method: thresholding; grid row: 27)	COMPLETED	0	1m 50s	2s
+311	run_methods (method: thresholding; grid row: 27)	COMPLETED	0	1m 50s	1s
+313	run_methods (method: thresholding; grid row: 29)	COMPLETED	0	1m 50s	1s
+306	run_methods (method: em; grid row: 27)	COMPLETED	0	4m 20s	10s
+302	run_methods (method: em; grid row: 26)	COMPLETED	0	4m 20s	9s
+315	run_methods (method: thresholding; grid row: 29)	COMPLETED	0	1m 50s	2s
+317	run_methods (method: thresholding; grid row: 29)	COMPLETED	0	1m 50s	1s
+308	run_methods (method: em; grid row: 27)	COMPLETED	0	4m 20s	10s
+319	run_methods (method: thresholding; grid row: 29)	COMPLETED	0	1m 50s	2s
+304	run_methods (method: em; grid row: 27)	COMPLETED	0	4m 20s	10s
+312	run_methods (method: em; grid row: 27)	COMPLETED	0	4m 20s	9s
+321	run_methods (method: thresholding; grid row: 29)	COMPLETED	0	1m 50s	1s
+327	run_methods (method: thresholding; grid row: 30)	COMPLETED	0	1m 50s	1s
+323	run_methods (method: thresholding; grid row: 30)	COMPLETED	0	1m 50s	2s
+325	run_methods (method: thresholding; grid row: 30)	COMPLETED	0	1m 50s	1s
+310	run_methods (method: em; grid row: 27)	COMPLETED	0	4m 20s	11s
+314	run_methods (method: em; grid row: 29)	COMPLETED	0	4m 20s	12s
+316	run_methods (method: em; grid row: 29)	COMPLETED	0	4m 20s	12s
+318	run_methods (method: em; grid row: 29)	COMPLETED	0	4m 20s	11s
+322	run_methods (method: em; grid row: 29)	COMPLETED	0	4m 20s	8s
+329	run_methods (method: thresholding; grid row: 30)	COMPLETED	0	1m 50s	1s
+331	run_methods (method: thresholding; grid row: 30)	COMPLETED	0	1m 50s	1s
+320	run_methods (method: em; grid row: 29)	COMPLETED	0	4m 20s	11s
+337	run_methods (method: thresholding; grid row: 31)	COMPLETED	0	1m 50s	1s
+333	run_methods (method: thresholding; grid row: 31)	COMPLETED	0	1m 50s	2s
+335	run_methods (method: thresholding; grid row: 31)	COMPLETED	0	1m 50s	2s
+324	run_methods (method: em; grid row: 30)	COMPLETED	0	4m 20s	11s
+339	run_methods (method: thresholding; grid row: 31)	COMPLETED	0	1m 50s	2s
+326	run_methods (method: em; grid row: 30)	COMPLETED	0	4m 20s	11s
+328	run_methods (method: em; grid row: 30)	COMPLETED	0	4m 20s	10s
+341	run_methods (method: thresholding; grid row: 31)	COMPLETED	0	1m 50s	1s
+330	run_methods (method: em; grid row: 30)	COMPLETED	0	4m 20s	11s
+332	run_methods (method: em; grid row: 30)	COMPLETED	0	4m 20s	10s
+334	run_methods (method: em; grid row: 31)	COMPLETED	0	4m 20s	10s
+336	run_methods (method: em; grid row: 31)	COMPLETED	0	4m 20s	9s
+338	run_methods (method: em; grid row: 31)	COMPLETED	0	4m 20s	8s
+349	run_methods (method: thresholding; grid row: 32)	COMPLETED	0	1m 50s	2s
+346	run_methods (method: thresholding; grid row: 32)	COMPLETED	0	1m 50s	2s
+345	run_methods (method: thresholding; grid row: 32)	COMPLETED	0	1m 50s	2s
+342	run_methods (method: em; grid row: 31)	COMPLETED	0	4m 20s	8s
+343	run_methods (method: thresholding; grid row: 32)	COMPLETED	0	1m 50s	1s
+340	run_methods (method: em; grid row: 31)	COMPLETED	0	4m 20s	9s
+351	run_methods (method: thresholding; grid row: 32)	COMPLETED	0	1m 50s	1s
+347	run_methods (method: em; grid row: 32)	COMPLETED	0	4m 20s	8s
+348	run_methods (method: em; grid row: 32)	COMPLETED	0	4m 20s	7s
+350	run_methods (method: em; grid row: 32)	COMPLETED	0	4m 20s	7s
+344	run_methods (method: em; grid row: 32)	COMPLETED	0	4m 20s	5s
+352	run_methods (method: em; grid row: 32)	COMPLETED	0	4m 20s	4s
+353	collate_results	COMPLETED	0	1m	1s
+354	cleanup	COMPLETED	0	-	0ms
