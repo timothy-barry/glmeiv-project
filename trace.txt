@@ -1,0 +1,355 @@
+task_id	name	status	exit	time	realtime
+1	generate_data (grid row: 3)	COMPLETED	0	7m 15s	475ms
+3	generate_data (grid row: 2)	COMPLETED	0	7m 15s	557ms
+5	generate_data (grid row: 5)	COMPLETED	0	7m 15s	584ms
+28	generate_data (grid row: 28)	COMPLETED	0	7m 15s	556ms
+32	generate_data (grid row: 32)	COMPLETED	0	7m 15s	667ms
+2	generate_data (grid row: 4)	COMPLETED	0	7m 15s	478ms
+6	generate_data (grid row: 6)	COMPLETED	0	7m 15s	681ms
+4	generate_data (grid row: 1)	COMPLETED	0	7m 15s	598ms
+29	generate_data (grid row: 29)	COMPLETED	0	7m 15s	585ms
+8	generate_data (grid row: 8)	COMPLETED	0	7m 15s	582ms
+7	generate_data (grid row: 7)	COMPLETED	0	7m 15s	545ms
+30	generate_data (grid row: 30)	COMPLETED	0	7m 15s	576ms
+35	run_methods (method: em; grid row: 3)	FAILED	1	6m	14ms
+36	run_methods (method: em; grid row: 3)	FAILED	1	6m	2ms
+43	run_methods (method: thresholding; grid row: 2)	COMPLETED	0	2m 15s	991ms
+58	run_methods (method: em; grid row: 5)	FAILED	1	6m	2ms
+62	run_methods (method: em; grid row: 5)	FAILED	1	6m	2ms
+66	run_methods (method: em; grid row: 28)	FAILED	1	6m	2ms
+72	run_methods (method: em; grid row: 28)	FAILED	1	6m	2ms
+76	run_methods (method: em; grid row: 32)	FAILED	1	6m	17ms
+78	run_methods (method: em; grid row: 32)	FAILED	1	6m	20ms
+80	run_methods (method: em; grid row: 32)	FAILED	1	6m	2ms
+81	run_methods (method: thresholding; grid row: 32)	COMPLETED	0	2m 15s	1.2s
+82	run_methods (method: em; grid row: 32)	FAILED	1	6m	2ms
+90	run_methods (method: em; grid row: 4)	FAILED	1	6m	2ms
+92	run_methods (method: em; grid row: 4)	FAILED	1	6m	2ms
+95	run_methods (method: thresholding; grid row: 6)	COMPLETED	0	2m 15s	1.3s
+100	run_methods (method: em; grid row: 6)	FAILED	1	6m	2ms
+44	run_methods (method: em; grid row: 2)	FAILED	1	6m	8ms
+55	run_methods (method: thresholding; grid row: 5)	COMPLETED	0	2m 15s	1.6s
+71	run_methods (method: thresholding; grid row: 28)	COMPLETED	0	2m 15s	1.6s
+77	run_methods (method: thresholding; grid row: 32)	COMPLETED	0	2m 15s	1.4s
+79	run_methods (method: thresholding; grid row: 32)	COMPLETED	0	2m 15s	1.8s
+83	run_methods (method: thresholding; grid row: 4)	COMPLETED	0	2m 15s	1.2s
+91	run_methods (method: thresholding; grid row: 4)	COMPLETED	0	2m 15s	1s
+94	run_methods (method: em; grid row: 6)	FAILED	1	6m	1ms
+93	run_methods (method: thresholding; grid row: 6)	COMPLETED	0	2m 15s	1.2s
+101	run_methods (method: thresholding; grid row: 6)	COMPLETED	0	2m 15s	1.1s
+9	generate_data (grid row: 9)	COMPLETED	0	7m 15s	581ms
+31	generate_data (grid row: 31)	COMPLETED	0	7m 15s	570ms
+33	run_methods (method: thresholding; grid row: 3)	COMPLETED	0	2m 15s	1.1s
+34	run_methods (method: thresholding; grid row: 3)	COMPLETED	0	2m 15s	1.1s
+60	run_methods (method: em; grid row: 5)	FAILED	1	6m	8ms
+64	run_methods (method: em; grid row: 28)	FAILED	1	6m	8ms
+67	run_methods (method: thresholding; grid row: 28)	COMPLETED	0	2m 15s	1.2s
+57	run_methods (method: thresholding; grid row: 5)	COMPLETED	0	2m 15s	1.7s
+68	run_methods (method: em; grid row: 28)	FAILED	1	6m	3ms
+73	run_methods (method: thresholding; grid row: 32)	COMPLETED	0	2m 15s	1.1s
+85	run_methods (method: thresholding; grid row: 4)	COMPLETED	0	2m 15s	1.5s
+84	run_methods (method: em; grid row: 4)	FAILED	1	6m	16ms
+96	run_methods (method: em; grid row: 6)	FAILED	1	6m	9ms
+102	run_methods (method: em; grid row: 6)	FAILED	1	6m	2ms
+10	generate_data (grid row: 10)	COMPLETED	0	7m 15s	543ms
+37	run_methods (method: thresholding; grid row: 3)	COMPLETED	0	2m 15s	1.1s
+47	run_methods (method: thresholding; grid row: 2)	COMPLETED	0	2m 15s	985ms
+59	run_methods (method: thresholding; grid row: 5)	COMPLETED	0	2m 15s	1.1s
+63	run_methods (method: thresholding; grid row: 28)	COMPLETED	0	2m 15s	1.5s
+69	run_methods (method: thresholding; grid row: 28)	COMPLETED	0	2m 15s	1.2s
+86	run_methods (method: em; grid row: 4)	FAILED	1	6m	2ms
+87	run_methods (method: thresholding; grid row: 4)	COMPLETED	0	2m 15s	1.3s
+97	run_methods (method: thresholding; grid row: 6)	COMPLETED	0	2m 15s	1s
+106	run_methods (method: em; grid row: 1)	FAILED	1	6m	2ms
+103	run_methods (method: thresholding; grid row: 1)	COMPLETED	0	2m 15s	1.3s
+105	run_methods (method: thresholding; grid row: 1)	COMPLETED	0	2m 15s	1.5s
+107	run_methods (method: thresholding; grid row: 1)	COMPLETED	0	2m 15s	1.2s
+108	run_methods (method: em; grid row: 1)	FAILED	1	6m	2ms
+109	run_methods (method: thresholding; grid row: 1)	COMPLETED	0	2m 15s	1.1s
+110	run_methods (method: em; grid row: 1)	FAILED	1	6m	2ms
+111	run_methods (method: thresholding; grid row: 1)	COMPLETED	0	2m 15s	1.4s
+112	run_methods (method: em; grid row: 1)	FAILED	1	6m	2ms
+114	run_methods (method: em; grid row: 29)	FAILED	1	6m	2ms
+116	run_methods (method: em; grid row: 29)	FAILED	1	6m	2ms
+117	run_methods (method: thresholding; grid row: 29)	COMPLETED	0	2m 15s	1.1s
+125	run_methods (method: thresholding; grid row: 8)	COMPLETED	0	2m 15s	1.1s
+11	generate_data (grid row: 11)	COMPLETED	0	7m 15s	573ms
+46	run_methods (method: em; grid row: 2)	FAILED	1	6m	1ms
+56	run_methods (method: em; grid row: 5)	FAILED	1	6m	7ms
+61	run_methods (method: thresholding; grid row: 5)	COMPLETED	0	2m 15s	1.1s
+74	run_methods (method: em; grid row: 32)	FAILED	1	6m	2ms
+113	run_methods (method: thresholding; grid row: 29)	COMPLETED	0	2m 15s	1.1s
+115	run_methods (method: thresholding; grid row: 29)	COMPLETED	0	2m 15s	1s
+118	run_methods (method: em; grid row: 29)	FAILED	1	6m	4.5s
+124	run_methods (method: em; grid row: 8)	FAILED	1	6m	4.5s
+39	run_methods (method: thresholding; grid row: 3)	COMPLETED	0	2m 15s	1s
+65	run_methods (method: thresholding; grid row: 28)	COMPLETED	0	2m 15s	1.5s
+70	run_methods (method: em; grid row: 28)	FAILED	1	6m	5.1s
+88	run_methods (method: em; grid row: 4)	FAILED	1	6m	5.1s
+98	run_methods (method: em; grid row: 6)	FAILED	1	6m	5.1s
+104	run_methods (method: em; grid row: 1)	FAILED	1	6m	5.1s
+119	run_methods (method: thresholding; grid row: 29)	COMPLETED	0	2m 15s	1s
+127	run_methods (method: thresholding; grid row: 8)	COMPLETED	0	2m 15s	1s
+12	generate_data (grid row: 12)	COMPLETED	0	7m 15s	587ms
+75	run_methods (method: thresholding; grid row: 32)	COMPLETED	0	2m 15s	1.1s
+41	run_methods (method: thresholding; grid row: 3)	COMPLETED	0	2m 15s	1.1s
+49	run_methods (method: thresholding; grid row: 2)	COMPLETED	0	2m 15s	966ms
+99	run_methods (method: thresholding; grid row: 6)	COMPLETED	0	2m 15s	1.2s
+121	run_methods (method: thresholding; grid row: 29)	COMPLETED	0	2m 15s	1s
+128	run_methods (method: em; grid row: 8)	FAILED	1	6m	19.7s
+130	run_methods (method: em; grid row: 8)	FAILED	1	6m	15ms
+132	run_methods (method: em; grid row: 8)	FAILED	1	6m	39ms
+146	run_methods (method: em; grid row: 30)	FAILED	1	6m	8ms
+150	run_methods (method: em; grid row: 30)	FAILED	1	6m	20ms
+155	run_methods (method: thresholding; grid row: 9)	COMPLETED	0	2m 15s	1.2s
+164	run_methods (method: em; grid row: 31)	FAILED	1	6m	2ms
+165	run_methods (method: em; grid row: 31)	FAILED	1	6m	2ms
+168	run_methods (method: em; grid row: 31)	FAILED	1	6m	2ms
+13	generate_data (grid row: 13)	COMPLETED	0	7m 15s	577ms
+40	run_methods (method: em; grid row: 3)	FAILED	1	6m	20s
+45	run_methods (method: thresholding; grid row: 2)	COMPLETED	0	2m 15s	960ms
+89	run_methods (method: thresholding; grid row: 4)	COMPLETED	0	2m 15s	1.3s
+139	run_methods (method: thresholding; grid row: 7)	COMPLETED	0	2m 15s	1.3s
+143	run_methods (method: thresholding; grid row: 30)	COMPLETED	0	2m 15s	1.5s
+163	run_methods (method: thresholding; grid row: 31)	COMPLETED	0	2m 15s	1.4s
+166	run_methods (method: thresholding; grid row: 31)	COMPLETED	0	2m 15s	1.7s
+167	run_methods (method: thresholding; grid row: 31)	COMPLETED	0	2m 15s	1.6s
+169	run_methods (method: thresholding; grid row: 31)	COMPLETED	0	2m 15s	1.4s
+15	generate_data (grid row: 15)	COMPLETED	0	7m 15s	573ms
+120	run_methods (method: em; grid row: 29)	FAILED	1	6m	29.4s
+129	run_methods (method: thresholding; grid row: 8)	COMPLETED	0	2m 15s	1s
+131	run_methods (method: thresholding; grid row: 8)	COMPLETED	0	2m 15s	1s
+156	run_methods (method: em; grid row: 9)	FAILED	1	6m	1ms
+42	run_methods (method: em; grid row: 3)	FAILED	1	6m	30s
+48	run_methods (method: em; grid row: 2)	FAILED	1	6m	30s
+133	run_methods (method: thresholding; grid row: 7)	COMPLETED	0	2m 15s	1.5s
+141	run_methods (method: thresholding; grid row: 7)	COMPLETED	0	2m 15s	1.3s
+144	run_methods (method: em; grid row: 30)	FAILED	1	6m	5s
+147	run_methods (method: thresholding; grid row: 30)	COMPLETED	0	2m 15s	1.1s
+151	run_methods (method: thresholding; grid row: 30)	COMPLETED	0	2m 15s	1.4s
+170	run_methods (method: em; grid row: 31)	FAILED	1	6m	5s
+17	generate_data (grid row: 17)	COMPLETED	0	7m 15s	579ms
+50	run_methods (method: em; grid row: 2)	FAILED	1	6m	35s
+122	run_methods (method: em; grid row: 29)	FAILED	1	6m	39.4s
+136	run_methods (method: em; grid row: 7)	FAILED	1	6m	41ms
+140	run_methods (method: em; grid row: 7)	FAILED	1	6m	12ms
+148	run_methods (method: em; grid row: 30)	FAILED	1	6m	2ms
+152	run_methods (method: em; grid row: 30)	FAILED	1	6m	2ms
+153	run_methods (method: thresholding; grid row: 9)	COMPLETED	0	2m 15s	1.3s
+172	run_methods (method: em; grid row: 31)	FAILED	1	6m	1ms
+173	run_methods (method: thresholding; grid row: 10)	COMPLETED	0	2m 15s	1.3s
+174	run_methods (method: em; grid row: 10)	FAILED	1	6m	1ms
+188	run_methods (method: em; grid row: 11)	FAILED	1	6m	2ms
+190	run_methods (method: em; grid row: 11)	FAILED	1	6m	12ms
+191	run_methods (method: thresholding; grid row: 11)	COMPLETED	0	2m 15s	1.3s
+19	generate_data (grid row: 19)	COMPLETED	0	7m 15s	597ms
+38	run_methods (method: em; grid row: 3)	FAILED	1	6m	40s
+126	run_methods (method: em; grid row: 8)	FAILED	1	6m	44.4s
+145	run_methods (method: thresholding; grid row: 30)	COMPLETED	0	2m 15s	1.5s
+149	run_methods (method: thresholding; grid row: 30)	COMPLETED	0	2m 15s	1.1s
+157	run_methods (method: thresholding; grid row: 9)	COMPLETED	0	2m 15s	1.2s
+171	run_methods (method: thresholding; grid row: 31)	COMPLETED	0	2m 15s	1.4s
+177	run_methods (method: thresholding; grid row: 10)	COMPLETED	0	2m 15s	1.2s
+181	run_methods (method: thresholding; grid row: 10)	COMPLETED	0	2m 15s	1.1s
+185	run_methods (method: thresholding; grid row: 11)	COMPLETED	0	2m 15s	1.2s
+184	run_methods (method: em; grid row: 11)	FAILED	1	6m	16ms
+187	run_methods (method: thresholding; grid row: 11)	COMPLETED	0	2m 15s	1.1s
+189	run_methods (method: thresholding; grid row: 11)	COMPLETED	0	2m 15s	1.3s
+14	generate_data (grid row: 14)	COMPLETED	0	7m 15s	542ms
+51	run_methods (method: thresholding; grid row: 2)	COMPLETED	0	2m 15s	1s
+123	run_methods (method: thresholding; grid row: 8)	COMPLETED	0	2m 15s	1s
+135	run_methods (method: em; grid row: 7)	FAILED	1	6m	1ms
+142	run_methods (method: em; grid row: 7)	FAILED	1	6m	2ms
+154	run_methods (method: em; grid row: 9)	FAILED	1	6m	2ms
+158	run_methods (method: em; grid row: 9)	FAILED	1	6m	12ms
+176	run_methods (method: em; grid row: 10)	FAILED	1	6m	5s
+175	run_methods (method: thresholding; grid row: 10)	COMPLETED	0	2m 15s	1.3s
+183	run_methods (method: thresholding; grid row: 11)	COMPLETED	0	2m 15s	1.1s
+192	run_methods (method: em; grid row: 11)	FAILED	1	6m	5s
+52	run_methods (method: em; grid row: 2)	FAILED	1	6m	50s
+138	run_methods (method: em; grid row: 7)	FAILED	1	6m	12ms
+178	run_methods (method: em; grid row: 10)	FAILED	1	6m	4.9s
+194	run_methods (method: em; grid row: 12)	FAILED	1	6m	12ms
+16	generate_data (grid row: 16)	COMPLETED	0	7m 15s	574ms
+159	run_methods (method: thresholding; grid row: 9)	COMPLETED	0	2m 15s	1.3s
+179	run_methods (method: thresholding; grid row: 10)	COMPLETED	0	2m 15s	1.2s
+182	run_methods (method: em; grid row: 10)	FAILED	1	6m	5s
+196	run_methods (method: thresholding; grid row: 12)	COMPLETED	0	2m 15s	1.2s
+198	run_methods (method: em; grid row: 12)	FAILED	1	6m	7ms
+208	run_methods (method: em; grid row: 13)	FAILED	1	6m	2ms
+212	run_methods (method: em; grid row: 13)	FAILED	1	6m	2ms
+214	run_methods (method: em; grid row: 15)	FAILED	1	6m	2ms
+224	run_methods (method: em; grid row: 17)	FAILED	1	6m	2ms
+226	run_methods (method: thresholding; grid row: 17)	COMPLETED	0	2m 15s	1.3s
+225	run_methods (method: em; grid row: 17)	FAILED	1	6m	13ms
+223	run_methods (method: thresholding; grid row: 17)	COMPLETED	0	2m 15s	1.6s
+228	run_methods (method: em; grid row: 17)	FAILED	1	6m	9ms
+229	run_methods (method: thresholding; grid row: 17)	COMPLETED	0	2m 15s	1.3s
+232	run_methods (method: em; grid row: 17)	FAILED	1	6m	12ms
+20	generate_data (grid row: 20)	COMPLETED	0	7m 15s	527ms
+53	run_methods (method: thresholding; grid row: 5)	COMPLETED	0	2m 15s	1s
+134	run_methods (method: thresholding; grid row: 7)	COMPLETED	0	2m 15s	1.1s
+160	run_methods (method: em; grid row: 9)	FAILED	1	6m	8ms
+180	run_methods (method: em; grid row: 10)	FAILED	1	6m	14ms
+186	run_methods (method: em; grid row: 11)	FAILED	1	6m	19ms
+195	run_methods (method: em; grid row: 12)	FAILED	1	6m	1ms
+200	run_methods (method: em; grid row: 12)	FAILED	1	6m	15ms
+204	run_methods (method: thresholding; grid row: 13)	COMPLETED	0	2m 15s	1.5s
+218	run_methods (method: em; grid row: 15)	FAILED	1	6m	2ms
+219	run_methods (method: thresholding; grid row: 15)	COMPLETED	0	2m 15s	1.6s
+227	run_methods (method: thresholding; grid row: 17)	COMPLETED	0	2m 15s	1.2s
+230	run_methods (method: em; grid row: 17)	FAILED	1	6m	4.7s
+18	generate_data (grid row: 18)	COMPLETED	0	7m 15s	532ms
+54	run_methods (method: em; grid row: 5)	FAILED	1	6m	1m 5s
+137	run_methods (method: thresholding; grid row: 7)	COMPLETED	0	2m 15s	1.2s
+161	run_methods (method: thresholding; grid row: 9)	COMPLETED	0	2m 15s	1.3s
+193	run_methods (method: thresholding; grid row: 12)	COMPLETED	0	2m 15s	1.2s
+197	run_methods (method: thresholding; grid row: 12)	COMPLETED	0	2m 15s	1.1s
+207	run_methods (method: thresholding; grid row: 13)	COMPLETED	0	2m 15s	1.2s
+209	run_methods (method: thresholding; grid row: 13)	COMPLETED	0	2m 15s	1.4s
+215	run_methods (method: thresholding; grid row: 15)	COMPLETED	0	2m 15s	1.4s
+220	run_methods (method: em; grid row: 15)	FAILED	1	6m	5s
+233	run_methods (method: thresholding; grid row: 19)	COMPLETED	0	2m 15s	1.1s
+203	run_methods (method: em; grid row: 13)	FAILED	1	6m	9.9s
+211	run_methods (method: thresholding; grid row: 13)	COMPLETED	0	2m 15s	1.2s
+213	run_methods (method: thresholding; grid row: 15)	COMPLETED	0	2m 15s	1.5s
+217	run_methods (method: thresholding; grid row: 15)	COMPLETED	0	2m 15s	1.3s
+222	run_methods (method: em; grid row: 15)	FAILED	1	6m	10.1s
+231	run_methods (method: thresholding; grid row: 17)	COMPLETED	0	2m 15s	1.2s
+235	run_methods (method: thresholding; grid row: 19)	COMPLETED	0	2m 15s	1.3s
+242	run_methods (method: em; grid row: 19)	FAILED	1	6m	2ms
+246	run_methods (method: em; grid row: 14)	FAILED	1	6m	1ms
+262	run_methods (method: em; grid row: 16)	FAILED	1	6m	1ms
+266	run_methods (method: em; grid row: 20)	FAILED	1	6m	13ms
+21	generate_data (grid row: 21)	COMPLETED	0	7m 15s	890ms
+162	run_methods (method: em; grid row: 9)	FAILED	1	6m	15.1s
+199	run_methods (method: thresholding; grid row: 12)	COMPLETED	0	2m 15s	1s
+216	run_methods (method: em; grid row: 15)	FAILED	1	6m	15s
+234	run_methods (method: em; grid row: 19)	FAILED	1	6m	19.7s
+240	run_methods (method: em; grid row: 19)	FAILED	1	6m	2ms
+249	run_methods (method: thresholding; grid row: 14)	COMPLETED	0	2m 15s	1.2s
+257	run_methods (method: thresholding; grid row: 16)	COMPLETED	0	2m 15s	1.1s
+260	run_methods (method: em; grid row: 16)	FAILED	1	6m	4.9s
+265	run_methods (method: thresholding; grid row: 20)	COMPLETED	0	2m 15s	1.1s
+264	run_methods (method: em; grid row: 20)	FAILED	1	6m	5s
+263	run_methods (method: thresholding; grid row: 20)	COMPLETED	0	2m 15s	1.3s
+22	generate_data (grid row: 22)	COMPLETED	0	7m 15s	517ms
+210	run_methods (method: em; grid row: 13)	FAILED	1	6m	19.9s
+221	run_methods (method: thresholding; grid row: 15)	COMPLETED	0	2m 15s	1.5s
+241	run_methods (method: thresholding; grid row: 19)	COMPLETED	0	2m 15s	1.1s
+243	run_methods (method: thresholding; grid row: 14)	COMPLETED	0	2m 15s	1.1s
+244	run_methods (method: em; grid row: 14)	FAILED	1	6m	2ms
+254	run_methods (method: em; grid row: 16)	FAILED	1	6m	2ms
+258	run_methods (method: em; grid row: 16)	FAILED	1	6m	12ms
+27	generate_data (grid row: 27)	COMPLETED	0	7m 15s	581ms
+205	run_methods (method: thresholding; grid row: 13)	COMPLETED	0	2m 15s	1.2s
+238	run_methods (method: em; grid row: 19)	FAILED	1	6m	29.8s
+247	run_methods (method: thresholding; grid row: 14)	COMPLETED	0	2m 15s	1.1s
+206	run_methods (method: em; grid row: 13)	FAILED	1	6m	29.9s
+236	run_methods (method: em; grid row: 19)	FAILED	1	6m	34.6s
+251	run_methods (method: thresholding; grid row: 14)	COMPLETED	0	2m 15s	1.1s
+259	run_methods (method: thresholding; grid row: 16)	COMPLETED	0	2m 15s	1.1s
+267	run_methods (method: thresholding; grid row: 20)	COMPLETED	0	2m 15s	1.1s
+269	run_methods (method: thresholding; grid row: 20)	COMPLETED	0	2m 15s	981ms
+282	run_methods (method: em; grid row: 18)	FAILED	1	6m	1ms
+298	run_methods (method: em; grid row: 22)	FAILED	1	6m	16ms
+302	run_methods (method: em; grid row: 22)	FAILED	1	6m	2ms
+23	generate_data (grid row: 23)	COMPLETED	0	7m 15s	775ms
+248	run_methods (method: em; grid row: 14)	FAILED	1	6m	257ms
+252	run_methods (method: em; grid row: 14)	FAILED	1	6m	2ms
+261	run_methods (method: thresholding; grid row: 16)	COMPLETED	0	2m 15s	1.4s
+268	run_methods (method: em; grid row: 20)	FAILED	1	6m	27ms
+284	run_methods (method: thresholding; grid row: 21)	COMPLETED	0	2m 15s	1.3s
+291	run_methods (method: thresholding; grid row: 21)	COMPLETED	0	2m 15s	1s
+296	run_methods (method: thresholding; grid row: 22)	COMPLETED	0	2m 15s	1.3s
+25	generate_data (grid row: 25)	COMPLETED	0	7m 15s	559ms
+201	run_methods (method: thresholding; grid row: 12)	COMPLETED	0	2m 15s	1.1s
+237	run_methods (method: thresholding; grid row: 19)	COMPLETED	0	2m 15s	1.2s
+245	run_methods (method: thresholding; grid row: 14)	COMPLETED	0	2m 15s	1.2s
+270	run_methods (method: em; grid row: 20)	FAILED	1	6m	4.7s
+283	run_methods (method: em; grid row: 21)	FAILED	1	6m	2ms
+285	run_methods (method: thresholding; grid row: 21)	COMPLETED	0	2m 15s	1s
+292	run_methods (method: em; grid row: 21)	FAILED	1	6m	36ms
+293	run_methods (method: em; grid row: 22)	FAILED	1	6m	2ms
+299	run_methods (method: thresholding; grid row: 22)	COMPLETED	0	2m 15s	937ms
+26	generate_data (grid row: 26)	COMPLETED	0	7m 15s	576ms
+202	run_methods (method: em; grid row: 12)	FAILED	1	6m	45.5s
+239	run_methods (method: thresholding; grid row: 19)	COMPLETED	0	2m 15s	1.2s
+255	run_methods (method: thresholding; grid row: 16)	COMPLETED	0	2m 15s	1.1s
+271	run_methods (method: thresholding; grid row: 20)	COMPLETED	0	2m 15s	965ms
+286	run_methods (method: em; grid row: 21)	FAILED	1	6m	10ms
+297	run_methods (method: thresholding; grid row: 22)	COMPLETED	0	2m 15s	1.3s
+300	run_methods (method: em; grid row: 22)	FAILED	1	6m	12ms
+250	run_methods (method: em; grid row: 14)	FAILED	1	6m	12ms
+272	run_methods (method: em; grid row: 20)	FAILED	1	6m	1ms
+295	run_methods (method: em; grid row: 22)	FAILED	1	6m	13ms
+304	run_methods (method: em; grid row: 27)	FAILED	1	6m	20ms
+24	generate_data (grid row: 24)	COMPLETED	0	7m 15s	659ms
+287	run_methods (method: thresholding; grid row: 21)	COMPLETED	0	2m 15s	1s
+294	run_methods (method: thresholding; grid row: 22)	COMPLETED	0	2m 15s	1.1s
+301	run_methods (method: thresholding; grid row: 22)	COMPLETED	0	2m 15s	973ms
+305	run_methods (method: thresholding; grid row: 27)	COMPLETED	0	2m 15s	1.5s
+307	run_methods (method: thresholding; grid row: 27)	COMPLETED	0	2m 15s	1.6s
+310	run_methods (method: em; grid row: 27)	FAILED	1	6m	5s
+313	run_methods (method: thresholding; grid row: 23)	COMPLETED	0	2m 15s	986ms
+325	run_methods (method: thresholding; grid row: 25)	COMPLETED	0	2m 15s	1.1s
+253	run_methods (method: thresholding; grid row: 16)	COMPLETED	0	2m 15s	1.2s
+274	run_methods (method: thresholding; grid row: 18)	COMPLETED	0	2m 15s	988ms
+288	run_methods (method: em; grid row: 21)	FAILED	1	6m	12ms
+306	run_methods (method: em; grid row: 27)	FAILED	1	6m	1ms
+303	run_methods (method: thresholding; grid row: 27)	COMPLETED	0	2m 15s	1.2s
+308	run_methods (method: em; grid row: 27)	FAILED	1	6m	9ms
+311	run_methods (method: thresholding; grid row: 27)	COMPLETED	0	2m 15s	1.2s
+316	run_methods (method: em; grid row: 23)	FAILED	1	6m	2ms
+324	run_methods (method: em; grid row: 25)	FAILED	1	6m	2ms
+256	run_methods (method: em; grid row: 16)	FAILED	1	6m	5s
+273	run_methods (method: thresholding; grid row: 18)	COMPLETED	0	2m 15s	972ms
+309	run_methods (method: thresholding; grid row: 27)	COMPLETED	0	2m 15s	1.6s
+312	run_methods (method: em; grid row: 27)	FAILED	1	6m	5s
+318	run_methods (method: em; grid row: 23)	FAILED	1	6m	4.9s
+326	run_methods (method: em; grid row: 25)	FAILED	1	6m	5s
+289	run_methods (method: thresholding; grid row: 21)	COMPLETED	0	2m 15s	1s
+314	run_methods (method: em; grid row: 23)	FAILED	1	6m	9.9s
+333	run_methods (method: thresholding; grid row: 26)	COMPLETED	0	2m 15s	1.1s
+344	run_methods (method: thresholding; grid row: 24)	COMPLETED	0	2m 15s	1.2s
+275	run_methods (method: em; grid row: 18)	FAILED	1	6m	15s
+290	run_methods (method: em; grid row: 21)	FAILED	1	6m	15s
+319	run_methods (method: thresholding; grid row: 23)	COMPLETED	0	2m 15s	1.1s
+327	run_methods (method: thresholding; grid row: 25)	COMPLETED	0	2m 15s	1.2s
+336	run_methods (method: em; grid row: 26)	FAILED	1	6m	2ms
+343	run_methods (method: em; grid row: 24)	FAILED	1	6m	5s
+276	run_methods (method: em; grid row: 18)	FAILED	1	6m	20s
+315	run_methods (method: thresholding; grid row: 23)	COMPLETED	0	2m 15s	1.1s
+320	run_methods (method: em; grid row: 23)	FAILED	1	6m	19.9s
+328	run_methods (method: em; grid row: 25)	FAILED	1	6m	19.9s
+335	run_methods (method: thresholding; grid row: 26)	COMPLETED	0	2m 15s	1.1s
+334	run_methods (method: em; grid row: 26)	FAILED	1	6m	5s
+345	run_methods (method: thresholding; grid row: 24)	COMPLETED	0	2m 15s	1.2s
+346	run_methods (method: em; grid row: 24)	FAILED	1	6m	2ms
+337	run_methods (method: thresholding; grid row: 26)	COMPLETED	0	2m 15s	1.1s
+347	run_methods (method: thresholding; grid row: 24)	COMPLETED	0	2m 15s	1.1s
+277	run_methods (method: thresholding; grid row: 18)	COMPLETED	0	2m 15s	1s
+317	run_methods (method: thresholding; grid row: 23)	COMPLETED	0	2m 15s	1.2s
+329	run_methods (method: thresholding; grid row: 25)	COMPLETED	0	2m 15s	1.2s
+348	run_methods (method: em; grid row: 24)	FAILED	1	6m	12ms
+278	run_methods (method: em; grid row: 18)	FAILED	1	6m	35s
+321	run_methods (method: thresholding; grid row: 23)	COMPLETED	0	2m 15s	1s
+330	run_methods (method: em; grid row: 25)	FAILED	1	6m	34.9s
+338	run_methods (method: em; grid row: 26)	FAILED	1	6m	5s
+339	run_methods (method: thresholding; grid row: 26)	COMPLETED	0	2m 15s	1.1s
+349	run_methods (method: thresholding; grid row: 24)	COMPLETED	0	2m 15s	998ms
+279	run_methods (method: thresholding; grid row: 18)	COMPLETED	0	2m 15s	1s
+322	run_methods (method: em; grid row: 23)	FAILED	1	6m	44.9s
+331	run_methods (method: thresholding; grid row: 25)	COMPLETED	0	2m 15s	1.2s
+340	run_methods (method: em; grid row: 26)	FAILED	1	6m	17ms
+350	run_methods (method: em; grid row: 24)	FAILED	1	6m	114ms
+280	run_methods (method: em; grid row: 18)	FAILED	1	6m	55s
+323	run_methods (method: thresholding; grid row: 25)	COMPLETED	0	2m 15s	1.8s
+332	run_methods (method: em; grid row: 25)	FAILED	1	6m	54.9s
+281	run_methods (method: thresholding; grid row: 18)	COMPLETED	0	2m 15s	1s
+341	run_methods (method: thresholding; grid row: 26)	COMPLETED	0	2m 15s	1s
+351	run_methods (method: thresholding; grid row: 24)	COMPLETED	0	2m 15s	1.1s
+342	run_methods (method: em; grid row: 26)	FAILED	1	6m	4.1s
+352	run_methods (method: em; grid row: 24)	FAILED	1	6m	4.1s
+353	collate_results	COMPLETED	0	1m	1.9s
+354	cleanup	COMPLETED	0	-	106ms
