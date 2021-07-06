@@ -4,3 +4,4 @@ nextflow.config
 .Rhistory
 simulations/.Rhistory
 simulations/.DS_Store
+simulatr.log
