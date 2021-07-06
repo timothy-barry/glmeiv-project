@@ -20,7 +20,7 @@ remote_sim_dir=$REMOTE_GLMEIV_DATA_DIR"private/simulations"
 mkdir -p $sim_dir $LOCAL_GLMEIV_DATA_DIR"public"
 
 # 3. rclone sync remote to local
-rclone sync -i $remote_sim_dir $sim_dir
+# rclone sync -i $remote_sim_dir $sim_dir
 
 # 4. Create the simulatr specifier objects
 Rscript simulations/create_simulatr_spec_objects.R
@@ -33,6 +33,6 @@ $SIMULATR -f $sim_dir"/sim_spec_1.rds" -r $sim_dir"/raw_result_1.rds"
 fi
 
 # 5. rclone copy results to remote
-rclone copy $sim_dir $remote_sim_dir
+# rclone copy $sim_dir $remote_sim_dir
 
 # 6. Analyze the simulations
