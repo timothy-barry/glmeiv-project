@@ -75,3 +75,9 @@ sim_spec_2 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
                                                        covariate_sampler = NULL)
 
 saveRDS(object = sim_spec_2, file = to_save_2)
+
+
+# why does the thresholding method exhibit nonmonotonicity? Run over a finer grid.
+# examine power of either method for m_pert closer to zero
+# look at different distributions, e.g. Guassian.
+# Include covariate matrix (with, e.g., one covariate)
