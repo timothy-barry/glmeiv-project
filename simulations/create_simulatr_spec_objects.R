@@ -2,7 +2,7 @@
 # look at different distributions, e.g. Guassian.
 # Include covariate matrix (with, e.g., one covariate)
 library(magrittr)
-load_all("~/research_code/glmeiv/")
+library(glmeiv)
 
 # create simulatr objects
 # This script creates simulatr_specifier objects corresponding to the simulation studies reported in the manuscript.
