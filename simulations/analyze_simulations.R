@@ -12,7 +12,7 @@ sim_spec <- readRDS(paste0(sim_dir, "/sim_spec_1.rds")) # simulatr specifier obj
 sim_res <- readRDS(paste0(sim_dir, "/raw_result_1.rds")) # raw results
 
 # Obtain the (theoretical) thresholds and mixture distribution plotting dfs
-density_dfs_and_thresholds <- get_theoretical_densities_and_thresholds(sim_spec = sim_spec, xgrid = seq(0, 6))
+density_dfs_and_thresholds <- get_theoretical_densities_and_thresholds(sim_spec = sim_spec, xgrid = seq(0, 10))
 
 # update the parameter grid with g_thresh
 row.names(sim_spec@parameter_grid) <- NULL
@@ -43,7 +43,7 @@ obtain_valid_ids <- function(sim_res, spread_thresh = 0.1, approx_1_thresh = 75,
 }
 
 # filter the results according to the valid IDs.
-valid_ids <- obtain_valid_ids(sim_res)
+valid_ids <- obtain_valid_ids(sim_res, pi_thresh = 0.5)
 sim_res_sub <- filter(sim_res, id %in% valid_ids)
 
 # compute summary statistics
@@ -55,23 +55,19 @@ plot_all_arms(summarized_results, "m_perturbation", "bias", plot_discont_points 
 plot_all_arms(summarized_results, "m_perturbation", "mse", plot_discont_points = TRUE)
 plot_all_arms(summarized_results, "m_perturbation", "se", plot_discont_points = TRUE)
 plot_all_arms(summarized_results, "m_perturbation", "coverage")
-plot_all_arms(summarized_results, "m_perturbation", "count", c(0, 1000))
+
 
 # examine gRNA and mRNA distributions for arm c (g_perturbation varying)
-hard_idx <- filter(sim_spec@parameter_grid, g_perturbation == 0.75, arm_g_perturbation) %>% pull(grid_row_idx)
+hard_idx <- filter(sim_spec@parameter_grid, g_perturbation == 0.5, arm_g_perturbation) %>% pull(grid_row_idx)
 easy_idx <- filter(sim_spec@parameter_grid, g_perturbation == 3, arm_g_perturbation) %>% pull(grid_row_idx)
 # gRNA count distribution challenging extreme:
 plot_mixture(density_dfs_and_thresholds$g_dfs[[hard_idx]],
-             ceiling(density_dfs_and_thresholds$g_threshold[hard_idx]))
+             ceiling(density_dfs_and_thresholds$g_threshold[hard_idx]), x_max = 6)
 # gRNA count distribution easier extreme:
 plot_mixture(density_dfs_and_thresholds$g_dfs[[easy_idx]],
-             ceiling(density_dfs_and_thresholds$g_threshold[easy_idx]))
+             ceiling(density_dfs_and_thresholds$g_threshold[easy_idx]), x_max = 6)
 # mRNA count distribution (fixed)
-plot_mixture(density_dfs_and_thresholds$m_dfs[[hard_idx]])
-
-# examine outlier
-sim_res %>% filter(id == "em-17-2-101", target == "estimate")
-sim_res %>% filter(id == "em-17-2-2", target == "estimate")
+plot_mixture(density_dfs_and_thresholds$m_dfs[[hard_idx]], x_max = 10)
 
 ####################
 # simulation study 2
@@ -88,7 +84,7 @@ sim_spec@parameter_grid$grid_row_id <- seq(1, nrow(sim_spec@parameter_grid))
 sim_spec@parameter_grid$g_thresh <- density_dfs_and_thresholds$g_threshold
 
 # get the valid IDs and filter
-valid_ids <- obtain_valid_ids(sim_res, spread_thresh = 0.1, approx_1_thresh = 50, approx_0_thresh = 50)
+valid_ids <- obtain_valid_ids(sim_res, spread_thresh = 0.1, approx_1_thresh = 75, approx_0_thresh = 75)
 sim_res_sub <- filter(sim_res, id %in% valid_ids)
 
 # compute summary stats
@@ -96,14 +92,14 @@ summarized_results <- summarize_results(sim_spec = sim_spec, sim_res = sim_res_s
                                         metrics = c("bias", "coverage", "count", "mse", "se"),
                                         parameters = c("m_perturbation")) %>% as_tibble()
 # plot arms
+plot_all_arms(summarized_results, "m_perturbation", "count", plot_discont_points = FALSE, ylim = c(0, 1000))
 plot_all_arms(summarized_results, "m_perturbation", "bias", plot_discont_points = TRUE, ylim = c(-0.01, 0.075))
 plot_all_arms(summarized_results, "m_perturbation", "mse", plot_discont_points = TRUE)
 plot_all_arms(summarized_results, "m_perturbation", "se", plot_discont_points = FALSE)
 plot_all_arms(summarized_results, "m_perturbation", "coverage", plot_discont_points = TRUE, ylim = c(0,1))
-plot_all_arms(summarized_results, "m_perturbation", "count", plot_discont_points = FALSE, ylim = c(0, 1000))
 
 # examinine mixture distributions
-hard_idx_g <- filter(sim_spec@parameter_grid, arm_g_perturbation, g_perturbation == 1.6) %>% pull(grid_row_id)
+hard_idx_g <- filter(sim_spec@parameter_grid, arm_g_perturbation, g_perturbation == 0.2) %>% pull(grid_row_id)
 easy_idx_g <- filter(sim_spec@parameter_grid, g_perturbation == 3, arm_g_perturbation) %>% pull(grid_row_id)
 hard_idx_m <- filter(sim_spec@parameter_grid, arm_m_perturbation, m_perturbation == -0.2) %>% pull(grid_row_id)
 easy_idx_m <- filter(sim_spec@parameter_grid, arm_m_perturbation, m_perturbation == -2) %>% pull(grid_row_id)
@@ -111,7 +107,7 @@ easy_idx_m <- filter(sim_spec@parameter_grid, arm_m_perturbation, m_perturbation
 # gRNA count distribution challenging extreme:
 plot_mixture(density_dfs_and_thresholds$g_dfs[[hard_idx_g]],
              ceiling(density_dfs_and_thresholds$g_threshold[hard_idx_g]),
-             x_max = 5)
+             x_max = 6)
 # gRNA count distribution easy extreme
 plot_mixture(density_dfs_and_thresholds$g_dfs[[easy_idx_g]],
              ceiling(density_dfs_and_thresholds$g_threshold[easy_idx_g]),

@@ -28,8 +28,13 @@ if [[ ! -f $sim_dir"/raw_result_1.rds" ]]
 then
 $SIMULATR -f $sim_dir"/sim_spec_1.rds" -r $sim_dir"/raw_result_1.rds"
 fi
-
+# ii.
 if [[ ! -f $sim_dir"/raw_result_2.rds" ]]
 then
 $SIMULATR -f $sim_dir"/sim_spec_2.rds" -r $sim_dir"/raw_result_2.rds"
+fi
+# iii.
+if [[ ! -f $sim_dir"/raw_result_3.rds" ]]
+then
+$SIMULATR -f $sim_dir"/sim_spec_3.rds" -r $sim_dir"/raw_result_3.rds"
 fi
