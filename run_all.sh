@@ -20,7 +20,7 @@ remote_sim_dir=$REMOTE_GLMEIV_DATA_DIR"private/simulations"
 mkdir -p $sim_dir $LOCAL_GLMEIV_DATA_DIR"public"
 
 # 3. Create the simulatr specifier objects
-Rscript simulations/create_simulatr_spec_objects.R
+Rscript simulations/create_simulatr_spec_objects.R FALSE
 
 # 4. Run the simulations
 # i.
