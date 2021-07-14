@@ -7,10 +7,10 @@ sim_dir <- paste0(.get_config_path("LOCAL_GLMEIV_DATA_DIR"), "private/simulation
 obtain_valid_ids <- function(sim_res, spread_thresh = 0.1, approx_1_thresh = 75, approx_0_thresh = 75, g_pert_thresh = -0.5, m_pert_thresh = 0.5, pi_thresh = 0.3) {
   valid_em_ids <- sim_res %>% filter(method == "em") %>%
     group_by(id) %>%
-    summarize(valid_idx = (# Filter out solutions where problem is inherently hard (i.e., effective sample size too small for good solution) 
+    summarize(valid_idx = (# Filter out solutions where problem is inherently hard (i.e., effective sample size too small for good solution)
       value[target == "converged"] == 1
-      & value[target == "membership_probability_spread"] > spread_thresh 
-      & value[target == "n_approx_0"] >= approx_0_thresh 
+      & value[target == "membership_probability_spread"] > spread_thresh
+      & value[target == "n_approx_0"] >= approx_0_thresh
       & value[target == "n_approx_1"] >= approx_1_thresh
       # below: filter out local optima using knowledge of distribution
       & value[parameter == "g_perturbation" & target == "estimate"] >= g_pert_thresh
@@ -146,3 +146,37 @@ plot_all_arms(summarized_results, "m_perturbation", "rejection_probability", yli
 plot_all_arms(summarized_results, "m_perturbation", "bias", plot_discont_points = FALSE, arm_info = arm_info)
 plot_all_arms(summarized_results, "m_perturbation", "coverage", plot_discont_points = FALSE, arm_info = arm_info)
 plot_all_arms(summarized_results, "m_perturbation", "count", plot_discont_points = FALSE, arm_info = arm_info, ylim = c(0, 1000))
+
+
+####################
+# simulation study 4
+####################
+sim_spec <- readRDS(paste0(sim_dir, "/sim_spec_4.rds")) # simulatr specifier object
+sim_res <- readRDS(paste0(sim_dir, "/raw_result_4.rds")) # raw results
+
+# obtain theoretical thresholds and mixture distributions
+density_dfs_and_thresholds <- get_theoretical_densities_and_thresholds(sim_spec = sim_spec, xgrid = seq(-5, 8, 0.1))
+
+# plot densities
+plot_mixture(density_dfs_and_thresholds$m_dfs[[35]],
+             x_max = 8, points = FALSE)
+
+
+valid_ids <- obtain_valid_ids(sim_res = sim_res, spread_thresh = 0.1,
+                              approx_1_thresh = 50, approx_0_thresh = 50, m_pert_thresh = Inf)
+sim_res_sub <- filter(sim_res, id %in% valid_ids)
+
+summarized_results <- summarize_results(sim_spec = sim_spec, sim_res = sim_res,
+                                        metrics = c("bias", "coverage", "count", "mse", "se", "rejection_probability"),
+                                        parameters = c("m_perturbation"),
+                                        threshold = 0.1) %>% as_tibble()
+
+arm_info <- list(arm_names = c("arm_arm_pi_small", "arm_arm_pi_intermediate", "arm_arm_pi_big"),
+                 varying_param = c("g_perturbation", "g_perturbation", "g_perturbation"),
+                 all_params = c("g_perturbation", "pi"))
+# make plots
+plot_all_arms(summarized_results, "m_perturbation", "count", plot_discont_points = FALSE, arm_info = arm_info, ylim = c(0, 1000))
+plot_all_arms(summarized_results, "m_perturbation", "bias", plot_discont_points = FALSE, arm_info = arm_info)
+plot_all_arms(summarized_results, "m_perturbation", "coverage", plot_discont_points = FALSE, arm_info = arm_info)
+
+filter(sim_res, id %in% c("em-27-4-132", "em-27-5-71"), target == "estimate")

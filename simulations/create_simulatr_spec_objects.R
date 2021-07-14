@@ -143,7 +143,7 @@ save_obj(sim_spec_3, to_save_3, overwrite)
 
 # Study 4: Gaussian case; no covariates; intercept terms fixed at zero (WOLOG); varying g_perturbation and pi.
 to_save_4 <- paste0(sim_dir, "/sim_spec_4.rds")
-param_vals <- list(g_perturbation = seq(0.5, 6, 0.5), pi = seq(0.1, 0.3, 0.1))
+param_vals <- list(g_perturbation = seq(0.5, 6, 0.5), pi = c(0.05, 0.15, 0.25))
 arm_names <- c("arm_pi_small", "arm_pi_intermediate", "arm_pi_big")
 arm_param <- "pi"
 param_grid <- simulatr::create_param_grid_two_way_factorial(param_vals, arm_names, arm_param)
@@ -153,12 +153,12 @@ fixed_params <- list(
   B = 1000,
   n_processors = 5,
   m_intercept = 0,
-  m_perturbation = 3,
+  m_perturbation = -4,
   g_intercept = 0,
   m_fam = gaussian(),
   g_fam = gaussian(),
   alpha = 0.95,
-  n_em_rep = 5,
+  n_em_rep = 10,
   lambda = NULL,
   save_membership_probs_mult = 250,
   sd = 0.15,
