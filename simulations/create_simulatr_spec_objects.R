@@ -177,3 +177,42 @@ sim_spec_4 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
                                                        covariate_sampler = NULL)
 
 save_obj(obj = sim_spec_4, file_path = to_save_4, overwrite = overwrite)
+
+
+# 5. no covariates; varying m_pert, g_pert, and pi; NB family objects. m_pert and g_pert baselines are easy (large values)
+to_save_5 <- paste0(sim_dir, "/sim_spec_5.rds")
+param_grid <- simulatr::create_param_grid_fractional_factorial(varying_values = list(pi = seq(0.05, 0.25, 0.025),
+                                                                                     m_perturbation = seq(0.0, -2, -0.2),
+                                                                                     g_perturbation = seq(0.0, 3, 0.25)),
+                                                               baseline_values = list(pi = 0.25,
+                                                                                      m_perturbation = -2,
+                                                                                      g_perturbation = 3))
+fixed_params <- list(
+  seed = 4,
+  n = 2000,
+  B = 1000,
+  n_processors = 5,
+  m_intercept = 2,
+  g_intercept = -2,
+  m_fam = MASS::negative.binomial(5),
+  g_fam = MASS::negative.binomial(5),
+  alpha = 0.95,
+  n_em_rep = 5,
+  lambda = NULL,
+  save_membership_probs_mult = 250,
+  sd = 0.15,
+  m_covariate_coefs = NULL,
+  g_covariate_coefs = NULL,
+  covariate_matrix = NULL,
+  m_offset = NULL,
+  g_offset = NULL
+)
+
+one_rep_times <- list(generate_data_function = 1,
+                      thresholding = 1,
+                      em = 12)
+sim_spec_5 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
+                                                       fixed_params = fixed_params,
+                                                       one_rep_times = one_rep_times,
+                                                       covariate_sampler = NULL)
+save_obj(sim_spec_5, to_save_5, overwrite)
