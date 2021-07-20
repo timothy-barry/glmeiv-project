@@ -4,28 +4,6 @@ library(dplyr)
 library(ggplot2)
 sim_dir <- paste0(.get_config_path("LOCAL_GLMEIV_DATA_DIR"), "private/simulations")
 
-obtain_valid_ids <- function(sim_res, spread_thresh = 0.1, approx_1_thresh = 75, approx_0_thresh = 75, g_pert_thresh = -0.5, m_pert_thresh = 0.5, pi_thresh = 0.3) {
-  valid_em_ids <- sim_res %>% filter(method == "em") %>%
-    group_by(id) %>%
-    summarize(valid_idx = (# Filter out solutions where problem is inherently hard (i.e., effective sample size too small for good solution)
-      value[target == "converged"] == 1
-      & value[target == "membership_probability_spread"] > spread_thresh
-      & value[target == "n_approx_0"] >= approx_0_thresh
-      & value[target == "n_approx_1"] >= approx_1_thresh
-      # below: filter out local optima using knowledge of distribution
-      & value[parameter == "g_perturbation" & target == "estimate"] >= g_pert_thresh
-      & value[parameter == "m_perturbation" & target == "estimate"] <= m_pert_thresh
-      & value[parameter == "m_perturbation" & target == "estimate"] <= pi_thresh),
-    ) %>%
-    filter(valid_idx) %>% pull(id) %>% as.character()
-  valid_thresh_ids <- sim_res %>%
-    filter(method == "thresholding") %>%
-    group_by(id) %>%
-    summarize(valid_idx = (value[target == "fit_attempted"] == 1)) %>%
-    filter(valid_idx) %>% pull(id) %>% as.character()
-  valid_ids <- c(valid_em_ids, valid_thresh_ids)
-}
-
 ####################
 # simulation study 1
 ####################
@@ -33,7 +11,7 @@ sim_spec <- readRDS(paste0(sim_dir, "/sim_spec_1.rds")) # simulatr specifier obj
 sim_res <- readRDS(paste0(sim_dir, "/raw_result_1.rds")) # raw results
 
 # Obtain the (theoretical) thresholds and mixture distribution plotting dfs
-density_dfs_and_thresholds <- get_theoretical_densities_and_thresholds(sim_spec = sim_spec, xgrid = seq(0, 10))
+density_dfs_and_thresholds <- get_theoretical_densities_and_thresholds(sim_spec = sim_spec, xgrid = seq(0, 15))
 
 # update the parameter grid with g_thresh
 row.names(sim_spec@parameter_grid) <- NULL
@@ -41,7 +19,8 @@ sim_spec@parameter_grid$grid_row_idx <- seq(1, nrow(sim_spec@parameter_grid))
 sim_spec@parameter_grid$g_thresh <- density_dfs_and_thresholds$g_threshold
 
 # filter the results according to the valid IDs.
-valid_ids <- obtain_valid_ids(sim_res, pi_thresh = 0.5)
+id_classifications <- obtain_valid_ids(sim_res, pi_upper = Inf)
+valid_ids <- id_classifications$valid_ids
 sim_res_sub <- filter(sim_res, id %in% valid_ids)
 
 # compute summary statistics
@@ -59,19 +38,23 @@ plot_all_arms(summarized_results, "m_perturbation", "count", ylim = c(0, 1000))
 hard_idx <- filter(sim_spec@parameter_grid, g_perturbation == 0.5, arm_g_perturbation) %>% pull(grid_row_idx)
 easy_idx <- filter(sim_spec@parameter_grid, g_perturbation == 3, arm_g_perturbation) %>% pull(grid_row_idx)
 # gRNA count distribution challenging extreme:
-plot_mixture(density_dfs_and_thresholds$g_dfs[[hard_idx]],
-             ceiling(density_dfs_and_thresholds$g_threshold[hard_idx]), x_max = 6)
+plot_mixture(density_df = density_dfs_and_thresholds$g_dfs[[hard_idx]],
+             thresh = ceiling(density_dfs_and_thresholds$g_threshold[hard_idx]),
+             x_max = 4)
 # gRNA count distribution easier extreme:
 plot_mixture(density_dfs_and_thresholds$g_dfs[[easy_idx]],
-             ceiling(density_dfs_and_thresholds$g_threshold[easy_idx]), x_max = 6)
+             ceiling(density_dfs_and_thresholds$g_threshold[easy_idx]), x_max = 8)
 # mRNA count distribution (fixed)
-plot_mixture(density_dfs_and_thresholds$m_dfs[[hard_idx]], x_max = 10)
+plot_mixture(density_dfs_and_thresholds$m_dfs[[hard_idx]], x_max = 15)
+
+# plot em classifications
+plot_em_classifications(em_classifications = id_classifications$em_classifications, sim_spec = sim_spec, grid_row_id = 30, parameter = "m_perturbation")
 
 
 ####################
 # simulation study 2
 ####################
-sim_spec <- readRDS(paste0(sim_dir, "/sim_spec_2.rds")) # simulatr specifier object
+sim_res <- readRDS(paste0(sim_dir, "/sim_spec_2.rds")) # simulatr specifier object
 sim_res <- readRDS(paste0(sim_dir, "/raw_result_2.rds")) # raw results
 
 # obtain the (theoretical) thresholds and mixture distribution plotting dfs
@@ -83,7 +66,8 @@ sim_spec@parameter_grid$grid_row_id <- seq(1, nrow(sim_spec@parameter_grid))
 sim_spec@parameter_grid$g_thresh <- density_dfs_and_thresholds$g_threshold
 
 # get the valid IDs and filter
-valid_ids <- obtain_valid_ids(sim_res, spread_thresh = 0.1, approx_1_thresh = 50, approx_0_thresh = 50)
+id_classifications <- obtain_valid_ids(sim_res = sim_res, m_pert_upper = 0.25)
+valid_ids <- id_classifications$valid_ids
 sim_res_sub <- filter(sim_res, id %in% valid_ids)
 
 # compute summary stats
@@ -92,9 +76,9 @@ summarized_results <- summarize_results(sim_spec = sim_spec, sim_res = sim_res_s
                                         parameters = c("m_perturbation")) %>% as_tibble()
 # plot arms
 plot_all_arms(summarized_results, "m_perturbation", "count", plot_discont_points = FALSE, ylim = c(0, 1000))
-plot_all_arms(summarized_results, "m_perturbation", "bias", plot_discont_points = TRUE, ylim = c(-0.01, 0.075))
-plot_all_arms(summarized_results, "m_perturbation", "mse", plot_discont_points = TRUE)
-plot_all_arms(summarized_results, "m_perturbation", "se", plot_discont_points = FALSE)
+plot_all_arms(summarized_results, "m_perturbation", "bias", plot_discont_points = TRUE, ylim = c(-0.02, 0.07))
+plot_all_arms(summarized_results, "m_perturbation", "mse", plot_discont_points = TRUE, ylim = c(0, 0.007))
+plot_all_arms(summarized_results, "m_perturbation", "se", plot_discont_points = FALSE, ylim = c(0, 0.05))
 plot_all_arms(summarized_results, "m_perturbation", "coverage", plot_discont_points = TRUE, ylim = c(0,1))
 
 # examinine mixture distributions
@@ -118,6 +102,8 @@ plot_mixture(density_dfs_and_thresholds$m_dfs[[hard_idx_m]],
 plot_mixture(density_dfs_and_thresholds$m_dfs[[easy_idx_m]],
              x_max = 30, points = FALSE)
 
+# examine failure modes
+plot_em_classifications(em_classifications = id_classifications$em_classifications, sim_spec = sim_spec, grid_row_id = 6, parameter = "m_perturbation")
 
 ####################
 # simulation study 3
@@ -129,7 +115,8 @@ sim_res <- readRDS(paste0(sim_dir, "/raw_result_3.rds")) # raw results
 density_dfs_and_thresholds <- get_theoretical_densities_and_thresholds(sim_spec = sim_spec, xgrid = seq(0, 50))
 
 # get the valid IDs and filter
-valid_ids <- obtain_valid_ids(sim_res, spread_thresh = 0.1, approx_1_thresh = 50, approx_0_thresh = 50)
+id_classifications <- obtain_valid_ids(sim_res = sim_res, spread_thresh = 0.1, approx_0_thresh = 60, approx_1_thresh = 60, g_pert_lower = -0.5, m_pert_upper = 0.5, pi_upper = 0.3)
+valid_ids <- id_classifications$valid_ids
 sim_res_sub <- filter(sim_res, id %in% valid_ids)
 
 # compute summary stats
@@ -147,6 +134,8 @@ plot_all_arms(summarized_results, "m_perturbation", "bias", plot_discont_points 
 plot_all_arms(summarized_results, "m_perturbation", "coverage", plot_discont_points = FALSE, arm_info = arm_info)
 plot_all_arms(summarized_results, "m_perturbation", "count", plot_discont_points = FALSE, arm_info = arm_info, ylim = c(0, 1000))
 
+# examine failure modes
+plot_em_classifications(em_classifications = id_classifications$em_classifications, sim_spec = sim_spec, grid_row_id = 16, categories = "confident-implausible")
 
 ####################
 # simulation study 4
@@ -154,9 +143,8 @@ plot_all_arms(summarized_results, "m_perturbation", "count", plot_discont_points
 sim_spec <- readRDS(paste0(sim_dir, "/sim_spec_4.rds")) # simulatr specifier object
 sim_res <- readRDS(paste0(sim_dir, "/raw_result_4.rds")) # raw results; note: PSC failed for certain settings in which pi was small and g_perturbation was large. Unclear why. Investigate.
 
-valid_ids <- obtain_valid_ids(sim_res = sim_res, spread_thresh = 0.1,
-                              approx_1_thresh = 50, approx_0_thresh = 50, g_pert_thresh = -0.5,
-                              pi_thresh = 0.3, m_pert_thresh = 0.5)
+id_classifications <- obtain_valid_ids(sim_res = sim_res, spread_thresh = 0.1, approx_0_thresh = 60, approx_1_thresh = 60, g_pert_lower = -0.5, m_pert_upper = 0.5, pi_upper = 0.3)
+valid_ids <- id_classifications$valid_ids
 sim_res_sub <- filter(sim_res, id %in% valid_ids)
 
 summarized_results <- summarize_results(sim_spec = sim_spec, sim_res = sim_res_sub,
@@ -206,3 +194,34 @@ idx <- sim_spec@parameter_grid %>% filter(arm_arm_pi_big, g_perturbation == 0.5)
 plot_mixture(density_df = density_dfs_and_thresholds$g_dfs[[idx]], points = FALSE, x_min = -4, x_max = 4)
 # pi big, m_perturbation (fixed)
 plot_mixture(density_df = density_dfs_and_thresholds$m_dfs[[idx]], points = FALSE, x_min = -7, x_max = 4)
+
+# plot EM classifications
+plot_em_classifications(em_classifications = id_classifications$em_classifications, sim_spec = sim_spec, grid_row_id = 3)
+
+####################
+# simulation study 5
+####################
+sim_spec <- readRDS(paste0(sim_dir, "/sim_spec_5.rds")) # simulatr specifier object
+sim_res <- readRDS(paste0(sim_dir, "/raw_result_5.rds"))
+density_dfs_and_thresholds <- get_theoretical_densities_and_thresholds(sim_spec = sim_spec, xgrid = seq(0, 10))
+sim_spec@parameter_grid$g_thresh <- density_dfs_and_thresholds$g_threshold
+
+id_classifications <- obtain_valid_ids(sim_res = sim_res)
+valid_ids <- id_classifications$valid_ids
+sim_res_sub <- filter(sim_res, id %in% valid_ids)
+
+summarized_results <- summarize_results(sim_spec = sim_spec, sim_res = sim_res_sub,
+                                        metrics = c("bias", "coverage", "count", "mse", "se", "rejection_probability"),
+                                        parameters = c("m_perturbation"),
+                                        threshold = 0.1) %>% as_tibble()
+
+plot_all_arms(summarized_results, "m_perturbation", "bias", plot_discont_points = TRUE)
+plot_all_arms(summarized_results, "m_perturbation", "coverage", plot_discont_points = TRUE)
+plot_all_arms(summarized_results, "m_perturbation", "mse", plot_discont_points = TRUE)
+plot_all_arms(summarized_results, "m_perturbation", "count", ylim = c(0, 1000))
+
+# examine the membership probabilities in four different grid IDs
+mem_probs <- plot_posterior_membership_probabilities(sim_res = sim_res, grid_row_id = 1, valid_ids = valid_ids)
+
+# plot the m_perturbation estimates themselves
+plot_em_classifications(em_classifications = id_classifications$em_classifications, sim_spec = sim_spec, grid_row_id = 2)

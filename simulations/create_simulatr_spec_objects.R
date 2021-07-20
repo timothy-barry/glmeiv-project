@@ -216,3 +216,13 @@ sim_spec_5 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
                                                        one_rep_times = one_rep_times,
                                                        covariate_sampler = NULL)
 save_obj(sim_spec_5, to_save_5, overwrite)
+
+# 6. Varying m_intercept, g_intercept
+# 7. adding a covariate (or two)
+
+# presenting the results
+# 1. First, present the metric (bias, MSE, coverage, count, etc.) curves vs parameter.
+# Also, show the mixture distributions to illustrate where the problem is easy/hard for either method.
+# (Roughly: there are three settings -- both bad; thresholding bad, EM good; and both good.
+# both bad: no separation in either modality; thresholding good: large separation in gRNA modality;
+# EM good and thresholding bad: moderate separation in either modality).
