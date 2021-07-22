@@ -50,11 +50,10 @@ plot_mixture(density_dfs_and_thresholds$m_dfs[[hard_idx]], x_max = 15)
 # plot em classifications
 plot_em_classifications(em_classifications = id_classifications$em_classifications, sim_spec = sim_spec, grid_row_id = 30, parameter = "m_perturbation")
 
-
 ####################
 # simulation study 2
 ####################
-sim_res <- readRDS(paste0(sim_dir, "/sim_spec_2.rds")) # simulatr specifier object
+sim_spec <- readRDS(paste0(sim_dir, "/sim_spec_2.rds")) # simulatr specifier object
 sim_res <- readRDS(paste0(sim_dir, "/raw_result_2.rds")) # raw results
 
 # obtain the (theoretical) thresholds and mixture distribution plotting dfs
@@ -103,7 +102,7 @@ plot_mixture(density_dfs_and_thresholds$m_dfs[[easy_idx_m]],
              x_max = 30, points = FALSE)
 
 # examine failure modes
-plot_em_classifications(em_classifications = id_classifications$em_classifications, sim_spec = sim_spec, grid_row_id = 6, parameter = "m_perturbation")
+plot_em_classifications(em_classifications = id_classifications$em_classifications, sim_spec = sim_spec, grid_row_id = 16, parameter = "m_perturbation")
 
 ####################
 # simulation study 3

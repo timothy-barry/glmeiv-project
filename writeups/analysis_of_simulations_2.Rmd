@@ -1,0 +1,410 @@
+---
+title: "GLM-EIV simulation study"
+author: "Tim B"
+date: "7/20/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE, cache=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(glmeiv)
+library(simulatr)
+library(dplyr)
+library(ggplot2)
+sim_dir <- paste0(.get_config_path("LOCAL_GLMEIV_DATA_DIR"), "private/simulations")
+```
+
+## Introduction and overview
+
+This document reports the results of a simulation study comparing GLM-EIV to the thresholding method. The simulation study consists of five experiments. The experiments are as follows:
+
+1. Gaussian response; no covariates; problem setting intermediate difficulty
+2. Negative binomial response; no covariates; problem setting intermediate difficulty
+3. Poisson response; no covariates; problem setting intermediate difficulty
+4. Poisson response; no covariates; *m_perturbation* varied over coarse grid; problem setting high difficulty
+5. Poisson response; no covariates; *m_perturbation* varied over fine grid near zero; problem setting high difficulty
+
+Experiments 1-3 aim to compare GLM-EIV to the thresholding method on estimation accuracy and confidence interval coverage rate in settings of intermediate difficulty. Experiment 4 aims to push GLM-EIV to its limit, identifying regions of the parameter space where GLM-EIV fails to produce a confident answer. Experiment 5 aims to compare the power of GLM-EIV to that of the thresholding method in a hypothesis testing framework.
+
+The main takeaways of the simulation study are as follows:
+
+1. The parameter space can be partitioned into roughly three regions: a challenging region in which both GLM-EIV and the thresholding method fail, a region of intermediate difficulty in which GLM-EIV works but thresholding fails, and an easy region in which both methods perform well.
+2. GLM-EIV fails gracefully in challenging regions of the parameter space. Instead of returning a bad estimate for challenging parameter settings, GLM-EIV returns "I do not know."
+3. The central challenge of the statistical problem under investigation is to assign perturbation identities to cells accurately: if the perturbation identities were known, the problem would be easy. GLM-EIV outperforms thresholding in assigning perturbation identities for two reasons: (i) GLM-EIV produces soft rather than hard assignments, capturing the inherent uncertainty in whether a perturbation occurred; and (ii) GLM-EIV leverages information from *both* modalities to assign perturbation identities, in contrast to thresholding, which only uses a single modality.
+
+In an attempt to avoid overwhelming the reader, the following section displays only the outputs for which GLM-EIV produced a concrete estimate instead of "I do not know." The subsequent section explains in detail how GLM-EIV determines whether to return a concrete answer or withold an estimate.
+
+## Experiments
+
+All experiments consisted of n = 2,000 cells, B = 1,000 Monte Carlo replicates, and 5 to 10 EM algorithm restarts (for GLM-EIV). Metrics examined include bias, mean squared error, confidence interval coverage rate, and rejection probability (type I error under the null and type II error under the alternative). Monte Carlo CIs are plotted for all metrics. The model consisted of five parameters in total: *pi* (probability of perturbation), *m_perturbation* (effect of perturbation of mRNA expression), *m_intercept* (baseline level of mRNA expression), *g_perturbation* (effect of perturbation on gRNA expression), and *g_intercept* (baseline level of gRNA expression). Metrics are plotted for the "treatment" variable *m_perturbation* only to simplify analysis.
+
+### Experiment 1
+
+```{r, echo = FALSE, message=FALSE, cache=TRUE}
+sim_spec <- readRDS(paste0(sim_dir, "/sim_spec_4.rds")) # simulatr specifier object
+sim_res <- readRDS(paste0(sim_dir, "/raw_result_4.rds")) # raw results; note: PSC failed for certain settings in which pi was small and g_perturbation was large. Unclear why. Investigate.
+
+id_classifications <- obtain_valid_ids(sim_res = sim_res, pi_upper = 0.4)
+valid_ids <- id_classifications$valid_ids
+sim_res_sub <- filter(sim_res, id %in% valid_ids)
+
+summarized_results <- summarize_results(sim_spec = sim_spec, sim_res = sim_res_sub,
+                                        metrics = c("bias", "coverage", "count", "mse", "se", "rejection_probability"),
+                                        parameters = c("m_perturbation"),
+                                        threshold = 0.1) %>% as_tibble()
+
+arm_info <- list(arm_names = c("arm_arm_pi_small", "arm_arm_pi_intermediate", "arm_arm_pi_big"),
+                 varying_param = c("g_perturbation", "g_perturbation", "g_perturbation"),
+                 all_params = c("g_perturbation", "pi"))
+
+# for each arm, compute the theoretical bias over a grid of g_perturbation
+arm_names <- purrr::set_names(arm_info$arm_names, arm_info$arm_names)
+theoretical_values <- purrr::map_dfr(.x = arm_names, function(arm_name) {
+  curr_arm_df <- sim_spec@parameter_grid %>% filter(!!as.symbol(arm_name))
+  pi <- curr_arm_df$pi[1]
+  g_pert_range <- curr_arm_df$g_perturbation %>% range()
+  g_pert_grid <- seq(g_pert_range[1], g_pert_range[2], length.out = 100)
+  bias <- get_tresholding_estimator_bias(m_perturbation = sim_spec@fixed_parameters$m_perturbation,
+                                         g_perturbation = g_pert_grid, pi = pi)
+  data.frame(value = c(bias, rep(0, length(g_pert_grid))),
+             x = c(g_pert_grid, g_pert_grid),
+             method = c(rep("thresholding", length(g_pert_grid)), rep("em", length(g_pert_grid))))
+}, .id = "arm")
+```
+
+Experiment 1 varied *pi* and *g_perturbation* while holding all other parameters constant. mRNA and gRNA levels were modeled using a Gaussian distribution. GLM-EIV exhibited lower bias than the thresholding method across all parameter settings. Empirical bias (points) and theoretical bias (calculated analytically; dashed line) are plotted below. Empirical bias and theoretical bias coincided, indicating correctness of the theory.
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results, "m_perturbation", "bias", plot_discont_points = FALSE, arm_info = arm_info, theoretical_values = theoretical_values, ylim = c(-0.1, 3))
+```
+
+GLM-EIV also exhibited lower MSE than thresholding.
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results, "m_perturbation", "mse", plot_discont_points = FALSE, arm_info = arm_info)
+```
+
+Finally, GLM-EIV exhibited 95\% CI coverage rate, in contrast to thresholding, which exhibited pooer coverage rates for settings which which *g_perturbation* was small.
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results, "m_perturbation", "coverage", plot_discont_points = FALSE, arm_info = arm_info)
+```
+
+To provide the reader with a sense of the underlying data generating mechanism, we plot the gRNA distribution for *g_perturbation* = 0.5 and *pi* = 0.25 (pannel **c**, leftmost setting) and *g_perturbation* = 6 and *pi* = 0.25 (pannel **c**, rightmost setting). The conditional distributions (green, blue) are weighted by *pi*; the marginal distribution (red) is the sum of the weighted conditional distributions. The Bayes-optimal threshold of the gRNA distribution is shown as a vertical black line.
+
+```{r, echo=FALSE, fig.width=5, fig.height=2}
+density_dfs_and_thresholds <- get_theoretical_densities_and_thresholds(sim_spec = sim_spec, xgrid = seq(-10, 10, 0.1))
+
+idx <- sim_spec@parameter_grid %>% filter(arm_arm_pi_big, g_perturbation == 0.5) %>% pull(grid_id)
+plot_mixture(density_df = density_dfs_and_thresholds$g_dfs[[idx]], points = FALSE, x_min = -4, x_max = 4, thresh = density_dfs_and_thresholds$g_threshold[idx], xlab = "gRNA level")
+
+idx <- sim_spec@parameter_grid %>% filter(arm_arm_pi_big, g_perturbation == 6) %>% pull(grid_id)
+plot_mixture(density_df = density_dfs_and_thresholds$g_dfs[[idx]], points = FALSE, x_min = -4, x_max = 9, thresh = density_dfs_and_thresholds$g_threshold[idx], xlab = "gRNA level")
+```
+
+As *g_perturbation* increases, the marginal gRNA distribution becomes well-separated and the problem becomes easy. We also plot the mRNA distribution, fixed across all settings of subpannel **c**.
+
+```{r, echo=FALSE, fig.width=5, fig.height=2}
+plot_mixture(density_df = density_dfs_and_thresholds$m_dfs[[idx]], points = FALSE, x_min = -7, x_max = 4, xlab = "mRNA level")
+```
+
+This marginal mRNA distribution was fairly well-separated.
+
+### Experiment 2
+
+```{r, echo=FALSE, message=FALSE, cache=TRUE}
+rm(sim_spec); rm(sim_res)
+sim_spec_2 <- readRDS(paste0(sim_dir, "/sim_spec_5.rds"))
+sim_res_2 <- readRDS(paste0(sim_dir, "/raw_result_5.rds"))
+sim_spec_2@parameter_grid$grid_id <- seq(1, nrow(sim_spec_2@parameter_grid))
+density_dfs_and_thresholds <- get_theoretical_densities_and_thresholds(sim_spec = sim_spec_2, xgrid = seq(0, 10))
+sim_spec_2@parameter_grid$g_thresh <- density_dfs_and_thresholds$g_threshold
+
+id_classifications_2 <- obtain_valid_ids(sim_res = sim_res_2)
+valid_ids_2 <- id_classifications_2$valid_ids
+sim_res_sub_2 <- filter(sim_res_2, id %in% valid_ids_2)
+
+summarized_results <- summarize_results(sim_spec = sim_spec_2, sim_res = sim_res_sub_2,
+                                        metrics = c("bias", "coverage", "count", "mse", "se", "rejection_probability"),
+                                        parameters = c("m_perturbation"),
+                                        threshold = 0.1) %>% as_tibble()
+```
+
+Experiment 2 varied *pi*, *g_perturbation*, and *m_perturbation* while keeping the other parameters constant. mRNA and gRNA counts were modeled using a negative binomial distribution with known $\theta = 5$. Again, GLM-EIV outperformed the thresholding method on bias and MSE.
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results, "m_perturbation", "bias", plot_discont_points = TRUE)
+```
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results, "m_perturbation", "mse", plot_discont_points = TRUE)
+```
+
+GLM-EIV likewise demonstrated good CI coverage, in contrast to the thresholding method.
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results, "m_perturbation", "coverage", plot_discont_points = TRUE)
+```
+
+Again, we plot a few marginal distributions to provide the reader with a sense of the data generating mechanism. First, we plot the gRNA count distribution for *g_perturbation = 3* and *pi = 0.25* (subpannel **b**, all parameter settings), indicating the integer-valued Bayes-optimal threshold (2) with a vertical black line.
+
+```{r, echo=FALSE, fig.width=5, fig.height=2}
+idx <- sim_spec_2@parameter_grid %>% filter(arm_m_perturbation, m_perturbation == -0.2) %>% pull(grid_id)
+plot_mixture(density_df = density_dfs_and_thresholds$g_dfs[[idx]], points = TRUE, xlab = "gRNA level", x_max = 7, thresh = ceiling(density_dfs_and_thresholds$g_threshold[idx]))
+```
+
+Next, we plot the mRNA count distribution for *m_perturbation = -2* and *m_perturbation = -0.2*, fixing *pi = 0.25* (subpannel **b**, leftmost and second rightmost parameter settings).
+
+```{r, echo=FALSE, fig.width=5, fig.height=2}
+density_dfs_and_thresholds <- get_theoretical_densities_and_thresholds(sim_spec = sim_spec_2, xgrid = seq(0, 15))
+
+idx <- sim_spec_2@parameter_grid %>% filter(arm_m_perturbation, m_perturbation == -2) %>% pull(grid_id)
+plot_mixture(density_df = density_dfs_and_thresholds$m_dfs[[idx]], points = TRUE, x_max = 14, xlab = "mRNA level")
+
+idx <- sim_spec_2@parameter_grid %>% filter(arm_m_perturbation, m_perturbation == -0.2) %>% pull(grid_id)
+plot_mixture(density_df = density_dfs_and_thresholds$m_dfs[[idx]], points = TRUE, xlab = "mRNA level")
+```
+
+The gRNA distribution is moderately-well separated, while the mRNA distribution transitions from poorly separated to well separated as *m_perturbation* grows in absolute value. GLM-EIV performs well in all of these settings.
+
+### Experiment 3
+
+```{r, echo=FALSE, message=FALSE, cache=TRUE}
+sim_spec <- readRDS(paste0(sim_dir, "/sim_spec_1.rds")) # simulatr specifier object
+sim_res <- readRDS(paste0(sim_dir, "/raw_result_1.rds")) # raw results
+
+# Obtain the (theoretical) thresholds and mixture distribution plotting dfs
+density_dfs_and_thresholds <- get_theoretical_densities_and_thresholds(sim_spec = sim_spec, xgrid = seq(0, 15))
+
+# update the parameter grid with g_thresh
+row.names(sim_spec@parameter_grid) <- NULL
+sim_spec@parameter_grid$grid_row_idx <- seq(1, nrow(sim_spec@parameter_grid))
+sim_spec@parameter_grid$g_thresh <- density_dfs_and_thresholds$g_threshold
+
+# filter the results according to the valid IDs.
+id_classifications <- obtain_valid_ids(sim_res)
+valid_ids <- id_classifications$valid_ids
+sim_res_sub <- filter(sim_res, id %in% valid_ids)
+
+# compute summary statistics
+summarized_results <- summarize_results(sim_spec = sim_spec, sim_res = sim_res_sub,
+                                        metrics = c("coverage", "bias", "mse", "count", "se"),
+                                        parameters = c("m_perturbation", "pi")) %>% filter(pi < 0.5)
+```
+
+Like experiment 2, experiment 3 varied *pi*, *g_perturbation*, and *m_perturbation*. However, instead of using a negative binomial distribution to model the counts, experiment 3 used a Poisson model. Bias, MSE, and CI coverage in estimating *m_perturbation* are plotted below. GLM-EIV exhibited good performance, and the thresholding method exhibited poor performance.
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results, "m_perturbation", "bias", plot_discont_points = TRUE)
+```
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results, "m_perturbation", "mse", plot_discont_points = TRUE)
+```
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results, "m_perturbation", "coverage", plot_discont_points = TRUE)
+```
+
+The Poisson distribution is discrete, and so the Bayes optimal classifier takes on integer values. (The same is true for the negative binomial distribution). Discontinuities in the bias and MSE of the thresholding method correspond to points at which the Bayes optimal classifier changed from one integer value to another (denoted by vertical gray lines). For example, in subpannel **a**, the Bayes optimal classifier changed from 1 to 2 at *pi = 0.35*.
+
+### Experiment 4
+
+```{r, echo=FALSE, message=FALSE, cache=TRUE}
+sim_spec_4 <- readRDS(paste0(sim_dir, "/sim_spec_2.rds")) # simulatr specifier object
+sim_res_4 <- readRDS(paste0(sim_dir, "/raw_result_2.rds")) # raw results
+
+# obtain the (theoretical) thresholds and mixture distribution plotting dfs
+density_dfs_and_thresholds <- get_theoretical_densities_and_thresholds(sim_spec = sim_spec_4, xgrid = seq(0, 50))
+
+# update parameter grid
+row.names(sim_spec_4@parameter_grid) <- NULL
+sim_spec_4@parameter_grid$grid_row_id <- seq(1, nrow(sim_spec_4@parameter_grid))
+sim_spec_4@parameter_grid$g_thresh <- density_dfs_and_thresholds$g_threshold
+
+# get the valid IDs and filter
+id_classifications_4 <- obtain_valid_ids(sim_res = sim_res_4, pi_upper = 0.4)
+valid_ids_4 <- id_classifications_4$valid_ids
+sim_res_sub_4 <- filter(sim_res_4, id %in% valid_ids_4)
+
+# compute summary stats
+summarized_results_4 <- summarize_results(sim_spec = sim_spec_4, sim_res = sim_res_sub_4,
+                                        metrics = c("bias", "coverage", "count", "mse", "se"),
+                                        parameters = c("m_perturbation")) %>% as_tibble()
+```
+
+Experiment 4 pushed GLM-EIV to its limit, investigating regions of the parameter space in which the method failed. Experiment 4 varied *m_perturbation* while fixing *g_perturbation* equal to 0.1 and then varied *g_perturbation* while fixing *m_perturbation* equal to 0.1. Poisson distributions were used to model the counts.
+
+First, we plot the number of outputs (out of B = 1,000 replicates) that each method produced for each parameter setting. GLM-EIV produced an output only when it was confident in the estimate that it produced and the estimate was biologically plausible, and the thresholding method produced an output only when the perturbation indicators were sufficiently balanced to fit a GLM.
+
+The thresholding method failed to produce an output when *g_perturbation* was small (approximately less than 1/2), as there was not sufficient separation in the gRNA count distribution to assign perturbation identities to the cells. GLM-EIV failed to produce an output when both *g_perturbation* and *m_perturbation* were small; when either of these parameters was sufficiently large, GLM-EIV produced a confident answer.
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results_4, "m_perturbation", "count", plot_discont_points = FALSE)
+```
+
+GLM-EIV exhibited low (but nonzero) bias and MSE. The bias and MSE of the thresholding method were greater than that of GLM-EIV.
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results_4, "m_perturbation", "bias", plot_discont_points = TRUE, ylim = c(-0.02, 0.07))
+```
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results_4, "m_perturbation", "mse", plot_discont_points = TRUE, ylim = c(0, 0.007))
+```
+
+Finally, the CI coverage rate of GLM-EIV was close to 95\%, while that of the thresholding method was lower.
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results_4, "m_perturbation", "coverage", plot_discont_points = TRUE, ylim = c(0,1))
+```
+
+### Experiment 5
+
+```{r, echo=FALSE, message=FALSE, cache=TRUE}
+sim_spec_5 <- readRDS(paste0(sim_dir, "/sim_spec_3.rds")) # simulatr specifier object
+sim_res_5 <- readRDS(paste0(sim_dir, "/raw_result_3.rds")) # raw results
+
+# obtain the (theoretical) thresholds and mixture distribution plotting dfs
+density_dfs_and_thresholds <- get_theoretical_densities_and_thresholds(sim_spec = sim_spec_5, xgrid = seq(0, 50))
+
+# get the valid IDs and filter
+id_classifications <- obtain_valid_ids(sim_res = sim_res_5, pi_upper = 0.4)
+valid_ids <- id_classifications$valid_ids
+sim_res_sub_5 <- filter(sim_res_5, id %in% valid_ids)
+
+# compute summary stats
+summarized_results_5 <- summarize_results(sim_spec = sim_spec_5, sim_res = sim_res_sub_5,
+                                        metrics = c("bias", "coverage", "count", "mse", "se", "rejection_probability"),
+                                        parameters = c("m_perturbation"),
+                                        threshold = 0.1) %>% as_tibble()
+arm_info <- list(arm_names = c("arm_intermediate", "arm_easy", "arm_null"),
+                 varying_param = c("m_perturbation", "m_perturbation", "g_perturbation"),
+                 all_params = c("m_perturbation", "g_perturbation"),
+                 ylab = c("Power", "Power", "Type-I error"))
+```
+
+Experiment 5 assessed the power and type-I error of GLM-EIV and the thresholding method in a hypothesis testing framework. *P*-values were obtained by computing the two-sided tail probability of the *z*-score of *m_perturbation*. 
+To study power, we set *g_perturbation* to 1.5 (subpannel **a**) and 2 (subpannel **b**) and varied *m_perturbation* over the interval [-0.01, -0.1]. Next, to study type I error, we set *m_perturbation* to zero (which corresponds to the null hypothesis of no regulatory relationship) and varied *g_perturbation* over the interval [1,2]. We found that GLM-EIV exhibited modestly greater power than the thresholding method (because the latter suffered attenuation bias). Both methods controlled type I error under the null.
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results_5, "m_perturbation", "rejection_probability", ylim = c(0, 1), plot_discont_points = FALSE, arm_info = arm_info, ylab = c("Power", "Power", "Type I error"))
+```
+
+
+## Failure modes of GLM-EIV
+
+GLM-EIV can fail in three ways:
+
+1. GLM-EIV finds the MLE, but the MLE is a poor estimate of the true parameter. This occurs in challenging regions of the parameter space, where the marginal mixture distributions are poorly separated or *pi* is small. In such settings few cells have posterior membership probabilities close to 1 or 0. The "effective sample size" is therefore small and MLE fails.
+
+2. GLM-EIV is in a feasible region of the parameter space, but the EM algorithm converges to a local rather than global optimum, thereby failing to produce the MLE.
+
+3. GLM-EIV converges to a local optimum in a challenging region of the parameter space. Barring considerable luck, the estimate and associated confidence interval are likely to be quite poor. 
+
+Thus, two conditions must be met for GLM-EIV to produce a good solution: (i) GLM-EIV must be in a feasible region of the parameter space (as reflected roughly by large a "effective sample size" of the posterior membership probabilities), and (ii) the EM algorithm must converge to the global optimum. The term "effective sample size" is used loosely here; roughly, the "effective sample size" is large if a large subset of cells has a posterior membership probability close to 1, and a separate, large subset of cells has a posterior membership probability close to 0 
+
+Leveraging these ideas, we develop a simple heuristic to determine whether to accept or reject a solution outputted by GLM-EIV. We say GLM-EIV has produced a *confident* answer on a given dataset if the following conditions are met:
+
+1. The number of cells with a posterior membership probability close to 1 (defined as probability > 0.85) exceeds the number of model parameters multiplied by 10 (5 * 10 = 50 in the above experiments).
+2. The number of cells with posterior a membership probability close to 0 (defined as probability < 0.15) exceeds the number of model parameters multiplied by 10.
+3. The membership probabilty "spread," defined as $$ \frac{1}{n} \sum_{i=1}^n (p_i - 0.5)^2 $$ where $p_i$ is the $i$th membership probability, exceeds some threshold (currently set at 0.1). The spread takes a value in the interval [0, 0.25].
+
+The first two criteria ensure that enough cells have been classified as either likely "perturbed" or "unperturbed" to estimate the parameters. These criteria are based on rules of thumb regarding the number of examples required to estimate the parameters in a regression model. The third criterion ensures that the membership probabilities are not clumped around 0.5. In practice the third criterion makes GLM-EIV slightly less likely to be "confident" and therefore more conservative.
+
+Next, we say that GLM-EIV has produced a *plausible* answer on a given dataset if the estimated parameters are in biologically realistic ranges. For example, in CRISPRi screens of candidate enhancers, *m_perturbation* should be nonpositive and *g_perturbation* should be nonnegative. We set the following conditions for *plausibility* in the simulation above:
+
+1. *m_perturbation* $\leq 0.25$
+2. *g_perturbation* $\geq -0.25$
+
+Additionally, for experiments in which *pi* took values less than or equal to 0.25 (all but #2-3), we enforced *pi* $\leq 0.4$.
+
+The *confidence* criterion aims to filter out prohibitively challenging regions of the parameter space, and the *plausibility* criterion aims to filter out local maxima. The two constructs are dependent: unconfident solutions generally (but not always) are implausible. GLM-EIV returns a solution if and only if the estimates are *plausible* *and* GLM-EIV is *confident* in the solution. Otherwise, GLM-EIV returns, "I do not know." (In practice one might run additional restarts of the EM algorithm on solutions that are implausible but confident; giving up at some point, however, is necessary.)
+
+## Investigating failure modes and posterior probabilities empirically
+
+We investigate the failure modes of GLM-EIV empirically. As an example we examine Experiment 4. We reproduce here the number of solutions outputted by GLM-EIV and the thresholding method as a function of the parameter setting.
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results_4, "m_perturbation", "count", plot_discont_points = FALSE)
+```
+
+
+```{r, echo=FALSE}
+id_gpert_1 <- sim_spec_4@parameter_grid %>% filter(arm_g_perturbation, g_perturbation == 1) %>% pull(grid_row_id)
+id_gpert_1.4 <- sim_spec_4@parameter_grid %>% filter(arm_g_perturbation, abs(g_perturbation - 1.4) < 1e-5 ) %>% pull(grid_row_id)
+id_gpert_2 <- sim_spec_4@parameter_grid %>% filter(arm_g_perturbation, g_perturbation == 2) %>% pull(grid_row_id)
+```
+
+We focus on the "arm" of the experiment reported in subpannel **b**, in which *m_perturbation* was fixed at 0.1 and *g_perturbation* varied from 0 to 3. We plot a histogram of GLM-EIV estimates of the coefficient for *m_perturbation*, categorizing the estimates by type: *confident* vs. *unconfident*, and *plausible* vs. *implausible*. First, we plot the estimates of the coefficient for *m_perturbation* when *g_perturbation* = 1.
+
+```{r, echo=FALSE, fig.width=6, fig.height=3}
+plot_em_classifications(id_classifications_4$em_classifications, sim_spec = sim_spec_4, id_gpert_1, parameter = "m_perturbation")
+```
+
+Next, we plot the estimates of the coefficient for *m_perturbation* when *g_perturbation* = 1.4.
+
+```{r, echo=FALSE, fig.width=6, fig.height=3}
+plot_em_classifications(id_classifications_4$em_classifications, sim_spec = sim_spec_4, id_gpert_1.4, parameter = "m_perturbation")
+```
+
+Finally, we plot the estimates of the coefficient for *m_perturbation* when *g_perturbation* = 2.
+
+```{r, echo=FALSE, fig.width=6, fig.height=3}
+plot_em_classifications(id_classifications_4$em_classifications, sim_spec = sim_spec_4, id_gpert_2, parameter = "m_perturbation")
+```
+
+We see that as *g_perturbation* grows (and the problem becomes easier), the number of "unconfident" solutions decreases, and the estimates concentrate around the true parameter value of -0.1 in a Gaussian distribution. Deciding where exactly to draw the line between a "confident" and "unconfident" solution is challenging; the cutoffs currently employed are somewhat conservative (see second histogram). Finally, the set of "confident-implausible" estimates that clustered around 0.08 in the third histogram likely are local optima.
+
+To provide a sense of why filtering the GLM-EIV solutions is crucial, we plot the bias and MSE of *all* (not just outputted) GLM-EIV solutions for Experiment 4. The quality of the estimates degrades substantially.
+
+```{r, echo=FALSE, message=FALSE, cache=TRUE}
+# compute summary stats
+summarized_results_4 <- summarize_results(sim_spec = sim_spec_4, sim_res = sim_res_4,
+                                        metrics = c("bias", "coverage", "count", "mse", "se"),
+                                        parameters = c("m_perturbation")) %>% as_tibble()
+```
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results_4, "m_perturbation", "bias", plot_discont_points = TRUE)
+```
+
+```{r, fig.width=4, fig.height=6, echo=FALSE}
+plot_all_arms(summarized_results_4, "m_perturbation", "mse", plot_discont_points = TRUE)
+```
+
+Finally, we plot a histogram of the membership probabilities themselves. Membership probabilities from Experiment 4 were not saved, so instead we plot membership probabilities collected from Experiment 2 (negative binomial response variable). 
+
+```{r, echo=FALSE}
+ps <- plot_posterior_membership_probabilities(sim_res = sim_res_2, grid_row_id = 1, valid_ids = valid_ids_2, n_approx_01 = 50)
+```
+
+The following is an example posterior membership probability distribution for which GLM-EIV is *confident*. Vertical blue lines are drawn at x = 0.85 and x = 0.15. The horizontal read line is drawn at y = 50. The sum of the bars on the left side of the left blue line (equal to the number of cells considered "likely unperturbed") and the sum of the bars on the right side of the right blue line (equal to the number of cells considered "likely perturbed") must both exceed 50 (denoted by the read line). Additionally, the "spread" (printed) must exceed 0.1.
+
+```{r, echo=FALSE, fig.width=4, fig.height=2.5}
+plot(ps$plots[[1]])
+ps$metrics_df[1,"spread"]
+```
+
+The following is an example of a posterior membership probability distribution for which GLM-EIV is *unconfident*.
+
+```{r,echo=FALSE, fig.width=4, fig.height=2.5}
+plot(ps$plots[[2]])
+ps$metrics_df[2,"spread"]
+```
+
+It would be ideal to create example membership probability histograms using results from Experiment 4. Such histograms could be explicitly connected to those above. This will be possible upon rerunning the experiment.
+
+## Conclusion
+
+GLM-EIV works quite well in feasible regions of the parameter space and fails gracefully in regions that are hard. GLM-EIV outperforms thresholding on all metrics across all experiments. Some ideas for additional experiments are as follows:
+
+- include covariates
+- vary the intercept (rather than slope) terms
+- use different response distributions for the mRNA modality and gRNA modality (e.g., Gaussian and Poisson)
+- test the "zero-inflated" model in addition to the "background read" model tested here
+
+We might consider limiting the total number of experiments to 6 or 7 for the paper, although this is not something I have much experience with.
