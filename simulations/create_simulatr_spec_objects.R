@@ -256,3 +256,4 @@ sim_spec_6 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
                                                        fixed_params = fixed_params,
                                                        one_rep_times = one_rep_times,
                                                        covariate_sampler = NULL)
+save_obj(sim_spec_6, to_save_6, overwrite)
