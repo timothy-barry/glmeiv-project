@@ -48,3 +48,8 @@ if [[ ! -f $sim_dir"/raw_result_5.rds" ]]
 then
 $SIMULATR -f $sim_dir"/sim_spec_5.rds" -r $sim_dir"/raw_result_5.rds"
 fi
+# vi.
+if [[ ! -f $sim_dir"/raw_result_6.rds" ]]
+then
+$SIMULATR -f $sim_dir"/sim_spec_6.rds" -r $sim_dir"/raw_result_6.rds"
+fi

@@ -217,12 +217,44 @@ sim_spec_5 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
                                                        covariate_sampler = NULL)
 save_obj(sim_spec_5, to_save_5, overwrite)
 
-# 6. Varying m_intercept, g_intercept
-# 7. adding a covariate (or two)
+# 6. Add offsets and a covariate (p_mito) to the Poisson model
+to_save_6 <- paste0(sim_dir, "/sim_spec_6.rds")
+param_grid <- simulatr::create_param_grid_fractional_factorial(varying_values = list(pi = seq(0.05, 0.25, 0.025),
+                                                                                     m_perturbation = log(seq(1, 0.25, length.out = 8)),
+                                                                                     g_perturbation = log(seq(1, 4, length.out = 8))),
+                                                               baseline_values = list(pi = 0.25,
+                                                                                      m_perturbation = log(0.25),
+                                                                                      g_perturbation = log(4)))
+set.seed(4)
+n <- 2000
+off <- log(rpois(n, 1000))
+covariate_matrix <- data.frame(p_mito = runif(n = n, min = 0, max = 1))
+fixed_params <- list(
+  seed = 4,
+  n = n,
+  B = 1000,
+  n_processors = 5,
+  m_intercept = log(0.05),
+  g_intercept = log(0.01),
+  m_fam = poisson(),
+  g_fam = poisson(),
+  alpha = 0.95,
+  n_em_rep = 8,
+  lambda = NULL,
+  save_membership_probs_mult = 250,
+  sd = 0.15,
+  covariate_matrix = covariate_matrix,
+  m_covariate_coefs = log(0.8),
+  g_covariate_coefs = log(1.2),
+  m_offset = off,
+  g_offset = off
+)
+one_rep_times <- list(generate_data_function = 1,
+                      thresholding = 1,
+                      em = 10)
+sim_spec_6 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
+                                                       fixed_params = fixed_params,
+                                                       one_rep_times = one_rep_times,
+                                                       covariate_sampler = NULL)
 
-# presenting the results
-# 1. First, present the metric (bias, MSE, coverage, count, etc.) curves vs parameter.
-# Also, show the mixture distributions to illustrate where the problem is easy/hard for either method.
-# (Roughly: there are three settings -- both bad; thresholding bad, EM good; and both good.
-# both bad: no separation in either modality; thresholding good: large separation in gRNA modality;
-# EM good and thresholding bad: moderate separation in either modality).
+check <- simulatr::check_simulatr_specifier_object(simulatr_spec = sim_spec_6, B_in = 5, parallel = TRUE)
