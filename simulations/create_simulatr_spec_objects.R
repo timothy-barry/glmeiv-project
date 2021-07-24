@@ -256,5 +256,3 @@ sim_spec_6 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
                                                        fixed_params = fixed_params,
                                                        one_rep_times = one_rep_times,
                                                        covariate_sampler = NULL)
-
-check <- simulatr::check_simulatr_specifier_object(simulatr_spec = sim_spec_6, B_in = 5, parallel = TRUE)
