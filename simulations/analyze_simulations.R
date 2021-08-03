@@ -224,3 +224,25 @@ mem_probs <- plot_posterior_membership_probabilities(sim_res = sim_res, grid_row
 
 # plot the m_perturbation estimates themselves
 plot_em_classifications(em_classifications = id_classifications$em_classifications, sim_spec = sim_spec, grid_row_id = 2)
+
+
+####################
+# Simulation study 6
+####################
+
+sim_spec <- readRDS(paste0(sim_dir, "/sim_spec_6.rds")) # simulatr specifier object
+sim_res <- readRDS(paste0(sim_dir, "/raw_result_6.rds"))
+
+id_classifications <- obtain_valid_ids(sim_res = sim_res)
+valid_ids <- id_classifications$valid_ids
+sim_res_sub <- filter(sim_res, id %in% valid_ids)
+
+summarized_results <- summarize_results(sim_spec = sim_spec, sim_res = sim_res_sub,
+                                        metrics = c("bias", "coverage", "count", "mse", "se", "rejection_probability"),
+                                        parameters = c("m_perturbation"),
+                                        threshold = 0.1) %>% as_tibble()
+
+plot_all_arms(summarized_results, "m_perturbation", "bias", plot_discont_points = FALSE, ylim = c(-0.1, 0.8))
+plot_all_arms(summarized_results, "m_perturbation", "coverage", plot_discont_points = FALSE, ylim = c(0, 1))
+plot_all_arms(summarized_results, "m_perturbation", "mse", plot_discont_points = FALSE, ylim = c(-0.1, 0.7))
+plot_all_arms(summarized_results, "m_perturbation", "count", ylim = c(0, 1000))

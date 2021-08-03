@@ -55,8 +55,9 @@ one_rep_times <- list(generate_data_function = 1,
                         em = 11)
 sim_spec_1 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
                                                        fixed_params = fixed_params,
-                                                       one_rep_times = one_rep_times,
-                                                       covariate_sampler = NULL)
+                                                       one_rep_times = one_rep_times)
+# check
+# check <- simulatr::check_simulatr_specifier_object(sim_spec_1, 3, TRUE)
 save_obj(sim_spec_1, to_save_1, overwrite)
 
 # Study 2: no covariates; varying m_pert and g_pert; poisson family objects; no covariates; m_pert and g_pert 0 (challenging setting).
@@ -91,8 +92,8 @@ one_rep_times <- list(generate_data_function = 1,
                       em = 50)
 sim_spec_2 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
                                                        fixed_params = fixed_params,
-                                                       one_rep_times = one_rep_times,
-                                                       covariate_sampler = NULL)
+                                                       one_rep_times = one_rep_times)
+# check <- simulatr::check_simulatr_specifier_object(sim_spec_2, 3, TRUE)
 save_obj(sim_spec_2, to_save_2, overwrite)
 
 # Study 3: Power to detect alternative. No covariates; varying m_pert over a fine, near-zero grid over three levels of g_pert (hard, easy, medium); Also test null hypothesis: m_pert = 0, vary g_pert over grid spanning hard to easy.
@@ -136,8 +137,8 @@ one_rep_times <- list(generate_data_function = 1,
                       em = 80)
 sim_spec_3 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
                                                        fixed_params = fixed_params,
-                                                       one_rep_times = one_rep_times,
-                                                       covariate_sampler = NULL)
+                                                       one_rep_times = one_rep_times)
+# check <- simulatr::check_simulatr_specifier_object(simulatr_spec = sim_spec_3, B_in = 3, parallel = TRUE)
 save_obj(sim_spec_3, to_save_3, overwrite)
 
 
@@ -173,9 +174,8 @@ one_rep_times <- list(generate_data_function = 1,
                       em = 6)
 sim_spec_4 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
                                                        fixed_params = fixed_params,
-                                                       one_rep_times = one_rep_times,
-                                                       covariate_sampler = NULL)
-
+                                                       one_rep_times = one_rep_times)
+# check <- simulatr::check_simulatr_specifier_object(simulatr_spec = sim_spec_4, B_in = 3, parallel = TRUE)
 save_obj(obj = sim_spec_4, file_path = to_save_4, overwrite = overwrite)
 
 
@@ -213,8 +213,8 @@ one_rep_times <- list(generate_data_function = 1,
                       em = 12)
 sim_spec_5 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
                                                        fixed_params = fixed_params,
-                                                       one_rep_times = one_rep_times,
-                                                       covariate_sampler = NULL)
+                                                       one_rep_times = one_rep_times)
+# check <- simulatr::check_simulatr_specifier_object(simulatr_spec = sim_spec_4, B_in = 3, parallel = TRUE)
 save_obj(sim_spec_5, to_save_5, overwrite)
 
 # 6. Add offsets and a covariate (p_mito) to the Poisson model
@@ -254,6 +254,6 @@ one_rep_times <- list(generate_data_function = 1,
                       em = 10)
 sim_spec_6 <- glmeiv::create_simulatr_specifier_object(param_grid = param_grid,
                                                        fixed_params = fixed_params,
-                                                       one_rep_times = one_rep_times,
-                                                       covariate_sampler = NULL)
+                                                       one_rep_times = one_rep_times)
+# check <- simulatr::check_simulatr_specifier_object(simulatr_spec = sim_spec_6, B_in = 3, parallel = TRUE)
 save_obj(sim_spec_6, to_save_6, overwrite)

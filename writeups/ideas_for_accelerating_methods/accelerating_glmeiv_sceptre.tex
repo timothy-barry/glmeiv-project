@@ -1,0 +1,115 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{graphicx} 
+\usepackage{float}
+\usepackage[caption = false]{subfig}
+\allowdisplaybreaks
+\usepackage{/Users/timbarry/optionFiles/mymacros}
+
+\begin{document}
+
+\begin{center}
+\textbf{A note on fitting mean-plus-offset models, with applications to accelerating GLM-EIV and SCEPTRE} \\
+Tim B
+\end{center}
+
+In this note I consider the problem of efficiently fitting mean-plus-offset models (defined below) for Poisson and negative binomial distributions. The proposed methods could accelerate SCEPTRE and GLM-EIV by several orders of magnitude. I also describe a new initialization procedure for GLM-EIV based on these (and some other) ideas.
+
+\section{Mean-plus-offset model}
+
+For $i \in \{ 1, \dots, n \}$, let $Y_i$ be a random variable with exponential family distribution. Suppose the mean of $Y_i$ is $g^{-1}(\beta + o_i)$, where $\beta \in \R$ is an unknown constant, $\{o_1, \dots, o_n\}$ are known ``offset'' terms, and $g^{-1}$ is an inverse link  function. The offset terms can be fixed or random; if they are random, we perform estimation and inference conditional on their observed values. Our goal is to estimate $\beta$ using MLE. We call this model a ``mean-plus-offset'' model.
+
+\subsection{Poisson case}
+
+Suppose the $Y_i$s are Poisson-distributed with log link function, i.e.
+
+$$Y_i \sim \textrm{Pois}( e^{ \beta + o_i } ).$$ The density $f$ of $Y_i$ is $$ f(y_i; \beta) =  \frac{\left[ e^{\beta + o_i}  \right]^{(y_i)} e ^{ - \left[ e^{\beta + o_i}  \right] }}{ y_i! } = \frac{ e^{y_i\beta} e^{y_i o_i}   }{ e^{\left[ e^{\beta + o_i} \right]} y_i! }.$$ The likelihood of the sample is
+\begin{multline*}
+L( \beta; y ) = \frac{ e^{ y_1 \beta } e^{ y_1 o_1}}{ e^{ \left[ e^{ \beta + o_1 } \right] } y_1! } \dots \frac{ e^{ y_n \beta } e^{ y_n o_n}}{ e^{ \left[ e^{ \beta + o_n } \right] } y_n! }  = \frac{ \left( e^{ \beta \sum_{i=1}^n y_i} \right) \left(e^{ \sum_{i=1}^n y_io_i} \right)}{ e^{ \sum_{i=1}^n e^{\beta + o_i}}  \prod_{i=1}^n \left( y_i! \right) },
+\end{multline*}
+and the log-likelihood (up to a constant) is
+$$ \mathcal{L}(\beta; y) = \beta \sum_{i=1}^n y_i -\sum_{i=1}^n e^{\beta + o_i}.$$ Differentiating and setting equal to zero, we obtain the MLE equation
+\begin{equation}\label{pois_mle_eq}
+e^\beta \left( \sum_{i=1}^n e^{o_i} \right) = \sum_{i=1}^n y_i.
+\end{equation}
+The MLE $\hat{\beta}^{(\textrm{Pois})}$ is therefore
+$$ \hat{\beta}^{(\textrm{Pois})} = \log \left( \frac{ \sum_{i=1}^n y_i }{ \sum_{i=1}^n e^{o_i} } \right).$$
+Suppose now that we have a weighted log-likelihood
+$$  \mathcal{L}(\beta; y) = \beta \sum_{i=1}^n T_i y_i -\sum_{i=1}^n T_i e^{\beta + o_i},$$ where $T_1, \dots, T_n \in [0,1]$ are weights. Repeating the above process, we find that the weighted MLE $\hat{\beta}^{(\textrm{Weighted Pois})}$ is
+$$\hat{\beta}^{(\textrm{Weighted Pois})} = \log \left( \frac{ \sum_{i=1}^n T_i y_i }{ \sum_{i=1}^n T_i e^{o_i} } \right) .$$
+Thus, we can calculate $\hat{\beta}^{(\textrm{pois})}$ and $\hat{\beta}^{(\textrm{Weighted Pois})}$ analytically. We could instead estimate $\beta$ by fitting a (possibly weighted) a GLM, but this is much ($\approx500 \times$) slower, as GLMs use an iterative fitting procedure.
+
+\subsection{Negative binomial case}
+
+Suppose the $Y_i$s are negative binomially distributed with fixed size $ r$ and log link function, i.e.,
+$$ Y_i \sim \textrm{NB}_r(e^{\beta + o_i}).$$ The density $f$ of $Y_i$ is
+\begin{multline*}
+f(y_i; \beta) = \binom{y_i + r - 1}{y_i} \left( \frac{ e^{\beta} e^{o_i} }{ e^{\beta}e^{o_i} + r } \right)^{y_i} \left( \frac{ r }{ e^{\beta}e^{o_i} + r } \right)^r \\ = \binom{y_i + r - 1}{y_i} \left( \frac{ e^{y_i\beta} e^{y_i o_i} }{ [e^\beta e^{o_i} + r]^{y_i} } \right) \left( \frac{r^r}{[e^{\beta} e^{o_i} + r ]^r} \right).
+\end{multline*}
+The likelihood across the samples is
+$$ L(\beta; y) = \prod_{i=1}^n \binom{ y_i + r - 1 }{ y_i }  \frac{ e^{ (\beta \sum y_i)} e^{\left(\sum y_i o_i \right)} }{  \prod_{i} \left[ \left( e^\beta e^{o_i} + r \right)^{y_i} \right] } \frac{ r^{rn} }{ \left[ \prod_i e^{\beta} e^{o_i} + r \right]^r },$$ and the log-likelihood (up to a constant) is
+ \begin{multline*} \mathcal{L}(\beta; y) = \beta \sum_i y_i - \sum_{i}  y_i \log\left( e^\beta e^{o_i} + r \right) - r \sum_{i=1}^n \log( e^{\beta} e^{o_i} + r ) \\ = \beta \sum_{i} y_i - \sum_{i} (y_i + r) \log ( e^\beta e^{o_i} + r ). \end{multline*} Differentiating in $\beta$ and setting equal to zero, we obtain the MLE equation
+ \begin{equation}\label{nb_mle_eq}
+   e^\beta \sum_i \frac{ (y_i + r) e^{o_i} }{ e^\beta e^{o_i} + r  }  = \sum_i y_i. 
+ \end{equation}
+ 
+ \subsubsection{Asymptotically exact solution}
+ 
+ We cannot solve for $\beta$ in (\ref{nb_mle_eq}) analytically. However, we can derive an asymptotically exact solution. Assume that $o_i$ is a random variable. Then by the law of total expectation,
+ \begin{multline*} \E \left[ \frac{(y_i + r) e^{o_i}}{ e^{\beta + o_i} + r } \right] = \E \left[ \E\left[ \frac{ (y_i + r) e^{o_i} }{ e^{\beta + o_i} + r } | o_i\right] \right] = \E \left[ \frac{ (e^{\beta + o_i} + r) e^{o_i}}{ e^{\beta + o_i} + r } \right] = \E [ e^{o_i} ],
+ \end{multline*} 
+ because $\E[y_i] = e^{\beta + o_i}$ given fixed $o_i$. Dividing by $n$ on both sides of (\ref{nb_mle_eq}), we have that
+ $$ e^{\beta} \left( \frac{1}{n} \sum_{i=1}^n \frac{ (y_i + r)e^{o_i} }{ e^\beta e^{o_i} + r } \right) = \frac{1}{n} \sum_{i=1}^n y_i.$$ Finally, taking the limit in $n$ and solving for $\beta$, we obtain
+ \begin{equation}
+\hat{\beta}^{(\textrm{NB})} \xrightarrow{P} \log\left( \frac{ \E[y_i] }{ \E[ e^{o_i} ] } \right).
+ \end{equation}
+ But the Poisson MLE $\hat{\beta}^{(\textrm{Pois})}$ converges to the same value (under random $o_i$):
+ 
+ $$ \hat{\beta}^{(\textrm{Pois})} =  \log \left( \frac{ (1/n) \sum_{i=1}^n y_i }{ (1/n) \sum_{i=1}^n e^{o_i} } \right) \xrightarrow{P} \log \left( \frac{ \E[y_i] }{ \E[ e^{o_i} ] } \right) .$$ Therefore, for large $n$, we can approximate $\hat{\beta}^{\textrm{(NB)}}$ by $\hat{\beta}^{(\textrm{Pois})}$, which is fast to compute. The weighted case is similar.
+ 
+ \subsubsection{Fisher information}
+ 
+ We can compute the Fisher information of the negative binomial mean-plus-offset model. The second derivative of the log-likelihood is
+ $$ \frac{d^2 \mathcal{L}(\beta | y) }{d \beta^2} = - \sum_{i=1}^n \frac{ r e^{o_i + \beta}(r + y_i)}{ \left(e^{o_i + \beta} + r\right)^2 }.$$ Therefore, the Fisher information is
+ \begin{multline*} I_n(\beta) = - \E \left[ \frac{d^2 \mathcal{L}(\beta | y) }{d \beta^2}  \right] = \sum_{i=1}^n \frac{ r e^{\beta + o_i} (r + e^{\beta + o_i} )}{ (e^{ \beta + o_i} + r )^2} = \sum_{i=1}^n \frac{ r e^{\beta + o_i} }{r + e^{\beta + o_i}}.
+ \end{multline*}
+Interestingly, the Fisher information for $\beta$ depends on $r$, while the approximate MLE does not. The $z$-score for $\hat{\beta}^{(\textrm{NB})}$, computable analytically, is 
+\begin{equation}\label{z_score}
+z = \hat{\beta}/\sqrt{ 1 / I_n(\hat{\beta})}.
+\end{equation}
+\section{Application to SCEPTRE}
+
+For a given gene-gRNA pair, SCEPTRE fits $B = 500$ negative binomial mean-plus-offset models. Currently, SCEPTRE does this by fitting 500 univariate GLMs of expression onto thresholded perturbation (using distillations as offsets). % We might be able to accelerate SCEPTRE by instead using the asymptotic analytic formula (\ref{z_score}) to compute the $z$-score.
+As we consider developing faster versions of SCEPTRE, the $z$-score test statistic introduced here might be an attractive alternative to a simple linear test statistic. 
+ 
+\section{Application to GLM-EIV, and a new initialization procedure}
+ 
+ We can apply some of these ideas to accelerate GLM-EIV by way of a new initialization procedure. Consider an mRNA model with intercept $\beta^m_0$, perturbation coefficient $\beta^m_{\textrm{pert}}$, and vector technical factor coefficients $\beta^m_\textrm{tech} \in \R^p$. Additionally, consider a gRNA model with analogous terms $\beta^g_0, \beta^g_{\textrm{pert}}$, and $\beta^g_\textrm{tech}$. Let $\pi$ be the marginal perturbation probability, and let $n$ be the number of cells. Recall that the technical factors (e.g., batch, library size, etc.) are observed, while the perturbation indicator is unobserved.
+ 
+A key observation is that, in practice, $n$ is large ($\approx 200,000$) and $\pi$ is small ($<0.01$). Therefore, we can obtain good estimates of $\beta_0^m, \beta^m_\textrm{tech}, \beta_0^g,$ and $\beta^g_\textrm{tech}$ by regressing mRNA and gRNA counts onto the technical factors, even if the effect size of the unobserved perturbation ($\beta^m_\textrm{pert}, \beta^g_{\textrm{pert}}$) is large. These estimates serve as good pilot estimates for the EM algorithm. This observation motivates the following procedure:
+ 
+\begin{itemize}
+\item[1.] Regress mRNA counts onto an intercept term and the technical factors to obtain estimates $\hat{\beta}_0^{m, \textrm{pilot}}$ and $\hat{\beta}_\textrm{tech}^{m,  \textrm{pilot}}$ of $\beta^m_o$ and $\beta^m_\textrm{tech}$. Do the same for the gRNA counts to obtain estimates $\hat{\beta}_0^{g, \textrm{pilot}}$ and $\hat{\beta}_\textrm{tech}^{g,  \textrm{pilot}}$.
+\item[2.] Extract the fitted values $f^m, f^g$ from the mRNA model and gRNA model.
+\item[3.] Run a reduced GLM-EIV on a simplified mRNA model consisting of offsets $\log(f^m)$ and a simplified gRNA model consisting of offsets $\log(f^g)$ (with no intercept or technical factor term in either model). Use $K \approx 15$ random restarts. Obtain pilot estimates $\hat{\beta}_{\textrm{pert}}^{m, \textrm{pilot}}, \hat{\beta}_{\textrm{pert}}^{g, \textrm{pilot}}, \hat{\pi}^{\textrm{pilot}}.$
+\item[4.] Using the pilot estimates $$ \hat{\pi}^{\textrm{pilot}}, \hat{\beta}_0^{m, \textrm{pilot}}, \hat{\beta}_{\textrm{pert}}^{m, \textrm{pilot}}, \hat{\beta}_\textrm{tech}^{m,  \textrm{pilot}}, \hat{\beta}_0^{g, \textrm{pilot}}, \hat{\beta}_{\textrm{pert}}^{g, \textrm{pilot}},  \hat{\beta}_\textrm{tech}^{g,  \textrm{pilot}}$$ as a starting location, run GLM-EIV on the full dataset once.
+\end{itemize} 
+
+\subsection{Speed}
+
+Relative to a naive strategy of repeated random parameter initialization, this algorithm is fast. Step 1 can be performed as a single precomputation (similar to SCEPTRE). Step 3 is a univariate EM algorithm. The E step only involves calculating membership probabilities, and the M step reduces to fitting mean-plus-offset models for both the mRNA and gRNA distributions, for which there exist analytic formulas. Finally, step 4 -- running GLM-EIV on the full data -- is fast because the pilot estimates are close to the global optimum.
+
+Assuming 15 random restarts and 20 iterations per restart, a naive EM algorithm might require fitting $15 \times 20 \times 2 = 600$ GLMs per gRNA-gene pair. The above EM algorithm, by contrast, might involve fitting 10 GLMs per gene-gRNA pair (after pre-computations), making the algorithm feasible to apply at scale. (These numbers should be confirmed empirically.)
+
+\subsection{Obtaining good pilot estimates for intercepts and technical factors}
+ 
+ In practice the perturbation probability $\pi$ is expected to be less than $1\%$. Denoting the $i$th mRNA count by $m_i$ and the $i$th technical factor vector by $z_i$, we can write the likelihood of mRNA regression model fitted in step 1 by
+ 
+ $$ \sum_{i=1}^n l(m_i, z_i) = \sum_{i : p_i = 1} l(m_i, z_i) + \sum_{i: p_i = 0} l(m_i, z_i) \approx \sum_{i : p_i = 0} l(m_i, z_i). $$ That is, the likelihood of the (technically incorrectly specified) GLM is approximately equal to the likelihood of a correctly specified GLM in which we condition on $p_i = 0$ before fitting the model. This observation (maybe under an additional assumption on the dependence of the covariates) suggests that we can obtain good estimates of $\beta^m_o$ and $\beta^m_\textrm{tech}$ without observing $p_i$.
+ 
+When using a negative binomial model, we must estimate the dispersion parameter, which we will do in step 1. We could use reasoning similar to the above to argue that our dispersion estimates are good. It would be worthwhile to flesh these ideas out in more theoretical detail.
+
+% \bibliographystyle{unsrt}
+% \bibliography{/Users/timbarry/Documents/optionFiles/library.bib}
+\end{document}

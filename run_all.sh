@@ -21,6 +21,7 @@ mkdir -p $sim_dir $LOCAL_GLMEIV_DATA_DIR"public"
 
 # 3. Create the simulatr specifier objects
 Rscript simulations/create_simulatr_spec_objects.R FALSE
+Rscript simulations/create_simulatr_spec_objects_scaled.R TRUE
 
 # 4. Run the simulations
 # i.
@@ -52,4 +53,9 @@ fi
 if [[ ! -f $sim_dir"/raw_result_6.rds" ]]
 then
 $SIMULATR -f $sim_dir"/sim_spec_6.rds" -r $sim_dir"/raw_result_6.rds"
+fi
+# vii.
+if [[ ! -f $sim_dir"/raw_result_7.rds" ]]
+then
+$SIMULATR -f $sim_dir"/sim_spec_7.rds" -r $sim_dir"/raw_result_7.rds"
 fi
