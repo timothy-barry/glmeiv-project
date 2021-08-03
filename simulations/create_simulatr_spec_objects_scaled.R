@@ -56,7 +56,7 @@ sim_spec_7 <- create_simulatr_specifier_object_v2(param_grid = param_grid,
                                                           fixed_params = fixed_params,
                                                           one_rep_times = list(generate_data_function = 5,
                                                                                thresholding = 10,
-                                                                               glmeiv_fast = 15,
+                                                                               glmeiv_fast = 30,
                                                                                glmeiv_slow = 160))
 to_save_7 <- paste0(sim_dir, "/sim_spec_7.rds")
 save_obj(sim_spec_7, to_save_7, overwrite)
