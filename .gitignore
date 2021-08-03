@@ -5,5 +5,4 @@ nextflow.config
 simulations/.Rhistory
 simulations/.DS_Store
 simulatr.log
-trace*
 .metaparams.txt
