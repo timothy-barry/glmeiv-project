@@ -59,3 +59,10 @@ if [[ ! -f $sim_dir"/raw_result_7.rds" ]]
 then
 $SIMULATR -f $sim_dir"/sim_spec_7.rds" -r $sim_dir"/raw_result_7.rds"
 fi
+
+#5. Run nextflow pipeline
+gene_exp_fp=$LOCAL_GASPERINI_2019_DATA_DIR"/at-scale/processed/gene_expressions"
+gRNA_counts_fp=$LOCAL_GASPERINI_2019_DATA_DIR"/at-scale/processed/gRNA_counts"
+pairs_fp=$LOCAL_GLMEIV_DATA_DIR"/public/data_analysis/pairs_sample.rds"
+
+nextflow $LOCAL_CODE_DIR/glmeiv-pipeline/main.nf --gene_expressions_fp $gene_exp_fp --gRNA_counts_fp $gRNA_counts_fp --pairs_fp $pairs_fp --result_dir $PWD 

@@ -6,3 +6,4 @@ simulations/.Rhistory
 simulations/.DS_Store
 simulatr.log
 .metaparams.txt
+.nextflow*
