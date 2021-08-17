@@ -57,7 +57,7 @@ ggplot(self_tss_to_plot, aes(x = confint_upper_thresholding, y = confint_upper_g
 Interestingly, when I use a threshold of 1 (rather than 5) for GLM-EIV, the solution quality degrades.
 
 ```{r, fig.width=4,fig.height=3,cache=TRUE}
-self_tss_thresh <- thresh_res %>% filter(threshold == 1, parameter == "m_perturbation", site_type == "selfTSS") %>% select(pair_id, value, target) %>% pivot_wider(id_cols = "pair_id", names_from = "target", values_from = "value")
+self_tss_thresh <- thresh_res %>% filter(threshold == 5, parameter == "m_perturbation", site_type == "selfTSS") %>% select(pair_id, value, target) %>% pivot_wider(id_cols = "pair_id", names_from = "target", values_from = "value")
 self_tss_glmeiv <- glmeiv_res %>% filter(parameter == "m_perturbation", site_type == "selfTSS") %>% select(pair_id, value, target) %>% pivot_wider(id_cols = "pair_id", names_from = "target", values_from = "value")
 self_tss_to_plot <- left_join(x = self_tss_glmeiv, y = self_tss_thresh, by = "pair_id", suffix = c("_glmeiv", "_thresholding"))
 ggplot(self_tss_to_plot, aes(x = estimate_thresholding, y = estimate_glmeiv)) + geom_point(alpha = 0.8) + geom_abline(slope = 1, intercept = 0, col = "red")
