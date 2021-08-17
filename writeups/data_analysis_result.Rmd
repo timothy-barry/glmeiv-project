@@ -1,0 +1,117 @@
+---
+title: "GLM-EIV data analysis results"
+author: "Tim B"
+date: "8/16/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+```
+
+## Result of GLM-EIV data analysis
+
+This document summarizes the results of the analysis of the Gasperini data. We compared GLM-EIV to the thresholding method (with threshold fixed at 5) on "self TSS" and "NTC" gene-gRNA pairs. There are four main takeaways:
+
+1. GLM-EIV and thresholding produced similar results.
+2. The coverage rate of thresholding on the negative control data was slightly better than that of GLM-EIV.
+3. GLM-EIV produced a number of "outlier" solutions, possibly stemming from its use of the EM algorithm. The solutions of thresholding were more stable.
+4. Thresholding took less time than GLM-EIV.
+
+My overall conclusion is that thresholding outperformed GLM-EIV on the Gasperini data.
+
+## Self TSS pairs
+
+First, I examine the results of GLM-EIV and thresholding on the "self TSS" positive control pairs.
+
+```{r, cache = TRUE, include=FALSE}
+gasp_result_dir <- paste0(.get_config_path("LOCAL_GLMEIV_DATA_DIR"), "public/gasperini/results/")
+glmeiv_res <- readRDS(paste0(gasp_result_dir, "result_glmeiv.rds"))
+thresh_res <- readRDS(paste0(gasp_result_dir, "result_thresholding.rds"))
+# restrict thresh_res to pair_ids in glmeiv_res
+glmeiv_pair_ids <- unique(glmeiv_res$pair_id)
+thresh_res <- filter(thresh_res, pair_id %in% glmeiv_pair_ids)
+# process self TSS pairs
+self_tss_thresh <- thresh_res %>% filter(threshold == 5, parameter == "m_perturbation", site_type == "selfTSS") %>% select(pair_id, value, target) %>% pivot_wider(id_cols = "pair_id", names_from = "target", values_from = "value")
+self_tss_glmeiv <- glmeiv_res %>% filter(parameter == "m_perturbation", site_type == "selfTSS") %>% select(pair_id, value, target) %>% pivot_wider(id_cols = "pair_id", names_from = "target", values_from = "value")
+self_tss_to_plot <- left_join(x = self_tss_glmeiv, y = self_tss_thresh, by = "pair_id", suffix = c("_glmeiv", "_thresholding"))
+```
+
+I plot estimates of the parameter of interest (*m_perturbation*) produced by GLM-EIV (y-axis) vs. those produced by thresholding (x-axis). The estimates are very similar.
+
+```{r, fig.width=4,fig.height=3,cache=TRUE}
+ggplot(self_tss_to_plot, aes(x = estimate_thresholding, y = estimate_glmeiv)) + geom_point(alpha = 0.8) + geom_abline(slope = 1, intercept = 0, col = "red")
+```
+
+Next, I plot the lower and upper confidence intervals of GLM-EIV and thresolding against one another.
+
+```{r, fig.width=4,fig.height=3,cache=TRUE}
+ggplot(self_tss_to_plot, aes(x = confint_lower_thresholding, y = confint_lower_glmeiv)) + geom_point(alpha = 0.8) + geom_abline(slope = 1, intercept = 0, col = "red")
+ggplot(self_tss_to_plot, aes(x = confint_upper_thresholding, y = confint_upper_glmeiv)) + geom_point(alpha = 0.8) + geom_abline(slope = 1, intercept = 0, col = "red")
+```
+
+Interestingly, when I use a threshold of 1 (rather than 5) for GLM-EIV, the solution quality degrades.
+
+```{r, fig.width=4,fig.height=3,cache=TRUE}
+self_tss_thresh <- thresh_res %>% filter(threshold == 1, parameter == "m_perturbation", site_type == "selfTSS") %>% select(pair_id, value, target) %>% pivot_wider(id_cols = "pair_id", names_from = "target", values_from = "value")
+self_tss_glmeiv <- glmeiv_res %>% filter(parameter == "m_perturbation", site_type == "selfTSS") %>% select(pair_id, value, target) %>% pivot_wider(id_cols = "pair_id", names_from = "target", values_from = "value")
+self_tss_to_plot <- left_join(x = self_tss_glmeiv, y = self_tss_thresh, by = "pair_id", suffix = c("_glmeiv", "_thresholding"))
+ggplot(self_tss_to_plot, aes(x = estimate_thresholding, y = estimate_glmeiv)) + geom_point(alpha = 0.8) + geom_abline(slope = 1, intercept = 0, col = "red")
+```
+
+The thresholding method here is suffering from attenuation bias.
+
+## NTC pairs
+
+I plot the estimates of *m_perturbation* produced by GLM-EIV against those produced by thresholding on the NTC pairs.
+
+```{r,include=FALSE,cache=TRUE}
+ntc_thresh <- thresh_res %>% filter(threshold == 5, parameter == "m_perturbation", site_type == "NTC") %>% select(pair_id, value, target) %>% pivot_wider(id_cols = "pair_id", names_from = "target", values_from = "value")
+ntc_glmeiv <- glmeiv_res %>% filter(parameter == "m_perturbation", site_type == "NTC") %>% select(pair_id, value, target) %>% pivot_wider(id_cols = "pair_id", names_from = "target", values_from = "value")
+ntc_to_plot <- left_join(x = ntc_thresh, y = ntc_glmeiv, by = "pair_id", suffix = c("_thresholding", "_glmeiv"))
+```
+
+```{r, fig.width=4.5,fig.height=3.5,cache=TRUE,echo=FALSE}
+ggplot(data = ntc_to_plot, mapping = aes(estimate_thresholding, estimate_glmeiv)) + geom_point(alpha = 0.8) + geom_abline(slope = 1, intercept = 0, col = "red") + geom_hline(yintercept = 2, col = "blue")
+```
+
+There is a cloud of points above the $y=x$ line. These points are outlier estimates of GLM-EIV, possibly due to EM convergence issues. I remove these outlier points (~0.25%) and recreate the plot.
+
+```{r, fig.width=4,fig.height=3}
+n_original_pairs <- nrow(ntc_to_plot)
+ntc_to_plot_sub <- ntc_to_plot %>% filter(estimate_glmeiv <= 2)
+100 * (1 - nrow(ntc_to_plot_sub)/n_original_pairs)
+ggplot(ntc_to_plot_sub, aes(estimate_thresholding, estimate_glmeiv)) + geom_point(alpha = 0.8) +geom_abline(slope = 1, intercept = 0, col = "red") + geom_hline(yintercept = 2, col = "blue")
+```
+
+Next, I compute the CI coverage rate of both methods (assuming the true underlying parameter is 1, corresponding to no change in gene expression).
+
+```{r}
+ntc_to_plot %>% mutate(covered_thresh = confint_upper_thresholding > 1 & confint_lower_thresholding < 1,
+                       covered_glmeiv = confint_upper_glmeiv > 1 & confint_lower_glmeiv < 1) %>%
+  summarize(thresh_coverage_rate = mean(covered_thresh), glmeiv_coverage_rate = mean(covered_glmeiv, na.rm = TRUE))
+```
+The coverage rate of the thresholding method is 1% higher than that of GLM-EIV. Finally, we calculate the average running time of both methods on the NTC pairs.
+
+
+## Positive control pairs
+
+```{r, cache=TRUE}
+pc_thresh <- thresh_res %>% filter(threshold == 5, parameter == "m_perturbation", site_type == "positive_ctrl") %>% select(pair_id, value, target) %>% pivot_wider(id_cols = "pair_id", names_from = "target", values_from = "value")
+pc_glmeiv <- glmeiv_res %>% filter(parameter == "m_perturbation", site_type == "positive_ctrl") %>% select(pair_id, value, target) %>% pivot_wider(id_cols = "pair_id", names_from = "target", values_from = "value")
+pc_to_plot <- left_join(x = pc_thresh, y = pc_glmeiv, by = "pair_id", suffix = c("_thresholding", "_glmeiv"))
+pc_to_plot %>% summarize(m = 100 * mean(p_value_glmeiv < p_value_thresholding))
+```
+
+Next, we look at the "positive control" pairs. First, we plot the glmeiv vs. thresholding p-values against one another. Next, we plot the negative log-transformed p-values against one another.
+
+```{r, fig.width=4,fig.height=3,cache=TRUE}
+ggplot(pc_to_plot, aes(estimate_thresholding, estimate_glmeiv)) + geom_point(alpha = 0.8) + geom_abline(slope = 1, intercept = 0, col = "red")
+ggplot(pc_to_plot, aes(-log(p_value_thresholding, 10), -log(p_value_glmeiv, 10))) + geom_point(alpha = 0.8) + geom_abline(slope = 1, intercept = 0, col = "red")
+```
+
+The thresholding method is more sensitive than GLM-EIV: only 7% of GLM-EIV p-values are smaller than the corresponding thresholding method p-values.
