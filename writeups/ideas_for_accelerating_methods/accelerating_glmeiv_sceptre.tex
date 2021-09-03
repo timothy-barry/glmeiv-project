@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx} 
 \usepackage{float}
+\usepackage{array}
 \usepackage[caption = false]{subfig}
 \allowdisplaybreaks
 \usepackage{/Users/timbarry/optionFiles/mymacros}
@@ -109,6 +110,7 @@ Assuming 15 random restarts and 20 iterations per restart, a naive EM algorithm 
  $$ \sum_{i=1}^n l(m_i, z_i) = \sum_{i : p_i = 1} l(m_i, z_i) + \sum_{i: p_i = 0} l(m_i, z_i) \approx \sum_{i : p_i = 0} l(m_i, z_i). $$ That is, the likelihood of the (technically incorrectly specified) GLM is approximately equal to the likelihood of a correctly specified GLM in which we condition on $p_i = 0$ before fitting the model. This observation (maybe under an additional assumption on the dependence of the covariates) suggests that we can obtain good estimates of $\beta^m_o$ and $\beta^m_\textrm{tech}$ without observing $p_i$.
  
 When using a negative binomial model, we must estimate the dispersion parameter, which we will do in step 1. We could use reasoning similar to the above to argue that our dispersion estimates are good. It would be worthwhile to flesh these ideas out in more theoretical detail.
+
 
 % \bibliographystyle{unsrt}
 % \bibliography{/Users/timbarry/Documents/optionFiles/library.bib}

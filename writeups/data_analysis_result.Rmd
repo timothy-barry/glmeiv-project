@@ -105,6 +105,8 @@ pc_thresh <- thresh_res %>% filter(threshold == 5, parameter == "m_perturbation"
 pc_glmeiv <- glmeiv_res %>% filter(parameter == "m_perturbation", site_type == "positive_ctrl") %>% select(pair_id, value, target) %>% pivot_wider(id_cols = "pair_id", names_from = "target", values_from = "value")
 pc_to_plot <- left_join(x = pc_thresh, y = pc_glmeiv, by = "pair_id", suffix = c("_thresholding", "_glmeiv"))
 pc_to_plot %>% summarize(m = 100 * mean(p_value_glmeiv < p_value_thresholding))
+pc_to_plot %>% mutate(tresh_ci_width = confint_upper_thresholding - confint_lower_thresholding,
+                      glmeiv_ci_width = confint_upper_glmeiv - confint_lower_glmeiv) %>% summarize(m = mean(glmeiv_ci_width > tresh_ci_width))
 ```
 
 Next, we look at the "positive control" pairs. First, we plot the glmeiv vs. thresholding p-values against one another. Next, we plot the negative log-transformed p-values against one another.
