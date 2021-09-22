@@ -1,0 +1,774 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  22 SEP 2021 01:46
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**unified_estimation_and_inference.tex
+(./unified_estimation_and_inference.tex
+LaTeX2e <2018-04-01> patch level 2
+Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
+(/usr/local/texlive/2018/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks14
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2017/09/02 v2.17a AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks15
+\ex@=\dimen103
+))
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen104
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count88
+LaTeX Info: Redefining \frac on input line 213.
+\uproot@=\count89
+\leftroot@=\count90
+LaTeX Info: Redefining \overline on input line 375.
+\classnum@=\count91
+\DOTSCASE@=\count92
+LaTeX Info: Redefining \ldots on input line 472.
+LaTeX Info: Redefining \dots on input line 475.
+LaTeX Info: Redefining \cdots on input line 596.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen105
+LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
+\macc@depth=\count93
+\c@MaxMatrixCols=\count94
+\dotsspace@=\muskip10
+\c@parentequation=\count95
+\dspbrk@lvl=\count96
+\tag@help=\toks16
+\row@=\count97
+\column@=\count98
+\maxfields@=\count99
+\andhelp@=\toks17
+\eqnshift@=\dimen106
+\alignsep@=\dimen107
+\tagshift@=\dimen108
+\tagwidth@=\dimen109
+\totwidth@=\dimen110
+\lineht@=\dimen111
+\@envbody=\toks18
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks19
+LaTeX Info: Redefining \[ on input line 2817.
+LaTeX Info: Redefining \] on input line 2818.
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks20
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen112
+\Gin@req@width=\dimen113
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count100
+\float@exts=\toks21
+\float@box=\box28
+\@float@everytoks=\toks22
+\@floatcapt=\box29
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen114
+\captionmargin@=\dimen115
+\captionwidth=\dimen116
+\caption@tempdima=\dimen117
+\caption@indent=\dimen118
+\caption@parindent=\dimen119
+\caption@hangindent=\dimen120
+)
+\c@KVtest=\count101
+\sf@farskip=\skip46
+\sf@captopadj=\dimen121
+\sf@capskip=\skip47
+\sf@nearskip=\skip48
+\c@subfigure=\count102
+\c@subfigure@save=\count103
+\c@lofdepth=\count104
+\c@subtable=\count105
+\c@subtable@save=\count106
+\c@lotdepth=\count107
+\sf@top=\skip49
+\sf@bottom=\skip50
+)
+(/Users/timbarry/optionFiles/mymacros.sty)
+(./unified_estimation_and_inference.aux)
+\openout1 = `unified_estimation_and_inference.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+
+(/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count108
+\scratchdimen=\dimen122
+\scratchbox=\box30
+\nofMPsegments=\count109
+\nofMParguments=\count110
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count111
+\MPscratchDim=\dimen123
+\MPnumerator=\count112
+\makeMPintoPDFobject=\count113
+\everyMPtoPDFconversion=\toks24
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)))
+(/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2018/01/30 v0.27 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: End \AtBeginDocument code.
+
+
+LaTeX Warning: Citation `Louis1982' on page 1 undefined on input line 26.
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 32.
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 32.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Underfull \hbox (badness 10000) in paragraph at lines 37--41
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 41--45
+
+ []
+
+[1
+
+{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 45--49
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--54
+
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 62--65
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 72--75
+
+ []
+
+[4] [5]
+Underfull \hbox (badness 10000) in paragraph at lines 108--111
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 113--116
+
+ []
+
+[7]
+<fig1_crop.pdf, id=37, 867.24pt x 87.9285pt>
+File: fig1_crop.pdf Graphic file (type pdf)
+<use fig1_crop.pdf>
+Package pdftex.def Info: fig1_crop.pdf  used on input line 139.
+(pdftex.def)             Requested size: 390.0pt x 39.54195pt.
+ [8 <./fig1_crop.pdf>] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 166--170
+
+ []
+
+
+Overfull \hbox (3.42496pt too wide) detected at line 171
+ []$[] \OT1/cmr/m/n/12 = [] [] + [] [] \OML/cmm/m/it/12 T[]\OT1/cmr/m/n/12 (\OM
+L/cmm/m/it/12 j\OT1/cmr/m/n/12 ) [] []$ 
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 176.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 176.
+ [10]
+Overfull \hbox (39.84236pt too wide) detected at line 181
+ []$[]  [] \OMS/cmsy/m/n/12 ^^@ [] \OT1/cmr/m/n/12 = 0  \OMS/cmsy/m/n/12 ([])  
+[] \OML/cmm/m/it/12 T[]\OT1/cmr/m/n/12 (1) \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/1
+2 ^^Y [] T[]\OT1/cmr/m/n/12 (1) = \OML/cmm/m/it/12 ^^Y [] T[]\OT1/cmr/m/n/12 (0
+)$ 
+ []
+
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 194--197
+
+ []
+
+
+Overfull \hbox (0.614pt too wide) in paragraph at lines 194--197
+[]$\OT1/cmr/m/n/12 : The mem-ber-ship prob-a-bil-i-ties for the background-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 197--200
+
+ []
+
+
+Overfull \hbox (3.42496pt too wide) detected at line 202
+ []$[] \OT1/cmr/m/n/12 = [] [] + [] [] \OML/cmm/m/it/12 T[]\OT1/cmr/m/n/12 (\OM
+L/cmm/m/it/12 j\OT1/cmr/m/n/12 ) [] []$ 
+ []
+
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 202--205
+
+ []
+
+
+LaTeX Warning: Citation `Louis1982' on page 13 undefined on input line 217.
+
+[13]
+Overfull \hbox (10.34172pt too wide) in paragraph at lines 218--218
+\OT1/cmr/m/n/12 Denote the ob-served in-for-ma-tion ma-trix given $(\OML/cmm/m/
+it/12 x; y\OT1/cmr/m/n/12 )$ eval-u-ated at $\OML/cmm/m/it/12 ^^R$ \OT1/cmr/m/n
+/12 by $\OML/cmm/m/it/12 J\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^R\OT1/cmr/m/n/12 
+; \OML/cmm/m/it/12 x; y\OT1/cmr/m/n/12 )$.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 228--232
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 228--232
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 232--235
+
+ []
+
+[14] [15]
+Overfull \hbox (3.15718pt too wide) detected at line 291
+[]
+ []
+
+
+Overfull \hbox (11.12286pt too wide) in paragraph at lines 293--293
+[]\OT1/cmr/bx/n/14.4 Observed in-for-ma-tion ma-trix for zero-inflated model 
+ []
+
+[16]
+Overfull \hbox (26.95567pt too wide) detected at line 298
+ []$[] \OT1/cmr/m/n/12 + \U/msb/m/n/12 E [] E [][]$ 
+ []
+
+<fig2_crop.pdf, id=86, 438.63875pt x 396.48125pt>
+File: fig2_crop.pdf Graphic file (type pdf)
+<use fig2_crop.pdf>
+Package pdftex.def Info: fig2_crop.pdf  used on input line 302.
+(pdftex.def)             Requested size: 234.00238pt x 211.51341pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 298--308
+
+ []
+
+[17 <./fig2_crop.pdf>]
+Overfull \hbox (6.75005pt too wide) in paragraph at lines 312--313
+[]\OT1/cmr/m/n/12 We be-gin by cal-cu-lat-ing the first and sec-ond deriva-tive
+s of the log-likelihood
+ []
+
+
+Overfull \hbox (42.88635pt too wide) detected at line 329
+ []$[]  \U/msb/m/n/12 E [] \OT1/cmr/m/n/12 = \U/msb/m/n/12 E [] \OT1/cmr/m/n/12
+ = \U/msb/m/n/12 E []$ 
+ []
+
+[18]
+Overfull \hbox (69.15237pt too wide) detected at line 334
+ []$[]   [][] \OT1/cmr/m/n/12 = [][] = \OML/cmm/m/it/12 a[] [] [] \U/msb/m/n/12
+ E\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 p[]\OT1/cmr/m/n/12 ]\OML/cmm/m/it/12 E\OT1/
+cmr/m/n/12 [\OML/cmm/m/it/12 p[]\OT1/cmr/m/n/12 ] \OMS/cmsy/m/n/12 ^^@ \OT1/cmr
+/m/n/12 2\OML/cmm/m/it/12 ab [] \U/msb/m/n/12 E\OT1/cmr/m/n/12 [\OML/cmm/m/it/1
+2 p[]\OT1/cmr/m/n/12 ] + \OML/cmm/m/it/12 b[]:  $ 
+ []
+
+
+Overfull \hbox (11.21475pt too wide) detected at line 337
+ []$[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 a[] [] \OT1/cmr/m/n/12 = [][] [] \OML
+/cmm/m/it/12 :  $ 
+ []
+
+[19]
+Overfull \hbox (1.59355pt too wide) detected at line 354
+ []$[]   [] \OT1/cmr/m/n/12 [\OML/cmm/m/it/12 k; l\OT1/cmr/m/n/12 ] = \U/msb/m/
+n/12 E []$ 
+ []
+
+
+Overfull \hbox (72.34514pt too wide) detected at line 367
+ []$[] \OT1/cmr/m/n/12 = [] [] \U/msb/m/n/12 E\OT1/cmr/m/n/12 [[]^^A[]\OML/cmm/
+m/it/12 s[]\OT1/cmr/m/n/12 ]\U/msb/m/n/12 E [] \OMS/cmsy/m/n/12 ^^@ [] \U/msb/m
+/n/12 E\OT1/cmr/m/n/12 [[]^^A[]\OML/cmm/m/it/12 s[]\OT1/cmr/m/n/12 ]\U/msb/m/n/
+12 E\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 s[]\OT1/cmr/m/n/12 ^^A[][]] \OMS/cmsy/m/n
+/12 ^^@ [] \U/msb/m/n/12 E\OT1/cmr/m/n/12 [[]^^A[]\OML/cmm/m/it/12 s[]s[]\OT1/c
+mr/m/n/12 ^^A[][]]$ 
+ []
+
+
+Overfull \hbox (20.46968pt too wide) detected at line 367
+ []$[] \OMS/cmsy/m/n/12 ^^@ [] []$ 
+ []
+
+[20]
+Overfull \hbox (20.66695pt too wide) detected at line 373
+ []$[]  \OML/cmm/m/it/12 J[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^R[]\OT1/cmr/m/n
+/12 ; \OML/cmm/m/it/12 m; g\OT1/cmr/m/n/12 ) = [] [](\OML/cmm/m/it/12 s\OT1/cmr
+/m/n/12 )[]\OML/cmm/m/it/12 T\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s\OT1/cmr/m/n/12
+ ) [] [](\OML/cmm/m/it/12 s\OT1/cmr/m/n/12 )+$ 
+ []
+
+[21]
+Overfull \hbox (70.5434pt too wide) detected at line 396
+ []$[]  \OT1/cmr/m/n/12 [\U/msb/m/n/12 E [] E [][] \OMS/cmsy/m/n/12 ^^@ \U/msb/
+m/n/12 E []\OT1/cmr/m/n/12 ][\OML/cmm/m/it/12 k; l\OT1/cmr/m/n/12 ]$ 
+ []
+
+
+Overfull \hbox (73.10452pt too wide) detected at line 396
+ []$[] \OT1/cmr/m/n/12 = [] [\OML/cmm/m/it/12 k; l\OT1/cmr/m/n/12 ] \OMS/cmsy/m
+/n/12 ^^@ \U/msb/m/n/12 E [] \OT1/cmr/m/n/12 [\OML/cmm/m/it/12 k; l\OT1/cmr/m/n
+/12 ]$ 
+ []
+
+
+Overfull \hbox (86.19183pt too wide) detected at line 396
+ []$[] \OT1/cmr/m/n/12 = \U/msb/m/n/12 E [] E [] \OMS/cmsy/m/n/12 ^^@ \U/msb/m/
+n/12 E []$ 
+ []
+
+
+Overfull \hbox (64.84317pt too wide) detected at line 396
+ []$[] \OT1/cmr/m/n/12 = [] [] \U/msb/m/n/12 E\OT1/cmr/m/n/12 [\OML/cmm/m/it/12
+ x[]P[]\OT1/cmr/m/n/12 ^^A[]\OML/cmm/m/it/12 s[]\OT1/cmr/m/n/12 ]\U/msb/m/n/12 
+E\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 x[]P[]\OT1/cmr/m/n/12 ^^A[]\OML/cmm/m/it/12 
+s[]\OT1/cmr/m/n/12 ] \OMS/cmsy/m/n/12 ^^@ [] [] \U/msb/m/n/12 E\OT1/cmr/m/n/12 
+[\OML/cmm/m/it/12 x[]P[]\OT1/cmr/m/n/12 ^^A[]\OML/cmm/m/it/12 s[]s[]\OT1/cmr/m/
+n/12 ^^A[]\OML/cmm/m/it/12 P[]x[]\OT1/cmr/m/n/12 ]$ 
+ []
+
+
+Overfull \hbox (66.84319pt too wide) detected at line 396
+ []$[] \OT1/cmr/m/n/12 = [] [] \U/msb/m/n/12 E\OT1/cmr/m/n/12 [\OML/cmm/m/it/12
+ x[]P[]\OT1/cmr/m/n/12 ^^A[]\OML/cmm/m/it/12 s[]\OT1/cmr/m/n/12 ]\U/msb/m/n/12 
+E [] \OMS/cmsy/m/n/12 ^^@ [] \U/msb/m/n/12 E\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 x
+[]P[]\OT1/cmr/m/n/12 ^^A[]\OML/cmm/m/it/12 s[]\OT1/cmr/m/n/12 ]\U/msb/m/n/12 E\
+OT1/cmr/m/n/12 [\OML/cmm/m/it/12 s[]P[]\OT1/cmr/m/n/12 ^^A[]\OML/cmm/m/it/12 x[
+]\OT1/cmr/m/n/12 ]$ 
+ []
+
+
+Overfull \hbox (5.82106pt too wide) detected at line 396
+ []$[] \OT1/cmr/m/n/12 = [] \U/msb/m/n/12 E\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 x[
+]P[]\OT1/cmr/m/n/12 ^^A[]\OML/cmm/m/it/12 H[]\OT1/cmr/m/n/12 ]\U/msb/m/n/12 E\O
+T1/cmr/m/n/12 [\OML/cmm/m/it/12 x[]P[]\OT1/cmr/m/n/12 ^^A[]\OML/cmm/m/it/12 H[]
+\OT1/cmr/m/n/12 ] \OMS/cmsy/m/n/12 ^^@ [] \U/msb/m/n/12 E\OT1/cmr/m/n/12 [\OML/
+cmm/m/it/12 x[]P[]\OT1/cmr/m/n/12 (^^A[])[](\OML/cmm/m/it/12 H[]\OT1/cmr/m/n/12
+ )[]\OML/cmm/m/it/12 x[]\OT1/cmr/m/n/12 ]$ 
+ []
+
+[22]
+Overfull \hbox (29.85057pt too wide) detected at line 417
+ []$[] \OT1/cmr/m/n/12 = [] [\OML/cmm/m/it/12 k; l\OT1/cmr/m/n/12 ] \OMS/cmsy/m
+/n/12 ^^@ \U/msb/m/n/12 E [] \OT1/cmr/m/n/12 [\OML/cmm/m/it/12 k; l\OT1/cmr/m/n
+/12 ]$ 
+ []
+
+
+Overfull \hbox (49.4337pt too wide) detected at line 417
+ []$[] \OT1/cmr/m/n/12 = [] \OMS/cmsy/m/n/12 ^^@ \U/msb/m/n/12 E []$ 
+ []
+
+
+Overfull \hbox (46.00598pt too wide) detected at line 417
+ []$[] \OT1/cmr/m/n/12 = \U/msb/m/n/12 E [] E [] \OMS/cmsy/m/n/12 ^^@ \U/msb/m/
+n/12 E []$ 
+ []
+
+
+Overfull \hbox (0.58905pt too wide) detected at line 417
+ []$[] \OT1/cmr/m/n/12 = [] [] \U/msb/m/n/12 E\OT1/cmr/m/n/12 [\OML/cmm/m/it/12
+ x[]P[]\OT1/cmr/m/n/12 ^^A[]\OML/cmm/m/it/12 s[]\OT1/cmr/m/n/12 ]\U/msb/m/n/12 
+E\OT1/cmr/m/n/12 [^^A[]\OML/cmm/m/it/12 s[][]\OT1/cmr/m/n/12 ] \OMS/cmsy/m/n/12
+ ^^@ [] [] \U/msb/m/n/12 E\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 x[]P[]\OT1/cmr/m/n/
+12 ^^A[]\OML/cmm/m/it/12 s[]\OT1/cmr/m/n/12 ^^A[]\OML/cmm/m/it/12 s[][]\OT1/cmr
+/m/n/12 ]$ 
+ []
+
+
+Overfull \hbox (16.51527pt too wide) detected at line 417
+ []$[] \OT1/cmr/m/n/12 = [] [] \OMS/cmsy/m/n/12 ^^A []$ 
+ []
+
+[23] [24]
+Overfull \hbox (64.42717pt too wide) detected at line 428
+ []$[]  \U/msb/m/n/12 E [] E [] \OMS/cmsy/m/n/12 ^^@ \U/msb/m/n/12 E []$ 
+ []
+
+
+Overfull \hbox (61.75565pt too wide) detected at line 428
+ []$[] \OT1/cmr/m/n/12 = [] [] \OMS/cmsy/m/n/12 ^^@ \U/msb/m/n/12 E []$ 
+ []
+
+
+Overfull \hbox (69.46317pt too wide) detected at line 428
+ []$[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 a [] [] \U/msb/m/n/12 E\OT1/cmr/m/n/1
+2 [\OML/cmm/m/it/12 p[]\OT1/cmr/m/n/12 ]\U/msb/m/n/12 E\OT1/cmr/m/n/12 [\OML/cm
+m/m/it/12 x[]p[]\OT1/cmr/m/n/12 ^^A[]\OML/cmm/m/it/12 s[]\OT1/cmr/m/n/12 ] \OMS
+/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 a [] \U/msb/m/n/12 E\OT1/cmr/m/n/12 [\OML/cmm
+/m/it/12 p[]\OT1/cmr/m/n/12 ]\U/msb/m/n/12 E\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 x
+[]p[]\OT1/cmr/m/n/12 ^^A[]\OML/cmm/m/it/12 s[]\OT1/cmr/m/n/12 ] \OMS/cmsy/m/n/1
+2 ^^@ \OML/cmm/m/it/12 a [] \U/msb/m/n/12 E\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 x[
+]p[]\OT1/cmr/m/n/12 ^^A[]\OML/cmm/m/it/12 s[]\OT1/cmr/m/n/12 ]$ 
+ []
+
+
+Overfull \hbox (61.9063pt too wide) detected at line 428
+ []$[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 a [] [] \OT1/cmr/m/n/12 = \OML/cmm/m/
+it/12 a [] x[]T[]\OT1/cmr/m/n/12 (1)^^A[]\OML/cmm/m/it/12 s[] []$ 
+ []
+
+[25]
+Overfull \hbox (63.70164pt too wide) detected at line 436
+ []$[]  \OML/cmm/m/it/12 J[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^R\OT1/cmr/m/n/1
+2 ; \OML/cmm/m/it/12 m; g\OT1/cmr/m/n/12 ) = \U/msb/m/n/12 E [] \OT1/cmr/m/n/12
+ + \U/msb/m/n/12 E [] E [][]$ 
+ []
+
+
+Overfull \hbox (33.82672pt too wide) detected at line 439
+ []$[]  \U/msb/m/n/12 E [] E [] \OMS/cmsy/m/n/12 ^^@ \U/msb/m/n/12 E []$ 
+ []
+
+
+Overfull \hbox (7.7015pt too wide) detected at line 439
+ []$[] \OT1/cmr/m/n/12 = [] [] \OMS/cmsy/m/n/12 ^^@ \U/msb/m/n/12 E []$ 
+ []
+
+
+Overfull \hbox (13.92676pt too wide) detected at line 439
+ []$[] \OT1/cmr/m/n/12 = [] [] \OMS/cmsy/m/n/12 ^^@ \U/msb/m/n/12 E []$ 
+ []
+
+
+Overfull \hbox (83.19388pt too wide) detected at line 439
+ []$[]\OML/cmm/m/it/12 a [] [] \U/msb/m/n/12 E\OT1/cmr/m/n/12 [\OML/cmm/m/it/12
+ p[]\OT1/cmr/m/n/12 ]\U/msb/m/n/12 E\OT1/cmr/m/n/12 [[]^^A[]\OML/cmm/m/it/12 s[
+]\OT1/cmr/m/n/12 ] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 b [] \U/msb/m/n/12 E\O
+T1/cmr/m/n/12 [[]^^A[]\OML/cmm/m/it/12 s[]\OT1/cmr/m/n/12 ] \OMS/cmsy/m/n/12 ^^
+@ []$ 
+ []
+
+
+Overfull \hbox (21.84378pt too wide) detected at line 439
+ []$[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 a []$ 
+ []
+
+[26] [27]
+Overfull \hbox (40.90285pt too wide) detected at line 452
+ []$[]  \OML/cmm/m/it/12 J[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^R[]\OT1/cmr/m/n
+/12 ; \OML/cmm/m/it/12 m; g\OT1/cmr/m/n/12 ) = [] [](\OML/cmm/m/it/12 s\OT1/cmr
+/m/n/12 )[]\OML/cmm/m/it/12 T\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s\OT1/cmr/m/n/12
+ ) [] [](\OML/cmm/m/it/12 s\OT1/cmr/m/n/12 )$ 
+ []
+
+
+Overfull \hbox (6.882pt too wide) detected at line 459
+\OML/cmm/m/it/12 J[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^R\OT1/cmr/m/n/12 ; \OML
+/cmm/m/it/12 m; g; p\OT1/cmr/m/n/12 ) = [] [] \OML/cmm/m/it/12 :
+ []
+
+
+Overfull \hbox (25.64458pt too wide) detected at line 467
+ []$[] \OT1/cmr/m/n/12 + \U/msb/m/n/12 E [] E [][]$ 
+ []
+
+[28]
+<fig3_crop.pdf, id=143, 413.545pt x 414.54875pt>
+File: fig3_crop.pdf Graphic file (type pdf)
+<use fig3_crop.pdf>
+Package pdftex.def Info: fig3_crop.pdf  used on input line 470.
+(pdftex.def)             Requested size: 234.00238pt x 234.5747pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 467--477
+
+ []
+
+[29 <./fig3_crop.pdf>]
+Overfull \hbox (11.52815pt too wide) detected at line 485
+ []$[]  \OML/cmm/m/it/12 J[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^R[]\OT1/cmr/m/n
+/12 ; \OML/cmm/m/it/12 m; g\OT1/cmr/m/n/12 ) = [] [](\OML/cmm/m/it/12 s\OT1/cmr
+/m/n/12 )[]\OML/cmm/m/it/12 T\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s\OT1/cmr/m/n/12
+ ) [] [](\OML/cmm/m/it/12 s\OT1/cmr/m/n/12 )$ 
+ []
+
+[30]
+Overfull \hbox (97.0723pt too wide) detected at line 508
+ []$[]   [] \OT1/cmr/m/n/12 [\OML/cmm/m/it/12 k; l\OT1/cmr/m/n/12 ]$ 
+ []
+
+
+Overfull \hbox (10.15074pt too wide) detected at line 508
+ []$[] \OT1/cmr/m/n/12 = [] [\OML/cmm/m/it/12 k; l\OT1/cmr/m/n/12 ] \OMS/cmsy/m
+/n/12 ^^@ \U/msb/m/n/12 E [] \OT1/cmr/m/n/12 [\OML/cmm/m/it/12 k; l\OT1/cmr/m/n
+/12 ]$ 
+ []
+
+
+Overfull \hbox (10.4379pt too wide) detected at line 508
+ []$[] \OT1/cmr/m/n/12 = \U/msb/m/n/12 E [] E [] \OMS/cmsy/m/n/12 ^^@ \U/msb/m/
+n/12 E []$ 
+ []
+
+
+Overfull \hbox (21.44876pt too wide) detected at line 508
+ []$[] \OT1/cmr/m/n/12 = \U/msb/m/n/12 E [] E [] \OMS/cmsy/m/n/12 ^^@ \U/msb/m/
+n/12 E []$ 
+ []
+
+[31]
+Overfull \hbox (4.24248pt too wide) detected at line 512
+ []$[]  \OML/cmm/m/it/12 J[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^R\OT1/cmr/m/n/1
+2 ; \OML/cmm/m/it/12 m; g\OT1/cmr/m/n/12 ) = [] [] [](\OML/cmm/m/it/12 s\OT1/cm
+r/m/n/12 )[]\OML/cmm/m/it/12 T\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s\OT1/cmr/m/n/1
+2 )^^A[](\OML/cmm/m/it/12 s\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 H[]\OT1/cmr/m/n/12
+ (\OML/cmm/m/it/12 s\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 T\OT1/cmr/m/n/12 (\OML/cm
+m/m/it/12 t\OT1/cmr/m/n/12 )^^A[](\OML/cmm/m/it/12 t\OT1/cmr/m/n/12 )\OML/cmm/m
+/it/12 H[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t\OT1/cmr/m/n/12 )[](\OML/cmm/m/it/
+12 t\OT1/cmr/m/n/12 )$ 
+ []
+
+[32] [33] [34] [35] [36]
+Overfull \hbox (32.13943pt too wide) detected at line 598
+ []$[] \OT1/cmr/m/n/12 = (1\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 2) [] + (1\OML/cmm
+/m/it/12 =\OT1/cmr/m/n/12 2) [] = (1\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 2) [] + (
+1\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 2) [] \OML/cmm/m/it/12 :  $ 
+ []
+
+[37]
+Overfull \hbox (43.68877pt too wide) detected at line 608
+ []$[]  \OML/cmm/m/it/12 h[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 c\OT1/cmr/m/n/12 
+) = [\OMS/cmsy/m/n/12 ^^@\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OMS/cmsy/m/n/12 ^^
+@\OML/cmm/m/it/12 c\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 f\OT
+1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^L \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 c\OT1/
+cmr/m/n/12 )] [] + [] []$ 
+ []
+
+
+Overfull \hbox (15.65962pt too wide) detected at line 608
+ []$[] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 ^^@\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 
+f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 c\OT1/cmr/m/n/12 ) + \OML/cmm/m/it/12 f\OT1/
+cmr/m/n/12 (\OML/cmm/m/it/12 c \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^L\OT1/cm
+r/m/n/12 )] [] + [] [] \OML/cmm/m/it/12 :  $ 
+ []
+
+
+Overfull \hbox (28.29579pt too wide) detected at line 619
+ []$[] \OT1/cmr/m/n/12 = [] []$ 
+ []
+
+
+Overfull \hbox (117.83633pt too wide) detected at line 619
+ []$[] \OT1/cmr/m/n/12 = [] [][] \OML/cmm/m/it/12 :$ []  
+ []
+
+[38]
+Underfull \hbox (badness 10000) in paragraph at lines 683--686
+
+ []
+
+[39]
+Underfull \hbox (badness 10000) detected at line 692
+ []$[]  \OML/cmm/m/it/12 L\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 y\OMS/cmsy/m/n/12 j
+\OML/cmm/m/it/12 ^^L\OT1/cmr/m/n/12 ) = [] [] [] = []\OML/cmm/m/it/12 :  $ 
+ []
+
+
+Overfull \hbox (11.17003pt too wide) detected at line 698
+ []$[]  [] \OT1/cmr/m/n/12 = [] \OML/cmm/m/it/12 y[] \OMS/cmsy/m/n/12 ^^@ [] \O
+ML/cmm/m/it/12 e[] \OT1/cmr/m/n/12 = [] \OML/cmm/m/it/12 y[] \OMS/cmsy/m/n/12 ^
+^@ [] \OML/cmm/m/it/12 e[]e[] \OT1/cmr/m/n/12 = [] \OML/cmm/m/it/12 y[] \OMS/cm
+sy/m/n/12 ^^@ \OML/cmm/m/it/12 e[] [] \OT1/cmr/m/n/12 = 0\OML/cmm/m/it/12 :  $ 
+
+ []
+
+[40] [41] (./unified_estimation_and_inference.bbl
+
+LaTeX Warning: Empty `thebibliography' environment on input line 3.
+
+) [42] (./unified_estimation_and_inference.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 3021 strings out of 492649
+ 45143 string characters out of 6129622
+ 123695 words of memory out of 5000000
+ 6856 multiletter control sequences out of 15000+600000
+ 12620 words of font info for 49 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 41i,13n,38p,2075b,226s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.p
+fb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pf
+b></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb>
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></
+usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
+r/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/l
+ocal/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loca
+l/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local
+/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/t
+exlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/tex
+live/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texl
+ive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texli
+ve/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/t
+exlive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on unified_estimation_and_inference.pdf (42 pages, 342457 bytes)
+.
+PDF statistics:
+ 262 PDF objects out of 1000 (max. 8388607)
+ 179 compressed objects within 2 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+
