@@ -613,7 +613,7 @@ $$g'(\beta/2) = f(\beta/2) - f(-\beta/2) = 0,$$ because $f$ is even. Next,
 h'(\beta/2) = - \left[ f(\beta/2) + f(-\beta/2) \right] \left[ \int_{-\infty}^{\beta/2} f + \int_{-\infty}^{-\beta/2} f \right] + \\ \left[\int_{-\infty}^{ -\beta/2 } f + \int_{-\infty}^{\beta/2} f \right] \left[ f(\beta/2) + f(-\beta/2) \right] = 0,
 \end{multline*} again because $f$ is even. Therefore, $g'(\beta/2)h(\beta/2) = g(\beta/2)h'(\beta/2)$, implying $c = \beta/2$ is a critical value of the function $\gamma$.
 
-\subsection{Limit in $c$}
+\subsection{Limit in $c$, or thresholding lower bound}
 
 Next, we study the limits of $\gamma$ as $c \to \pm \infty$. By L'Hoptial's rule, \begin{multline}\label{c_limit} \lim_{c \to \infty} \frac{g(c)}{h(c)} = \lim_{c \to \infty} \frac{g'(c)}{h'(c)} \\ = \lim_{c \to \infty} \frac{ f(c) - f(c - \beta) }{ -[f(c) + f(c - \beta)] \left[\int_{-\infty}^c f + \int_{-\infty}^{c - \beta} f \right] + \left[\int_{-\infty}^{-c} f -\int_{-\infty}^{\beta - c} f \right]\left[ f(c) + f(c - \beta) \right] } \\ = \lim_{c \to \infty} \left[ - \left(\frac{f(c) + f(c - \beta) }{ f(c) -f(c - \beta)} \right) \left( \int_{-\infty}^c f + \int_{-\infty}^{c - \beta} f \right) + \left( \frac{ f(c) + f(c - \beta) }{ f(c) - f(c - \beta) } \right)  \left( \int_{-\infty}^{-c} f - \int_{-\infty}^{\beta - c} f \right)\right]^{-1}.
 \end{multline}
@@ -629,9 +629,53 @@ $$ \lim_{c \to \infty} \frac{ f(c) + f(c - \beta) }{ f(c) - f(c - \beta)} = -1 $
 $$\lim_{c \to \infty} \left( \int_{-\infty}^c f + \int_{-\infty}^{c - \beta} f \right) = 2,$$ and $$\lim_{c \to \infty}  \left( \int_{-\infty}^{-c} f - \int_{-\infty}^{\beta - c} f \right) = 0.$$
 Combining these results, and applying the continuity and multiplication properties of limits, we see that (\ref{c_limit}) evaluates to $1/2.$
 
-\subsection{Limit in $\beta$, monotonicity}
+\subsection{Limit in $\beta$}
 
+We compute the limit of the multiplicative factor $\gamma$ in $\beta$:
 
+$$\gamma(\beta) = \frac{\int_{c-\beta}^{c} f }{ \left[ \int_{-\infty}^{-c} f + \int_{-\infty}^{\beta - c} f \right] \left[ \int_{-\infty}^c f + \int_{-\infty}^{c - \beta} f \right]} := \frac{g(\beta)}{h(\beta)}.$$ 
+
+Taking the limit,
+$$\lim_{\beta \to \infty} \gamma(\beta) = \frac{ \int_{-\infty}^{c} f} { \left( \int_{-\infty}^{-c} f + 1 \right)\left( \int_{-\infty}^c f \right) } = \frac{1}{ \int_{-\infty}^{-c} f + 1} \leq 1.$$
+
+Additionally, 
+$$\lim_{\beta \to -\infty} \gamma(\beta)  = \frac{ \int_{\infty}^c f }{ \left( \int_{-\infty}^{-c} f \right) \left( \int_{-\infty}^c f + 1 \right) } = \frac{ - \int_{c}^{\infty} f}{ \left( \int_{c}^\infty f \right) \left( \int_{-\infty}^c f + 1 \right)} = \frac{-1}{ \int_{-\infty}^c f + 1 } \geq -1.$$
+
+\subsection{Monotonicity in $\beta$}
+We show that $\gamma$ is monotonically increasing in $\beta$. Note that we can rewrite $g$ as $g(\beta) = \int_{-c}^{\beta - c} f.$ We have that
+$$g'(\beta) = f(\beta - c),$$ and $$h'(\beta) = f(\beta - c) \left[ \int_{-\infty}^c f + \int_{-\infty}^{c - \beta} f \right] - \left[ \int_{-\infty}^{-c} f + \int_{-\infty}^{\beta - c} f \right]f(\beta - c).$$ The derivative $\gamma'$ of $\gamma$ is
+$$ \gamma'( \beta )  = \frac{g'(\beta)h(\beta) - g(\beta)h'(\beta) }{ h^2(\beta)}.$$ Our goal is to show that
+$$ g'(\beta)h(\beta) \geq h'(\beta) g(\beta).$$ We have that
+$$ g'(\beta) h(\beta) = f(\beta-c) \left[ \int_{-\infty}^{-c} f + \int_{-\infty}^{\beta - c} f \right] \left[ \int_{-\infty}^c f + \int_{-\infty}^{c - \beta} f \right]$$ and 
+\begin{multline*}
+ g(\beta) h'(\beta) = \left(\int_{-c}^{\beta - c} f \right) f(\beta - c) \left[ \int_{-\infty}^c f + \int_{-\infty}^{c - \beta} f \right] \\ - \left(\int_{-c}^{\beta - c} f \right) \left[ \int_{-\infty}^{-c} f + \int_{-\infty}^{\beta - c} f \right]f(\beta - c).
+ \end{multline*}
+Adding $$\left(\int_{-c}^{\beta - c} f \right) \left[ \int_{-\infty}^{-c} f + \int_{-\infty}^{\beta - c} f \right]f(\beta - c)$$ to both sides, we obtain
+\begin{multline}\label{beta_monotone_1}
+f(\beta-c) \left[ \int_{-\infty}^{-c} f + \int_{-\infty}^{\beta - c} f \right] \left[ \int_{-\infty}^c f + \int_{-\infty}^{c - \beta} f \right] + \left(\int_{-c}^{\beta - c} f \right) \left[ \int_{-\infty}^{-c} f + \int_{-\infty}^{\beta - c} f \right]f(\beta - c) \\ = f(\beta - c) \left[ \int_{-\infty}^{-c} f + \int_{-\infty}^{\beta-c} f \right] \left( \int_{-\infty}^ c f + \int_{-\infty}^{c - \beta} f + \int_{-c}^{\beta - c} f \right)
+\end{multline} for the LHS. We want to show that
+\begin{multline}\label{beta_monotone_2}
+\left[ \int_{-\infty}^{-c} f + \int_{-\infty}^{\beta-c} f \right] \left( \int_{-\infty}^ c f + \int_{-\infty}^{c - \beta} f + \int_{-c}^{\beta - c} f \right) \\\geq \left(\int_{-c}^{\beta - c} f \right) \left[ \int_{-\infty}^c f + \int_{-\infty}^{c - \beta} f \right].
+\end{multline}
+
+We take cases on the sign of $\beta$.
+
+\textbf{Case 1}: $\beta < 0$. Then the RHS of (\ref{beta_monotone_2}) is less than or equal to zero, as $\left(\int_{-c}^{\beta-c} f\right) < 0$ and $\left( \int_{-\infty}^c f + \int_{-\infty}^{c-\beta}f \right) \geq 0$. Examining we LHS, we see that
+\begin{multline*}
+ \left( \int_{-\infty}^c f + \int_{-\infty}^{c -\beta} f + \int_{-c}^{\beta-c} f \right) = \left( \int_{-\infty}^c f + \int_{-\infty}^{c - \beta} f + \int_{-\infty}^{\beta - c} f - \int_{-\infty}^{-c} f \right) \\ \left( \int_{-\infty}^c f + \int_{-\infty}^{c - \beta} f + \int_{c - \beta}^{\infty} f - \int_{-\infty}^{-c} f \right) = \left( 1 + \int_{-\infty}^c f - \int_{-\infty}^{-c} f \right) \geq 0.
+ \end{multline*}
+ Furthermore, $\left( \int_{-\infty}^{-c} f + \int_{-\infty}^{\beta - c} f \right)$ is nonnegative. Thus, the entire left-hand side is nonnegative. The inequality follows.
+ 
+ \textbf{Case 2}: $\beta \geq 0$. Then
+ $$ \int_{-\infty}^{-c} f + \int_{-\infty}^{\beta -c } f \geq \int_{-\infty}^{\beta -c } f \geq \int_{-c}^{\beta - c}  f,$$ and $$ \int_{-\infty}^c f + \int_{-\infty}^{c - \beta} f + \int_{-c}^{\beta - c} f \geq \int_{-\infty}^c f + \int_{-\infty}^{c - \beta} f .$$ The inequality follows.
+
+\subsection{Attenuation bias}
+
+We have shown that (i) $\lim_{\beta \to \infty} \gamma(\beta) \leq 1$, (ii) $\lim_{\beta \to -\infty} \gamma(\beta) \geq -1,$ and (iii) $\gamma$ is monotonically increasing. It follows that $|\gamma(\beta)| \leq 1$ for all $\beta$. We have precisely characterized the attenuation bias as well. Attenuation bias vanishes only in the limit.
+
+\subsection{Agreement of Bayes-optimal and estimation-optimal thresholds}
+
+We want to find the $\beta$ for which the Bayes-optimal threshold $c = \beta/2$ outperforms the nominal threshold of $c = \infty$ on estimation accuracy.
 
 % Next, we compute the second derivative $\gamma''$ of $\gamma$. We have that
 % \begin{multline*}
