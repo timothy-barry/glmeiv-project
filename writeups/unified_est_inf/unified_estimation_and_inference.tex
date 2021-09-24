@@ -671,58 +671,73 @@ We take cases on the sign of $\beta$.
 
 \subsection{Attenuation bias}
 
-We have shown that (i) $\lim_{\beta \to \infty} \gamma(\beta) \leq 1$, (ii) $\lim_{\beta \to -\infty} \gamma(\beta) \geq -1,$ and (iii) $\gamma$ is monotonically increasing. It follows that $|\gamma(\beta)| \leq 1$ for all $\beta$. We have precisely characterized the attenuation bias as well. Attenuation bias vanishes only in the limit.
+We have shown that (i) $\lim_{\beta \to \infty} \gamma(\beta) \leq 1$, (ii) $\lim_{\beta \to -\infty} \gamma(\beta) \geq -1,$ and (iii) $\gamma$ is monotonically increasing. It follows that $|\gamma(\beta)| \leq 1$ for all $\beta$, for all $c$. In other words, attenuation bias occurs uniformly over the space: for all $c$ and $\beta$, we have attenuation bias.
 
-\subsection{Agreement of Bayes-optimal and estimation-optimal thresholds}
+\subsection{Comparison of Bayes-optimal threshold and estimation-optimal threshold}
 
-We want to find the $\beta$ for which the Bayes-optimal threshold $c = \beta/2$ outperforms the nominal threshold of $c = \infty$ on estimation accuracy.
+Let $r: \R \to \R$ be the attenuation factor evaluated at the Bayes-optimal threshold, i.e.
+$$ r(\beta) = \gamma(\beta, \beta/2) = \frac{ \int_{-\beta/2}^{\beta/2} f }{ \left[ \int_{-\infty}^{-\beta/2} f + \int_{-\infty}^{\beta/2} f \right]^2 }.$$ Observe that the denominator simplifies to
+$$ \int_{-\infty}^{-\beta/2} f + \int_{-\infty}^{\beta/2} f = \int_{-\infty}^{-\beta/2} f + \int_{-\beta/2}^{\infty} f = 1.$$ Therefore,
+$$r(\beta) = \int_{-\beta/2}^{\beta/2} f = 2 \int_{0}^{\beta/2} f.$$ Setting $r(\beta) = 1/2$, we obtain
+$$r(\beta) =\int_0^{\beta/2} f = \int_{-\infty}^{\beta/2} f - 1/2  = 1/4,$$ or 
+$$\int_{-\infty}^{\beta/2} f = \frac{3}{4}.$$ We then can solve for $\beta$ as $\beta/2 = \Phi^{-1}(3/4),$ or $\beta = 2 \Phi^{-1}(3/4) \approx 1.35.$ Therefore, for $\beta < 1.35$, the threshold $c = \infty$ is better than the Bayes-optimal threshold. However, for $\beta > 1.35$, the Bayes-optimal threshold is better.
 
-% Next, we compute the second derivative $\gamma''$ of $\gamma$. We have that
-% \begin{multline*}
-% \gamma''(c) = \frac{d}{dc} \left[ \frac{ g'(c)h(c) - g(c)h'(c) }{ % g^2(c)}\right] \\ = \frac{ (d/dc)[ g'(c) h(c) - g(c)h'(c) ]g^2(c) - 5 % [g'(c)h(c) - g(c)h'(c)] 2g(c)g'(c) }{ g^4(c)}.
-% \end{multline*}
-%Now,
-%\begin{multline*}
-%(d/dc) [g'(c) h(c) - g(c)h'(c)] =  g''(c) h(c) + g'(c)h'(c) - [ g'(c)h'(c) + g(c)h''(c) ] \\ = g''(c)h(c) - g(c)h''(c).
-%\end{multline*}
-%Considering the numerator of $\gamma''$, we obtain
-%\begin{multline*}
-%g''(c)h(c)g^2(c) - h''(c)g^3(c) - 2g(c)[g'(c)]^2h(c) + 2g^2(c) h'(c)g'(c)
-%\end{multline*}
+In conclusion, the picture is as follows: for given $\beta$, $c = \beta/2$ is a critical value of the attenuation fraction. When $\beta < 1.35$, $c = \beta/2$ is a worse choice than $c = \infty$; by contrast, when $\beta > 1.35$, $c = \beta/2$ is a better choice. Attenuation bias occurs uniformly over all $\beta$ and thresholds $c$.
 
-% \section{Fast GLM-EIV}
+\section{Generalizing to $\pi \in (0,1/2]$}
+We try to generalize the results in the previous section to $\pi \in (0, 1/2]$. First, we express the pieces of the attenuation fraction $\gamma$ in a convenient form. We have that
 
-% In practice, we must run the EM algorithm multiple times to find a globally-optimal solution. Moreover, each EM run consists of many iterations. This could be very slow, and so we propose several accelerations. We describe the accelerations for the background read model only, because this is the model we expect to use most in practice. The procedure for the zero-inflated model is similar.
-% \\ \\
-% \noindent
- % 1. \textbf{Distillation}: 
+$$ \E [ \hat{P}_i] = (1-\pi)  \left( \int_{c}^\infty f \right)+ \pi \left( \int_{c - \beta}^\infty f\right)$$ and 
+$$\omega = \int_{c - \beta}^\infty f.$$
+Also,
+\begin{multline*}
+1 - \E[\hat{P}_i]  = (1 - \pi) + \pi - (1-\pi) \left(\int_{c}^\infty f\right) - \pi \left( \int_{c - \beta}^\infty f \right) \\ = (1 -\pi)\left( 1 - \int_{c}^\infty f \right) + \pi \left( 1 - \int_{c - \beta}^\infty f \right) = (1 - \pi) \left( \int_{-\infty}^c f \right) + \pi \left( \int_{-\infty}^{c- \beta} f \right).
+\end{multline*}
+Finally,
+\begin{multline*}
+\omega - \E[\hat{P}_i] = \left(\int_{c - \beta}^\infty f \right) - (1-\pi) \left(\int_{c}^\infty f \right)- \pi \left(\int_{c - \beta}^\infty f \right) \\ = (1 - \pi) \left( \int_{c - \beta}^\infty f \right) - (1 - \pi)\left( \int_{c}^\infty f \right) = (1 - \pi) \left( \int_{c - \beta}^{c} f \right).
+\end{multline*}
+Stringing these pieces together, we can write the multiplicative factor $\gamma(\beta,c)$ as 
+\begin{multline*}
+\gamma(\beta, c) = \frac{ \pi (1-\pi) \left( \int_{c-\beta}^c f \right) }{  \left[ (1-\pi)  \left( \int_{-\infty}^{-c} f \right)+ \pi \left( \int_{-\infty}^{\beta - c} f\right) \right] \left[  (1 - \pi) \left( \int_{-\infty}^c f \right) + \pi \left( \int_{-\infty}^{c- \beta} f\right)  \right]}.
+\end{multline*}
 
-% \begin{enumerate}
-% \item[Step i.]
-% Regress $m_i$ and $g_i$ onto the observed covariate matrix $X$ to remove the effects of the covariates. Assume the simple models
-% $$
-% \begin{cases}
-% M_1, \dots, M_n \sim f_M \\
-% r_m(\mu^m_i) = x_i^T \gamma_m + o_i^m
-% \end{cases} \begin{cases}
-% G_1, \dots, G_n \sim f_G \\
-% r_g(\mu^g_i) = x_i^T \gamma_g + o_i^g
-% \end{cases}
-% $$
-% for $M_i$ and $G_i$. Here, $f_M$ and $f_G$ are the assumed exponential families for $M$ and $G$, $r_m$ and $r_g$ are the corresponding link functions, and  $x_i \in \R^{d-1}$ is the $i$th observed vector of covariates. Note that $x_i$ does not contain the unobserved perturbation covariate $P_i$. We obtain estimates $\hat{\gamma}_m$ and $\hat{\gamma}_g$ of $\gamma_m$ and $\gamma_g$ using IRLS.
-% \item[Step ii.] Fit the perturbation terms $\beta_1^m$, $\beta_1^g$ with the estimated contributions of $x_i$ from step i as offsets. This is a univariate regression, which is much faster to fit than a multivariate regression.
-% \end{enumerate}
+\subsection{Critical values of $\gamma$}
 
-% 2. \textbf{EM sparsity}: The complete-data log-likelihood (\ref{exp_log_lik_background_read}) that we must maximize contains $2n$ examples; $n$ examples correspond to $P_i = 0$, and $n$ examples correspond to $P_i = 1$. After distillation, we need only sum over the $n$ examples corresponding to $P_i = 1$. Considering the $M$ term,
-% \begin{multline*}
-% \sum_{i=1}^n \sum_{j=0}^1 T_i^{(t)}(j) \log \left[ f_m(m_i; \mu^m_i(j)) \right] \\ = \sum_{i=1}^n T^{(t)}(0) \log\left[ f_m(m_i; r_m^{-1} \left[\hat{\gamma}_m \right]) \right] + \sum_{i=1}^n T^{(t)}(1) \log \left[ f_m(m_i; r_m^{-1} \left[ \beta^m_1 + \hat{\gamma}_m \right] ) \right] \\ = C + \sum_{i=1}^n T^{(t)}(1) \log \left[ f_m(m_i; r_m^{-1} \left[ \beta^m_1 + \hat{\gamma}_m \right] ) \right].
-% \end{multline*}
- 
-% 3. \textbf{Membership probability sparsity}: Most (in practice $\geq80\%$) of the membership probabilities $T_i^{(1)}(1)$ are close to zero. For small $\ep > 0$ (say, $\ep = 0.001$), we therefore can write
+We compute the derivatives of the numerator and denominator in $c$. Define $$g(c) = \pi (1-\pi) \left( \int_{c-\beta}^c f \right),$$ and $$ h(c) = \left[ (1-\pi)  \left( \int_{-\infty}^{-c} f \right)+ \pi \left( \int_{-\infty}^{\beta - c} f\right) \right] \left[  (1 - \pi) \left( \int_{-\infty}^c f \right) + \pi \left( \int_{-\infty}^{c- \beta} f\right)  \right].$$ By FTC,
+$$ g'(c) = \pi (1 -\pi) [  f(c) - f(c - \beta)],$$ and
+\begin{multline*}
+h'(c) = [-(1-\pi) f(-c) - \pi f(\beta - c)] \left[  (1 - \pi) \left( \int_{-\infty}^c f \right) + \pi \left( \int_{-\infty}^{c- \beta} f\right)  \right] \\ + \left[ (1-\pi) f(c) + \pi f(c - \beta) \right]\left[ (1-\pi)  \left( \int_{-\infty}^{-c} f \right)+ \pi \left( \int_{-\infty}^{\beta - c} f\right) \right] \\ = -[(1-\pi) f(c) + \pi f(c - \beta)] \left[  (1 - \pi) \left( \int_{-\infty}^c f \right) + \pi \left( \int_{-\infty}^{c- \beta} f\right)  \right] \\ + \left[ (1-\pi) f(c) + \pi f(c - \beta) \right]\left[ (1-\pi)  \left( \int_{-\infty}^{-c} f \right)+ \pi \left( \int_{-\infty}^{\beta - c} f\right) \right].
+\end{multline*}
+We can try to solve for $c^*$, but this seems more challenging than last time.
+% Define $\gamma_\beta(c) = \gamma(\beta, c)$. We have that
+%$$ \gamma_\beta'(c) = \frac{ g'(c) h(c) - g(c) h'(c) }{ h^2(c) }.$$ We seek $c^*$ such that $\gamma'_\beta(c^*) = 0.$ Set $$c^* =  \frac{(1/2)\beta^2 + \log\left( (1-\pi)/\pi \right)}{\beta} =\frac{\beta}{2} + \frac{1}{\beta} \log\left( \frac{1-\pi}{\pi} \right).$$
+% Now, $$g'(c) = \pi(1-\pi)\left[ f(c*) - f(c^* - \beta) \right]$$
 
-% $$ \sum_{i=1}^n T_i^{(t)}(1) \log \left[ f_m(m_i; r_m^{-1} \left[ \beta^m_1 + \hat{\gamma}_m \right] ) \right] \approx \sum_{i : T_i^{(t)} > \ep }^n T_i^{(t)}(1) \log \left[ f_m\left(m_i; r_m^{-1} \left[ \beta^m_1 + \hat{\gamma}_m \right] \right) \right].$$
+\subsection{Limit in $c$}
 
-% These accelerations together reduce a multivariate regression over $2n$ examples to a univariate regression over $(1 - s)n$ examples, where $s$ is the $\ep$-sparsity of the $T^{(t)}_i(1)$s. Using these accelerations, we run several (say $\sim$ 10) restarts of the EM algorithm, and we use the output weights from the best of these runs as starting weights in a final, full EM algorithm to obtain the MLE.
+L'hopital's rule says that
+$$\lim_{c \to \infty} \frac{g(c)}{h(c)} = \lim_{c \to \infty} \frac{g'(c)}{h'(c)}.$$ Now,
+\begin{multline*}
+\frac{g'(c)}{h'(c)} = \Bigg(-\frac{ (1-\pi) f(c) + \pi f(c - \beta) }{ \pi (1-\pi) f(c) - \pi (1-\pi) f(c - \beta) } \left[ (1 - \pi) \left( \int_{-\infty}^c f \right) + \pi \left( \int_{-\infty}^{c- \beta} f\right) \right] \\ + \frac{ (1-\pi) f(c) + \pi f(c - \beta) }{ \pi (1-\pi) f(c) - \pi (1-\pi) f(c - \beta)}\left[ (1-\pi)  \left( \int_{-\infty}^{-c} f \right)+ \pi \left( \int_{-\infty}^{\beta - c} f\right) \right] \Bigg)^{-1}.
+\end{multline*}
+
+First, we compute
+\begin{multline}\label{lim_c_general}
+\lim_{c \to \infty} \frac{ (1-\pi) f(c) + \pi f(c - \beta) }{ \pi (1-\pi) f(c) - \pi (1-\pi) f(c - \beta)} \\ = \lim_{c \to \infty} \frac{ (1-\pi) f(c)/f(c-\beta) + \pi }{ \pi(1-\pi) f(c)/f(c-\beta) - \pi(1-\pi)}.
+\end{multline}
+We know that $$ \lim_{c \to \infty} \frac{ f(c) }{f(c -\beta)} = 0.$$ Therefore, the limit (\ref{lim_c_general}) evaluates to
+$$ -\frac{1}{1-\pi}.$$
+Next, we have that
+$$ \lim_{c \to \infty} (1-\pi) \left(\int_{-\infty}^c  f \right) + \pi \left( \int_{-\infty}^{c - \beta} f \right) = 1,$$ and
+$$ \lim_{c \to \infty} \left(1 - \pi \right) \left( \int_{-\infty}^{-c} f \right) + \pi \left( \int_{-\infty}^{\beta-c} f \right) = 0.$$
+Therefore,
+$$ \lim_{c \to \infty} \frac{g'(c)}{h'(c)} = \left[ \frac{1}{1-\pi} \cdot 1 - 0\right]^{-1} = 1 - \pi.$$
+
+We conclude by L'hopital's rule that
+$$ \lim_{c \to \infty} \frac{g(c)}{h(c)} = 1 - \pi. $$
+
+The interpretation of this result is as follows: as $\pi$ gets smaller (i.e., as the classes become less balanced), the strategy of choosing a large threshold becomes increasingly good.
 
 \section{Fitting mean plus offset models}
 
