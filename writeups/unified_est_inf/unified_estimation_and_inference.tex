@@ -739,6 +739,82 @@ $$ \lim_{c \to \infty} \frac{g(c)}{h(c)} = 1 - \pi. $$
 
 The interpretation of this result is as follows: as $\pi$ gets smaller (i.e., as the classes become less balanced), the strategy of choosing a large threshold becomes increasingly good.
 
+\section{Variance of thresholding method}
+
+\subsection{Warm up}
+
+We compute the asymptotic variance of the thresholding method. First, to warm up, we compute the variance of the OLS estimator. Suppose we observe data $\{(x_1, y_1), \dots, (x_n, y_n)\}$ from the following model:
+$$
+\begin{cases}
+y_i = \beta_0 + \beta x_i + \epsilon_i \\
+x_i \sim \textrm{Bern}(\pi) \\
+\epsilon_i \sim N(0,1)
+\end{cases}
+$$
+Our goal is to compute the variance of the $\sqrt{n} \hat{\beta}$, where $\hat{\beta}$ is the MLE for $\beta$. We have by law of total variance that
+$$\V(\sqrt{n} \hat{\beta}) = \E\left[ \V(\sqrt{n}\hat{\beta} | X ) \right] + \V \left[ \E ( \sqrt{n} \hat{\beta}|X) \right].$$
+
+
+ Let $X = [x_1, \dots, x_n]^T$, $\bar{x} = (1/n) \sum_{i=1}^n x_i,$ and $\overline{x^2} = (1/n) \sum_{i=1}^n x_i^2.$  It is well-known that
+$$ \V(\hat{\beta} | X) = \frac{ 1 }{n \left(\overline{x^2} - [\bar{x}]^2 \right)},$$ and so $$\V( \sqrt{n} \hat{\beta} | X ) = \frac{1}{\overline{x^2} - [\bar{x}]^2}.$$ Next, because $\hat{\beta}$ is an unbiased estimator of $\beta$, we have that
+$$ \E( \sqrt{n} \hat{\beta} | X ) = \sqrt{n} \E(\hat{\beta}|X)  = \sqrt{n} \beta.$$ Applying law of total variance,
+$$\V(\sqrt{n}\hat{\beta}) = \E\left[ \frac{1}{ \overline{x^2} - (\bar{x})^2} \right] + n \V(\beta) = \E\left[ \frac{1}{ \overline{x^2} - (\bar{x})^2} \right].$$
+Let the random variable $T_i$ be defined by
+$$T_j = \frac{1}{j}\sum_{i=1}^j x_i^2 - \left(\frac{1}{j} \sum_{i=1}^j x_i \right)^2.$$ We have by LLN that
+$$\{ T_j \}_{j=1}^\infty \xrightarrow{a.s.} \V(x_i) = \pi (1-\pi).$$
+Moreover, 
+$$T_j \leq \frac{1}{j} \sum_{i=1}^j x_i^2 \leq \frac{1}{j} \sum_{i=1}^j 1 = 1.$$
+Thus, by the continuous mapping theorem and bounded convergence theorem,
+$$\lim_{n \to \infty} \V(\sqrt{n} \hat{\beta}) \xrightarrow{a.s.} \E \left[ \lim_{n \to \infty} \frac{1}{ \overline{x^2} - (\bar{x})^2} \right] = \E \left( \frac{1}{\pi(1-\pi)}\right) = \frac{1}{\pi(1-\pi)}.$$
+The function $1/(\pi(1 - \pi))$ is monotonically decreasing over $\pi \in [0,1/2]$. Moreover, its limit as $\pi \to 0$ is infinity. Thus, we see that, as $\pi$ gets smaller, variance of $\sqrt{n} \hat{\beta}$ increases.
+
+\subsection{Errors-in-variables}
+
+Now, we derive $\V(\sqrt{n}\hat{\beta})$ for the EIV model (\ref{gaussian-special-case}). The MLE $\hat{\beta}^m_1$ is
+$$ \hat{\beta}^m_1 = \frac{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}}) m_i }{\sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} = \sum_{i=1}^n c_i m_i,$$ where $$c_i =  \frac{\hat{p}_i - \bar{\hat{p}}}{ \sum_{i=1}^n ( \hat{p}_i - \bar{\hat{p}})^2}.$$ Observe that
+$$\sum_{i=1}^n c_i = \frac{\sum_{i=1}^n \hat{p}_i - n \left(\frac{1}{n}\right) \sum_{i=1}^n \hat{p}_i}{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} = 0.$$
+
+Denote $P = [p_1, \dots, p_n ]^T$ and $\tau = [\tau_1, \dots, \tau_n]$. The law of total variance implies
+\begin{equation}\label{lotv_1}
+\V( \hat{\beta}^m_1 )  = \E \left( \V ( \hat{\beta}^m_1 | (P, \tau) ) \right) + \V \left(\E(\hat{\beta}^m_1 | (P, \tau))\right) .
+\end{equation}
+Now,
+\begin{multline}\label{exp_1}
+\E(\hat{\beta}^m_1 |(P, \tau)) = \sum_{i=1}^n c_i \E[m_i | (P,\tau)] =\sum_{i=1}^n c_i (\beta^m_0 + \beta^m_1 p_i) \\ = \beta^m_0 \sum_{i=1}^n c_i + \beta^m_1 \sum_{i=1}^n c_i p_i = \beta^m_1 \frac{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}} ) p_i}{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2}.
+\end{multline}
+Next,
+\begin{multline}\label{var_1}
+\V[\hat{\beta}^m_1 | (P, G)] = \V\left( \sum_{i=1}^n c_i m_i | (P, \tau) \right) = \sum_{i=1}^n c_i^2 \V(m_i | (P, \tau)) \\ = \sum_{i=1}^n c^2_i = \frac{ 1 }{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2}.\end{multline}
+Therefore, (\ref{lotv_1}) evaluates to
+\begin{equation}\label{var_2}
+ \V(\hat{\beta}^m_1) = \E\left( \frac{ 1 }{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} \right) + (\beta^m_1)^2 \V \left( \frac{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}} ) p_i}{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2}\right).
+ \end{equation}
+  % Multiplying by $n$,
+%$$ \V \left( \sqrt{n} \hat{\beta}^m_1 \right) =  \E\left( \frac{1}{ (1/n) \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2}\right) + [\beta_1^m]^2 \V \left(  \right)  $$
+To evaluate the second term of (\ref{var_2}), we apply the law of total variance again. Denote $\hat{P} = [\hat{p}_1, \dots, \hat{p}_n]^T,$ and let
+$$ X_n = \frac{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}} ) p_i}{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} = \sum_{i=1}^n c_i p_i.$$ We have that 
+\begin{equation}\label{var_3}
+\V(X_n)  = \E \left(\V( X_n | \hat{P} )\right) + \V \left( \E (X_n | \hat{P})\right).
+\end{equation} Now,
+$$\V \left( X_n | \hat{P} \right) = \sum_{i=1}^n c_i^2 \V(p_i) = (\pi)(1-\pi) \sum_{i=1}^n c_i^2 = \frac{ \pi(1-\pi) }{ \sum_{i=1}^n ( \hat{p}_i - \bar{ \hat{p}})^2}.$$
+Next,
+$$ \E \left( X_n | \hat{P} \right) = \E\left( \sum_{i=1}^n c_i p_i | \hat{P} \right) = \pi \sum_{i=1}^n c_i = 0.$$
+Therefore, (\ref{var_3}) evaluates to
+$$ \V(X_n) = \E \left( \frac{ 1(1-\pi) }{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} \right) + \V \left(0\right)  =  \E \left( \frac{ 1(1-\pi) }{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} \right).$$ Next, (\ref{var_2}) evaluates to
+\begin{multline*}
+ \V(\hat{\beta}^m_1) = \E \left( \frac{ 1 }{\sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} \right) + \E \left( \frac{(\beta_1^m)^2 \pi(1-\pi)}{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} \right) \\ =[1+(\beta_1^m)^2 \pi(1-\pi)] \E \left( \frac{1}{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2 } \right),
+\end{multline*}
+or
+\begin{equation}\label{var_4}
+\V( \sqrt{n} \hat{\beta}^m_1 ) = [1 + (\beta^m_1)^2 \pi(1-\pi)] \E \left(\frac{1}{ (1/n) \sum_{i=1}^n  ( \hat{p}_i - \bar{\hat{p}})}\right).
+\end{equation}
+Let the random variable $T_n$ be defined by
+$$T_n = \frac{1}{n}\sum_{i=1}^n \hat{p}_i^2 - \left(\frac{1}{n} \sum_{i=1}^n \hat{p}_i \right)^2.$$ We have by LLN that
+$$\{ T_n\}_{n=1}^\infty \xrightarrow{a.s.} \V(\hat{p}_i) = \E(\hat{p}_i)( 1 - \E(\hat{p}_i)).$$
+Moreover, 
+$$T_n\leq \frac{1}{n} \sum_{i=1}^n \hat{p}_i^2 \leq \frac{1}{n} \sum_{i=1}^n 1 = 1.$$
+Thus, by the continuous mapping theorem and bounded convergence theorem,
+$$\lim_{n \to \infty} \V(\sqrt{n} \hat{\beta}) \xrightarrow{a.s.} [1 + (\beta^m_1)^2 \pi(1-\pi)] \left( \frac{1}{\lim_{n\to\infty} T_n} \right) = \frac{ 1 + (\beta^m_1)^2 \pi(1-\pi) }{ \E(\hat{p}_i) \E\left(1 - \E(\hat{p}_i)\right)}.$$
 \section{Fitting mean plus offset models}
 
 We derive strategies for quickly fitting mean plus offset models in the Gaussian, Poisson, and negative binomial case.
@@ -765,7 +841,6 @@ Now, we consider adding weights $\{T_1, \dots, T_n \}$ to the log-likelihood:
 $$ \mathcal{L}(y|\beta) = \beta \sum_{i=1}^n T_i y_i - \sum_{i=1}^n T_i e^{\beta}e^{o_i} .$$ Taking the derivative and setting to zero, we have
 $$ \frac{ d \mathcal{L}(y|\beta) }{ d\beta} = \sum_{i=1}^n T_i y_i - e^\beta \sum_{i-1}^n T_i e^{o_i} = 0.$$ Therefore,
 $$ \hat{\beta} = \log\left( \frac{ \sum_{i=1}^n T_i y_i }{ \sum_{i=1}^n T_i e^{o_i}} \right).$$
-
 
 \textbf{Negative binomial}: Suppose $Y_i \sim \textrm{NB}_r(e^{\beta + o_i})$ for $i \in \{ 1, \dots, n \}$. Our goal is to use MLE to estimate $\beta$. Recall that the pmf $f(y_i | \mu)$ of $y_i$ given mean $\mu$ is
 $$ f(y_i | \mu) = \binom{y_i + r - 1}{y_i} \left( \frac{ \mu }{ \mu + r } \right)^{y_i} \left( \frac{ r }{ \mu + r }  \right)^r.$$ Suppose $y_i$ has mean $$e^{\beta + o_i}$$ for fixed $o_i$. Then 
@@ -794,18 +869,6 @@ $$y_i \sim NB_r(\exp( \beta + o_i)) .$$ By the law of total expectation, we have
  Therefore, by WLLN, the likelihood equation converges to
  $$ e^{\beta} \E[ e^{o_i} ] = \E[y_i].$$ Asymptotically, the MLE of the NB model is that same as that of the Poisson model. Thus, for large $n$, we can use the Poisson MLE to approximate the negative binomial MLE.
  
-% \subsubsection{Computing the Fisher information}
- 
- % We compute the Fisher information of the negative binomial model. The gradient of the log-likelihood $\mathcal{L}$ is
- 
-% $$ \frac{d^2 \mathcal{L}(\beta | y) }{d \beta^2} = - \sum_{i=1}^n \frac{ r e^{o_i + \beta}(r + y_i)}{ \left(e^{o_i + \beta} + r\right)^2 }.$$
-
-% The Fisher information is
-% \begin{multline*} I_n(\beta) = - \E \left[ \frac{d^2 \mathcal{L}(\beta | y) }{d \beta^2}  \right] = \sum_{i=1}^n \frac{ r e^{\beta + o_i} (r + e^{\beta + o_i} )}{ (e^{ \beta + o_i} + r )^2} = \sum_{i=1}^n \frac{ r e^{\beta + o_i} }{r + e^{\beta + o_i}}.
-% \end{multline*}
-% Observe that the Fisher information depends on $r$, whereas the MLE $\hat{\beta}$ (asymptotically) does not. Finally, a z-score is 
-% $$ z = \frac{ \hat{\beta} }{ \sqrt{ 1 / I_n(\hat{\beta}) } }.$$ The proof in the weighted case is similar, but we condition on $\left(o_i, T_i\right)$ in the application of law of total expectation.
-
 \bibliographystyle{unsrt}
 \bibliography{/Users/timbarry/Documents/optionFiles/library.bib}
 \end{document}

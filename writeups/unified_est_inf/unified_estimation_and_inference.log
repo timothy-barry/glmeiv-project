@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  23 SEP 2021 22:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  29 SEP 2021 01:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -759,19 +759,19 @@ Overfull \hbox (5.8324pt too wide) detected at line 723
  []$[] \OT1/cmr/m/n/12 + [] [] [][]\OML/cmm/m/it/12 :  $ 
  []
 
-[44]
-Underfull \hbox (badness 10000) in paragraph at lines 744--747
+[44] [45] [46] [47] [48]
+Underfull \hbox (badness 10000) in paragraph at lines 820--823
 
  []
 
-[45]
-Underfull \hbox (badness 10000) detected at line 753
+[49]
+Underfull \hbox (badness 10000) detected at line 829
  []$[]  \OML/cmm/m/it/12 L\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 y\OMS/cmsy/m/n/12 j
 \OML/cmm/m/it/12 ^^L\OT1/cmr/m/n/12 ) = [] [] [] = []\OML/cmm/m/it/12 :  $ 
  []
 
 
-Overfull \hbox (11.17003pt too wide) detected at line 759
+Overfull \hbox (11.17003pt too wide) detected at line 835
  []$[]  [] \OT1/cmr/m/n/12 = [] \OML/cmm/m/it/12 y[] \OMS/cmsy/m/n/12 ^^@ [] \O
 ML/cmm/m/it/12 e[] \OT1/cmr/m/n/12 = [] \OML/cmm/m/it/12 y[] \OMS/cmsy/m/n/12 ^
 ^@ [] \OML/cmm/m/it/12 e[]e[] \OT1/cmr/m/n/12 = [] \OML/cmm/m/it/12 y[] \OMS/cm
@@ -779,20 +779,20 @@ sy/m/n/12 ^^@ \OML/cmm/m/it/12 e[] [] \OT1/cmr/m/n/12 = 0\OML/cmm/m/it/12 :  $
 
  []
 
-[46] [47] (./unified_estimation_and_inference.bbl
+[50] [51] (./unified_estimation_and_inference.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [48] (./unified_estimation_and_inference.aux)
+) [52] (./unified_estimation_and_inference.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3029 strings out of 492649
- 45276 string characters out of 6129622
- 123725 words of memory out of 5000000
- 6864 multiletter control sequences out of 15000+600000
+ 3035 strings out of 492649
+ 45319 string characters out of 6129622
+ 123785 words of memory out of 5000000
+ 6870 multiletter control sequences out of 15000+600000
  13867 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,13n,38p,2075b,226s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -813,11 +813,11 @@ ve/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texliv
 e/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive
 /2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/tex
 live/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on unified_estimation_and_inference.pdf (48 pages, 362747 bytes)
+Output written on unified_estimation_and_inference.pdf (52 pages, 373057 bytes)
 .
 PDF statistics:
- 285 PDF objects out of 1000 (max. 8388607)
- 195 compressed objects within 2 object streams
+ 299 PDF objects out of 1000 (max. 8388607)
+ 204 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
