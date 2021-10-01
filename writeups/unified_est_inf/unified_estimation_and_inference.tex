@@ -759,8 +759,8 @@ $$\V(\sqrt{n} \hat{\beta}) = \E\left[ \V(\sqrt{n}\hat{\beta} | X ) \right] + \V 
 $$ \V(\hat{\beta} | X) = \frac{ 1 }{n \left(\overline{x^2} - [\bar{x}]^2 \right)},$$ and so $$\V( \sqrt{n} \hat{\beta} | X ) = \frac{1}{\overline{x^2} - [\bar{x}]^2}.$$ Next, because $\hat{\beta}$ is an unbiased estimator of $\beta$, we have that
 $$ \E( \sqrt{n} \hat{\beta} | X ) = \sqrt{n} \E(\hat{\beta}|X)  = \sqrt{n} \beta.$$ Applying law of total variance,
 $$\V(\sqrt{n}\hat{\beta}) = \E\left[ \frac{1}{ \overline{x^2} - (\bar{x})^2} \right] + n \V(\beta) = \E\left[ \frac{1}{ \overline{x^2} - (\bar{x})^2} \right].$$
-Let the random variable $T_i$ be defined by
-$$T_j = \frac{1}{j}\sum_{i=1}^j x_i^2 - \left(\frac{1}{j} \sum_{i=1}^j x_i \right)^2.$$ We have by LLN that
+Let the random variable $T_n$ be defined by
+$$T_n = \frac{1}{n}\sum_{i=1}^n x_i^2 - \left(\frac{1}{n} \sum_{i=1}^n x_i \right)^2.$$ We have by LLN that
 $$\{ T_j \}_{j=1}^\infty \xrightarrow{a.s.} \V(x_i) = \pi (1-\pi).$$
 Moreover, 
 $$T_j \leq \frac{1}{j} \sum_{i=1}^j x_i^2 \leq \frac{1}{j} \sum_{i=1}^j 1 = 1.$$
@@ -789,20 +789,42 @@ Therefore, (\ref{lotv_1}) evaluates to
 \begin{equation}\label{var_2}
  \V(\hat{\beta}^m_1) = \E\left( \frac{ 1 }{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} \right) + (\beta^m_1)^2 \V \left( \frac{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}} ) p_i}{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2}\right).
  \end{equation}
-  % Multiplying by $n$,
-%$$ \V \left( \sqrt{n} \hat{\beta}^m_1 \right) =  \E\left( \frac{1}{ (1/n) \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2}\right) + [\beta_1^m]^2 \V \left(  \right)  $$
-To evaluate the second term of (\ref{var_2}), we apply the law of total variance again. Denote $\hat{P} = [\hat{p}_1, \dots, \hat{p}_n]^T,$ and let
-$$ X_n = \frac{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}} ) p_i}{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} = \sum_{i=1}^n c_i p_i.$$ We have that 
+
+\subsection{Computing $\P(p_i |\hat{p}_i)$}
+
+To evaluate the variance above (\ref{var_2}), we must compute $\P(p_i = 1 | \hat{p}_i = 0)$ and $\P(p_i = 1 | \hat{p}_i = 1).$ Fix $\pi = 1/2$. Bayes' rule implies that 
+$$\P\left( p = 1 | \hat{p} = 1 \right) = \frac{ \P( \hat{p} = 1 | p = 1) \P( p = 1 )}{\P( \hat{p} = 1)}.$$
+Now,
+\begin{multline*} \P(\hat{p} = 1 | p = 1) \P(p=1) =  \P( \beta_1^g + \tau \geq c ) (1/2) = \P( \tau \geq c - \beta^g_1 )(1/2) \\ = (1/2) \left(\int_{c - \beta^g_1}^\infty f\right).
+\end{multline*}
+Further,
+\begin{multline*}
+\P( \hat{p} = 1) = \P( \hat{p} = 1 | p = 0) \P(p = 0) + \P(\hat{p} = 1 | p = 1) \P(p = 1) \\ = (1/2) \P( \tau \geq c) + (1/2) \P( \tau + \beta^g_1 \geq c) = (1/2) \left( \int_{c}^\infty  f \right) + (1/2) \left(\int_{c - \beta_1^g}^\infty f\right).
+\end{multline*}
+Therefore,
+\begin{equation}\label{cond_phat1}
+\P(p = 1 | \hat{p} = 1) = \frac{ \int_{c - \beta^g_1}^\infty f }{ \int_c^\infty f + \int_{c - \beta^g_1}^\infty f}.
+\end{equation}
+Next, $$\P(\hat{p} = 1 | p = 0)\P(p = 0) = \P( \tau \geq c )(1/2)  = (1/2) \int_c^\infty f.$$
+Further,
+\begin{multline*}
+\P( \hat{p} = 0) = 1 - \P(\hat{p} = 1) = (1/2) - (1/2) \left( \int_c^\infty f \right) + (1/2) - (1/2) \left( \int_{c - \beta_1^g}^\infty f \right) \\ (1/2) \left( \int_{-\infty}^c f \right) + (1/2) \left( \int_{-\infty}^{c - \beta_1^g} f \right).
+\end{multline*}
+Therefore,
+$$\P\left( p = 1 | \hat{p} = 0 \right) = \frac{ \int_{c}^{\infty} f }{ \int_{-\infty}^c f + \int_{-\infty}^{c - \beta_1^g} f}.$$
+\subsection{Special case: $c = \beta_1^g = 0$ and $\pi = 1/2$}
+
+We now evaluate $(\ref{var_2}),$ setting $c = \beta_1^g = 0$ and $\pi = 1/2$ for simplicity. In this case we have that $\P\left(p_i = 1 | \hat{p}_i = 1 \right) = \P(p_i = 1 | \hat{p}_i = 0) = 1/2.$  To evaluate the second term of (\ref{var_2}), we apply the law of total variance again. Denote $\hat{P} = [\hat{p}_1, \dots, \hat{p}_n]^T,$ and let $$ X_n = \frac{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}} ) p_i}{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} = \sum_{i=1}^n c_i p_i.$$ We have that 
 \begin{equation}\label{var_3}
 \V(X_n)  = \E \left(\V( X_n | \hat{P} )\right) + \V \left( \E (X_n | \hat{P})\right).
 \end{equation} Now,
-$$\V \left( X_n | \hat{P} \right) = \sum_{i=1}^n c_i^2 \V(p_i) = (\pi)(1-\pi) \sum_{i=1}^n c_i^2 = \frac{ \pi(1-\pi) }{ \sum_{i=1}^n ( \hat{p}_i - \bar{ \hat{p}})^2}.$$
+$$\V \left( X_n | \hat{P} \right) = \sum_{i=1}^n c_i^2 \V(p_i  | \hat{p}_i ) = (\pi)(1-\pi) \sum_{i=1}^n c_i^2 = \frac{ \pi(1-\pi)}{\sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2}.$$
 Next,
 $$ \E \left( X_n | \hat{P} \right) = \E\left( \sum_{i=1}^n c_i p_i | \hat{P} \right) = \pi \sum_{i=1}^n c_i = 0.$$
 Therefore, (\ref{var_3}) evaluates to
-$$ \V(X_n) = \E \left( \frac{ 1(1-\pi) }{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} \right) + \V \left(0\right)  =  \E \left( \frac{ 1(1-\pi) }{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} \right).$$ Next, (\ref{var_2}) evaluates to
+$$ \V(X_n) = \E \left( \frac{ \pi(1-\pi) }{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} \right) + \V \left(0\right)  =  \E \left( \frac{ \pi(1-\pi) }{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} \right).$$ Next, (\ref{var_2}) evaluates to
 \begin{multline*}
- \V(\hat{\beta}^m_1) = \E \left( \frac{ 1 }{\sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} \right) + \E \left( \frac{(\beta_1^m)^2 \pi(1-\pi)}{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} \right) \\ =[1+(\beta_1^m)^2 \pi(1-\pi)] \E \left( \frac{1}{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2 } \right),
+\V(\hat{\beta}^m_1) = \E \left( \frac{ 1 }{\sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} \right) + \E \left( \frac{(\beta_1^m)^2 \pi(1-\pi)}{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2} \right) \\ =[1+(\beta_1^m)^2 \pi(1-\pi)] \E \left( \frac{1}{ \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})^2 } \right),
 \end{multline*}
 or
 \begin{equation}\label{var_4}
@@ -814,7 +836,18 @@ $$\{ T_n\}_{n=1}^\infty \xrightarrow{a.s.} \V(\hat{p}_i) = \E(\hat{p}_i)( 1 - \E
 Moreover, 
 $$T_n\leq \frac{1}{n} \sum_{i=1}^n \hat{p}_i^2 \leq \frac{1}{n} \sum_{i=1}^n 1 = 1.$$
 Thus, by the continuous mapping theorem and bounded convergence theorem,
-$$\lim_{n \to \infty} \V(\sqrt{n} \hat{\beta}) \xrightarrow{a.s.} [1 + (\beta^m_1)^2 \pi(1-\pi)] \left( \frac{1}{\lim_{n\to\infty} T_n} \right) = \frac{ 1 + (\beta^m_1)^2 \pi(1-\pi) }{ \E(\hat{p}_i) \E\left(1 - \E(\hat{p}_i)\right)}.$$
+$$\lim_{n \to \infty} \V(\sqrt{n} \hat{\beta}) \xrightarrow{a.s.} [1 + (\beta^m_1)^2 \pi(1-\pi)] \left( \frac{1}{\lim_{n\to\infty} T_n} \right) = \frac{ 1 + (\beta^m_1)^2 \pi(1-\pi) }{ \E(\hat{p}_i) \left(1 - \E(\hat{p}_i)\right)}.$$ Plugging in $\pi = 1/2, c = 0,$ and $\beta^g_1 = 0,$ we get $5$ as our answer.
+\subsection{Lower bound on variance}
+
+We can obtain a simple lower bound on the variance. We have by (\ref{var_2}) that
+$$\V\left( \hat{\beta}^m_1 \right) \geq \E \left( \frac{1}{ \sum_{i=1}^n ( \hat{p}_i - \bar{\hat{p}})^2 }\right).$$ This inequality is an equality under the null hypothesis (i.e., $\beta^m_1 = 0$). Using arguments similar to those above,
+$$\lim_{n \to \infty} \V( \sqrt{n} \hat{\beta}^m_1) \geq \frac{1}{ \E(\hat{P}_i) (1 - \E(\hat{P}_i))}.$$ Denote
+\begin{multline*}
+v(c,\beta^g,\pi) = \frac{1}{ \E[ \hat{P}_i ] ( 1- \E[\hat{P}_i])} \\ = \frac{1}{\left[ (1-\pi)  \left( \int_{-\infty}^{-c} f \right)+ \pi \left( \int_{-\infty}^{\beta - c} f\right) \right] \left[  (1 - \pi) \left( \int_{-\infty}^c f \right) + \pi \left( \int_{-\infty}^{c- \beta} f\right)\right]}.
+\end{multline*}
+We see that
+$$\lim_{c \to \infty} v(c,\beta^g_1,\pi) = \lim_{c \to -\infty} v(c, \beta^g_1, \pi) = \infty.$$ In other words, the variance of $\sqrt{n}\hat{\beta}^m_1$ grows without bound as we pick a large (or large negative) threshold $c$. Thus, the strategy of choosing a large threshold to reduce bias leads to high variance.
+
 \section{Fitting mean plus offset models}
 
 We derive strategies for quickly fitting mean plus offset models in the Gaussian, Poisson, and negative binomial case.
