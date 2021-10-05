@@ -848,6 +848,52 @@ v(c,\beta^g,\pi) = \frac{1}{ \E[ \hat{P}_i ] ( 1- \E[\hat{P}_i])} \\ = \frac{1}{
 We see that
 $$\lim_{c \to \infty} v(c,\beta^g_1,\pi) = \lim_{c \to -\infty} v(c, \beta^g_1, \pi) = \infty.$$ In other words, the variance of $\sqrt{n}\hat{\beta}^m_1$ grows without bound as we pick a large (or large negative) threshold $c$. Thus, the strategy of choosing a large threshold to reduce bias leads to high variance.
 
+\subsection{No-intercept model}
+
+We derive the limiting variance of the thresholding method in the no-intercept model. Consider the following model:
+
+$$
+\begin{cases}
+m_i = \beta_m p_i + \ep_i \\
+g_i = \beta_g p_i + \tau_i \\
+p_i \sim \textrm{Bern}(\pi) \\
+\ep_i, \tau_i \sim N(0,1) \\
+p_i \indep \tau_i \indep \ep_i
+\end{cases}
+$$
+Define $$\hat{p}_i = \mathbb{I}\left( g_i \geq c \right)$$ for some $c > 0$. The thresholding estimator is
+$$\hat{\beta} = \frac{\sum_{i=1}^n \hat{p}_i m_i}{\sum_{i=1}^n \hat{p}_i^2}.$$
+We have that
+$$ \V(\hat{\beta}| p, \tau ) = \frac{ \sum_{i=1}^n \hat{p}_i^2 \V(m_i | \tau_i, p_i)}{ \left( \sum_{i=1}^n \hat{p}^2_i \right)^2 } = \frac{1}{\sum_{i=1}^n \hat{p}_i^2}.$$ Furthermore,
+$$\E(\hat{\beta} | p, \tau)  = \frac{ \sum_{i=1}^n \hat{p}_i m_i}{ \sum_{i=1}^n \hat{p}^2_i} = \frac{\sum_{i=1}^n \hat{p}_i \beta_m p_i }{\sum_{i=1}^n \hat{p}_i^2} = \beta_m \left( \frac{\sum_{i=1}^n \hat{p}_i p_i}{\sum_{i=1}^n \hat{p}_i^2} \right) .$$ Thus, by law of total variance,
+$$ \V(\hat{\beta}) = \E \left(\frac{ 1 }{ \sum_{i=1}^n \hat{p}_i^2}\right) + \beta_m^2 \V\left(\frac{\sum_{i=1}^n \hat{p}_i p_i}{\sum_{i=1}^n \hat{p}_i^2} \right).$$
+Now,
+$$\beta_m \V\left( \frac{\sum_{i=1}^n \hat{p}_i p_i}{\sum_{i=1}^n \hat{p}_i^2}\right) = \frac{\beta_m}{ \left(\sum_{i=1}^n \hat{p}_i^2 \right)^2 } \V \left( \sum_{i=1}^n \hat{p}_i p_i \right).$$
+% \begin{multline*}
+% \V \left( \sum_{i=1}^n \hat{p}_i p_i \right) = \E \left[ \left( \sum_{i=1}^n \hat{p}_i p_i \right)^2\right] - \left[ \E \left( \sum_{i=1}^n \hat{p}_i p_i \right) \right]^2 \\ = \E \left[ \sum_{i=1}^n \sum_{j=1}^n \hat{p}_i p_i \hat{p}_j p_j \right] - \left[ \sum_{i=1}^n \E(\hat{p}_i p_i) \right]^2 \\ = \sum_{i=1}^n \sum_{j=1}^n \E[ \hat{p}_i p_i] \E[ \hat{p}_j p_j] - \sum_{i=1}^n \sum_{j=1}^n \E( \hat{p}_i p_i) \E(\hat{p}_j p_j).
+% \end{multline*}
+Next, $\hat{p}_i p_i$ is a Bernoulli random variable. We therefore can calculate its variance by calculating its mean:
+$$
+\E\left[ \hat{p}_i p_i \right]  = \E\left( \E\left[ \hat{p}_i p_i | p_i \right]\right) = \E \left( p_i \P( \tau_i \geq c - \beta_g p_i ) \right) = \pi\P( \tau_i \geq c - \beta_g) = \omega \pi.
+$$
+Thus, $$\V[\hat{p}_ip_i] = \omega \pi (1 - \omega \pi).$$ Because the $p_i$s are independent, we have
+$$ \V \left( \sum_{i=1}^n \hat{p}_i p_i \right) = n \omega \pi (1 - \omega \pi).$$
+We can rewrite $\V(\hat{\beta})$ as 
+$$ \V(\hat{\beta}) = \E \left( \frac{1}{\sum_{i=1}^n \hat{p}_i^2} \right) + \frac{n \beta_m \omega \pi (1 - \omega \pi)}{ \left(\sum_{i=1}^n \hat{p}_i \right)^2}.$$ Multiplying the above by $n$,
+$$ \V(\sqrt{n} \hat{\beta}) = \E \left( \frac{1}{ (1/n) \sum_{i=1}^n \hat{p}_i^2 } \right) + \frac{ \beta_m \omega \pi (1 - \omega \pi) }{ \left( (1/n) \sum_{i=1}^n \hat{p}_i^2 \right)^2}.$$
+
+Taking the limit,
+$$ \lim_{n \to \infty} \V(\sqrt{n} \hat{\beta}) = \frac{1}{\E[ \hat{p}_i^2]} + \frac{ \beta_m \omega \pi (1 - \omega \pi) }{ \E[\hat{p}_i^2]^2} = \frac{1}{\E[ \hat{p}_i]} + \frac{\beta_m^2 \omega \pi (1 - \omega \pi)}{\E[\hat{p}_i]^2}.$$
+
+Next, we derive the limit of $\hat{\beta}$ in the no-intercept model. We have that 
+$$\hat{\beta} = \frac{ (1/n) \sum_{i=1}^n \hat{p}_i m_i}{(1/n) \sum_{i=1}^n \hat{p}_i^2}.$$
+Now,
+$$\lim_{n \to \infty} (1/n) \sum_{i=1}^n \hat{p}_i^2 = \E\left[\hat{p}_i^2\right] = \E [\hat{p}_i] = \zeta (1 - \pi) + \omega \pi.$$
+Next,
+$$\lim_{n \to \infty} (1/n) \sum_{i=1} \hat{p}_i m_i = \E[\hat{p}_i m_i].$$ We have
+$$ \E[\hat{p}_i m_i] = \E[ \hat{p}_i (\beta_m p_i + \ep_i)] = \E[\beta_m \hat{p}_i p_i + \hat{p}_i \ep_i] = \beta_m \E[ \hat{p}_i p_i] = \beta_m \omega \pi.$$ Thus,
+$$ \hat{\beta} \xrightarrow{P} \frac{\beta_m \omega \pi}{ \zeta(1-\pi) + \omega \pi},$$ where $\zeta = \P\left(\tau_i \geq c \right)$ and $\omega = \P(\tau_i \geq c - \beta_g).$
+
 \section{Fitting mean plus offset models}
 
 We derive strategies for quickly fitting mean plus offset models in the Gaussian, Poisson, and negative binomial case.

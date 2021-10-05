@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  1 OCT 2021 00:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  4 OCT 2021 19:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -759,19 +759,19 @@ Overfull \hbox (5.8324pt too wide) detected at line 723
  []$[] \OT1/cmr/m/n/12 + [] [] [][]\OML/cmm/m/it/12 :  $ 
  []
 
-[44] [45] [46] [47] [48] [49] [50]
-Underfull \hbox (badness 10000) in paragraph at lines 853--856
+[44] [45] [46] [47] [48] [49] [50] [51] [52]
+Underfull \hbox (badness 10000) in paragraph at lines 899--902
 
  []
 
-[51]
-Underfull \hbox (badness 10000) detected at line 862
+[53]
+Underfull \hbox (badness 10000) detected at line 908
  []$[]  \OML/cmm/m/it/12 L\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 y\OMS/cmsy/m/n/12 j
 \OML/cmm/m/it/12 ^^L\OT1/cmr/m/n/12 ) = [] [] [] = []\OML/cmm/m/it/12 :  $ 
  []
 
 
-Overfull \hbox (11.17003pt too wide) detected at line 868
+Overfull \hbox (11.17003pt too wide) detected at line 914
  []$[]  [] \OT1/cmr/m/n/12 = [] \OML/cmm/m/it/12 y[] \OMS/cmsy/m/n/12 ^^@ [] \O
 ML/cmm/m/it/12 e[] \OT1/cmr/m/n/12 = [] \OML/cmm/m/it/12 y[] \OMS/cmsy/m/n/12 ^
 ^@ [] \OML/cmm/m/it/12 e[]e[] \OT1/cmr/m/n/12 = [] \OML/cmm/m/it/12 y[] \OMS/cm
@@ -779,11 +779,11 @@ sy/m/n/12 ^^@ \OML/cmm/m/it/12 e[] [] \OT1/cmr/m/n/12 = 0\OML/cmm/m/it/12 :  $
 
  []
 
-[52] [53] (./unified_estimation_and_inference.bbl
+[54] [55] (./unified_estimation_and_inference.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [54] (./unified_estimation_and_inference.aux)
+) [56] (./unified_estimation_and_inference.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -815,11 +815,11 @@ e/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/
 018/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/20
 18/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texliv
 e/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on unified_estimation_and_inference.pdf (54 pages, 392775 bytes)
+Output written on unified_estimation_and_inference.pdf (56 pages, 397877 bytes)
 .
 PDF statistics:
- 313 PDF objects out of 1000 (max. 8388607)
- 214 compressed objects within 3 object streams
+ 320 PDF objects out of 1000 (max. 8388607)
+ 219 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
