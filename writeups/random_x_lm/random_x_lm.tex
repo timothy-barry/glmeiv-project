@@ -76,6 +76,8 @@ p_i \indep \tau_i \indep \ep_i
 $$
 Define $$\hat{p}_i = \mathbb{I}\left( g_i \geq c \right)$$ for some $c > 0$. The thresholding estimator is
 $$\hat{\beta} = \frac{\sum_{i=1}^n \hat{p}_i m_i}{\sum_{i=1}^n \hat{p}_i^2}.$$
+
+
 We have that
 $$ \V(\hat{\beta}| p, \tau ) = \frac{ \sum_{i=1}^n \hat{p}_i^2 \V(m_i | \tau_i, p_i)}{ \left( \sum_{i=1}^n \hat{p}^2_i \right)^2 } = \frac{1}{\sum_{i=1}^n \hat{p}_i^2}.$$ Furthermore,
 $$\E(\hat{\beta} | p, \tau)  = \frac{ \sum_{i=1}^n \hat{p}_i m_i}{ \sum_{i=1}^n \hat{p}^2_i} = \frac{\sum_{i=1}^n \hat{p}_i \beta_m p_i }{\sum_{i=1}^n \hat{p}_i^2} = \beta_m \left( \frac{\sum_{i=1}^n \hat{p}_i p_i}{\sum_{i=1}^n \hat{p}_i^2} \right) .$$ Thus, by law of total variance,
@@ -107,5 +109,28 @@ $$\lim_{n \to \infty} (1/n) \sum_{i=1} \hat{p}_i m_i = \E[\hat{p}_i m_i].$$ We h
 $$ \E[\hat{p}_i m_i] = \E[ \hat{p}_i (\beta_m p_i + \ep_i)] = \E[\beta_m \hat{p}_i p_i + \hat{p}_i \ep_i] = \beta_m \E[ \hat{p}_i p_i] = \beta_m \omega \pi.$$ Thus,
 $$ \hat{\beta} \xrightarrow{P} \frac{\beta_m \omega \pi}{ \zeta(1-\pi) + \omega \pi},$$ where $\zeta = \P\left(\tau_i \geq c \right)$ and $\omega = \P(\tau_i \geq c - \beta_g).$
 
+\subsection{CLT approach to errors-in-variables}
+Let 
+$$ T_i = \hat{p}_i (m_i - l \hat{p}_i) = \hat{p}_im_i - l \hat{p}^2_i = \hat{p}_i m_i - l \hat{p}_i,$$ where
+$$l = \frac{\beta_m \omega \pi}{\zeta (1 - \pi) + \omega \pi}. $$
+We need to compute the expectation and variance of $T_i$. First, expectation:
+\begin{multline*}
+\E\left( \hat{p}_i m_i - l \hat{p}_i^2 \right) = \E [ \hat{p}_i m_i ] - l \E [\hat{p}_i] = \beta_m \omega \pi - l ( \zeta (1 - \pi) + \omega \pi ) \\ = \beta_m \omega \pi - \beta_m \omega \pi = 0.
+\end{multline*}
+Second, variance. Observe that
+$$ \E \left( \left[ \hat{p}_i m_i - l \hat{p}_i \right]^2 \right) = \E [\hat{p}_i m_i^2] - 2 l \E[m_i \hat{p}_i] + l^2 \E[\hat{p}_i].$$ We take the first two terms one-at-a-time:
+\begin{itemize}
+\item[1.] \begin{multline*}
+\E \left[ \hat{p}_i( \beta_m p_i + \ep_i )^2 \right] = \E\left[ \hat{p}_i \left( \beta_m^2 p_i^2 + 2 \beta_m p_i \ep_i + \ep_i^2 \right)  \right] \\ = \E\left[ \hat{p}_i p_i \beta^2_m + 2 \beta_m p_i \hat{p}_i \ep_i + \hat{p}_i \ep_i^2 \right] \\ = \beta^2_m \E[ \hat{p}_i p_i] + 2 \beta_m \E[p_i\hat{p}_i] \E[\ep_i] + \E[\hat{p}_i] \E[ \ep^2_i ] \\ = \beta^2_m \E[ \hat{p}_i p_i] + \E[\hat{p}_i] = \beta^2_m \omega \pi + \E[ \hat{p}_i ] 
+\end{multline*}
+\item[2.] $l \E[m \hat{p}_i] = l \beta_m \omega \pi.$
+\end{itemize}
+Summing together,
+$$\V(T_i) = \beta^2_m\omega\pi + \E[\hat{p}_i] - 2 l \beta_m \omega \pi + l^2 \E[\hat{p}_i].$$
+By CLT,
+$$\frac{1}{\sqrt{n}} \sum_{i=1}^n T_i \xrightarrow{d} N(0, V(T_i)).$$
+ By LLN, $$ \frac{1}{n} \sum_{i=1}^n \hat{p}_i \xrightarrow{P} \E(\hat{p}_i).$$
+ By Slutsky's Theorem,
+ $$\sqrt{n} (\hat{\beta} - l) \xrightarrow{d} N\left(0, \frac{\V(T_i)}{\E^2(\hat{p}_i)}\right).$$
 
 \end{document}

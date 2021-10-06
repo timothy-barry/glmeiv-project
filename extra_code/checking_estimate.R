@@ -48,10 +48,8 @@ var(sqrt(n) * beta_1_hats)
 1/(pi* (1 - pi))
 }
 
-
 # theoretical
 z <- 1 - stats::pnorm(c)
 w <- 1 - stats::pnorm(c - g_beta_1)
 mean_phat <- z * (1 - pi) + w * pi
 var <- (1 + m_beta_1^2 * pi * (1 - pi))/(mean_phat * (1 - mean_phat))
-
