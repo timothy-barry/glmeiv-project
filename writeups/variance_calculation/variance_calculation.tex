@@ -1,0 +1,116 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{graphicx} 
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage[caption = false]{subfig}
+\usepackage{/Users/timbarry/optionFiles/mymacros}
+
+\begin{document}
+\noindent
+Tim\\
+\begin{center}
+\textbf{Limiting variance of $\hat{\beta}$ random design for both non-EIV and EIV models.}
+\end{center}
+
+\section{Non-EIV}
+Suppose we observe data $(x_1, y_1), \dots, (x_n, y_n)$ from the following model:
+$$
+\begin{cases}
+y_i = \beta_0 + \beta x_i + \epsilon_i \\
+x_i \sim X \\
+\epsilon_i \sim N(0,1) \\
+x_i \indep \epsilon_i.
+\end{cases}
+$$
+Let the estimator $\hat{\beta}$ of $\beta$ be given by
+$$\hat{\beta} = \frac{ \sum_{i=1}^n (x_i - \bar{x}) y_i }{ \sum_{i=1}^n x_i^2 - \frac{1}{n}\left( \sum_{i=1}^n x_i \right)^2}.$$
+Our goal is to compute the limiting distribution
+$$\sqrt{n} \left( \hat{\beta} - \beta \right).$$
+Define
+$$ T= \sum_{i=1}^n (x_i - \bar{x}) y_i - \beta \left[ \sum_{i=1}^n x_i^2 - \frac{1}{n}\left( \sum_{i=1}^n x_i \right)^2 \right].$$
+\noindent
+\textbf{Manipulating $T$}: We first manipulate $T$. We have that
+\begin{multline*}
+T_i = \sum_{i=1}^n x_i y_i - \bar{x}\sum_{i=1}^n y_i - \beta \sum_{i=1}^n x_i^2 + \beta(1/n) (n \bar{x})^2 \\ = \left[ \sum_{i=1}^n x_iy_i - \beta \sum_{i=1}^n x_i^2 \right] + \left[ \beta n (\bar{x})^2 - \bar{x} \sum_{i=1}^n y_i \right] \\ = \sum_{i=1}^n x_i(y_i - \beta x_i) + \bar{x} \left( \bar{x} n \beta - \sum_{i=1}^n y_i \right) \\ = \sum_{i=1}^n x_i(y_i - \beta x_i) + \bar{x} \left( \sum_{i=1}^n \beta x_i - \sum_{i=1}^n y_i \right) \\ \sum_{i=1}^n x_i(y_i - \beta x_i) - \bar{x}\sum_{i=1}^n (y_i - \beta x_i) = \sum_{i=1}^n (x_i - \bar{x}) (y_i -\beta x_i) \\ = \sum_{i=1}^n (x_i - \bar{x})( y_i - \beta_0 - \beta x_i) = \sum_{i=1}^n (x_i - \bar{x})\ep_i = \sum_{i=1}^n (x_i - \E[x_i] + \E[x_i] - \bar{x}) \ep_i \\ = \sum_{i=1}^n (x_i - \E[x_i]) \ep_i + \sum_{i=1}^n ( \E[x_i] - \bar{x}) \ep_i \\ = \sum_{i=1}^n (x_i - \E[x_i]) \ep_i - (\bar{x} - \E[x_i]) \sum_{i=1}^n \ep_i.
+\end{multline*}
+\noindent
+\textbf{Writing down limiting distribution}:
+We can express $$\sqrt{n}(\hat{\beta} - \beta)$$ as
+\begin{multline*}
+\sqrt{n}(\hat{\beta} - \beta) = \sqrt{n} \left[ \frac{\sum_{i=1}^n (x_i - \bar{x}) y_i }{ \sum_{i=1}^n x_i^2 - \frac{1}{n}\left(\sum_{i=1}^n x_i \right)^2} -\frac{ \beta  \left[\sum_{i=1}^n x_i^2 - \frac{1}{n}\left(\sum_{i=1}^n x_i \right)^2 \right]}{\sum_{i=1}^n x_i^2 - \frac{1}{n}\left( \sum_{i=1}^n x_i \right)^2} \right] \\ = \sqrt{n} \left[\frac{(1/n)\sum_{i=1}^n (x_i - \E[x_i])\ep_i - (\bar{x} - \E[x_i]) (1/n) \sum_{i=1}^{n} \ep_i}{(1/n) \sum_{i=1}^n x_i^2 - \left((1/n) \sum_{i=1}^n x_i \right)^2} \right] \\ =  \left[ \frac{ (1/\sqrt{n})\sum_{i=1}^n (x_i - \E[x_i])\ep_i - (\bar{x} - \E[x_i]) (1/\sqrt{n}) \sum_{i=1}^{n} \ep_i }{ (1/n) \sum_{i=1}^n x_i^2 - \left((1/n) \sum_{i=1}^n x_i \right)^2 } \right].
+\end{multline*}
+\\ \noindent
+\textbf{Applying theorems}:
+
+\begin{itemize}
+\item[1.] We have that $$\E\left( (x_i - \E[x_i]) \ep_i\right] = 0$$ and $$ V\left[( x_i - \E[x_i]) \ep_i \right] = \E \left[ \V \left(( x_i - \E[x_i] )\ep_i\right) | \ep_i \right] = \E \left[ (x_i - \E[x_i])^2 \right] = \V(x_i).$$ Therefore, by CLT,
+$$ (1/\sqrt{n}) \sum_{i=1}^n (x_i - \E[x_i]) \ep_i \xrightarrow{d} N(0, \V[x_i]).$$
+\item[2.] $$( \bar{x} - \E[x_i]) \xrightarrow{P} 0.$$
+\item[3.] $$ (1/\sqrt{n}) \sum_{i=1}^n \ep_i \xrightarrow{d} N(0,1).$$
+\item[4.] Combining (2) and (3) yields
+$$ (\bar{x} - \E[x_i]) (1/\sqrt{n}) \sum_{i=1}^n \ep_i \xrightarrow{P} 0.$$
+\item[5.] Combining (1) and (4) yields (by Slutsky's theorem)
+$$ (1/\sqrt{n})\sum_{i=1}^n (x_i - \E[x_i])\ep_i - (\bar{x} - \E[x_i]) (1/\sqrt{n}) \sum_{i=1}^{n} \ep_i \xrightarrow{d} N( 0, V[x_i]).$$
+\item[6.] LLN implies that
+$$ (1/n) \sum_{i=1}^n x_i^2 - \left((1/n) \sum_{i=1}^n x_i \right)^2 \xrightarrow{P} \V[x_i].$$
+\item[7.] Therefore, Slutsky's theorem implies that
+$$\sqrt{n} \left( \hat{\beta} - \beta \right) \xrightarrow{d} N \left(0, \frac{1}{V[x_i]}\right).$$
+\end{itemize}
+
+\section{EIV}
+
+Next, consider the errors-in-variables model:
+$$
+\begin{cases}
+m_i = \beta^m_0 + \beta^m_1 p_i + \ep_i \\
+g_i = \beta^g_0 + \beta^g_1 p_i + \tau_i \\
+p_i \sim \textrm{Bern}(\pi) \\
+\ep_i, \tau_i \sim N(0,1) \\
+p_i \indep \tau_i \indep \ep_i
+\end{cases}
+$$
+
+Define $$\hat{p}_i = \mathbb{I}\left( g_i \geq c \right)$$ for some $c > 0$. The thresholding estimator is
+$$\hat{\beta} = \frac{\sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})m_i }{\sum_{i=1}^n \hat{p}_i^2 - (1/n) \left( \sum_{i=1}^n \hat{p}_i \right)^2}.$$
+Our goal is to compute the limiting distribution
+$$ \sqrt{n} \left(\hat{\beta}^m_1 - l \right),$$ where $l$ is the limit (in probability) of $\hat{\beta}^m_1$:
+$$\hat{\beta}^m_1 \xrightarrow{P} \frac{\beta^m_1 \pi \left(\omega - \E[\hat{p}_i ]\right)}{\E[\hat{p}_i ](1 - \E[\hat{p}_i])} := l.$$
+We have that
+\begin{multline*}
+\hat{\beta}^m_1 -  l = \hat{\beta}^m_1 - l \frac{\sum_{i=1}^n \hat{p}_i^2 - (1/n) \left( \sum_{i=1}^n \hat{p}_i \right)^2}{ \sum_{i=1}^n \hat{p}_i^2 - (1/n) \left( \sum_{i=1}^n \hat{p}_i \right)^2} \\ = \frac{\sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})m_i - l \left[ \sum_{i=1}^n \hat{p}_i^2 - (1/n) \left( \sum_{i=1}^n \hat{p}_i \right)^2 \right] }{\sum_{i=1}^n \hat{p}_i^2 - (1/n) \left( \sum_{i=1}^n \hat{p}_i \right)^2}.
+\end{multline*}
+After doing some algebra, the numerator of $\sqrt{n}( \hat{\beta}^m_1 - l )$ becomes:
+\begin{multline}\label{limit_1}
+\frac{1}{\sqrt{n}} \left[\sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})m_i - l \left[ \sum_{i=1}^n \hat{p}_i^2 - (1/n) \left( \sum_{i=1}^n \hat{p}_i \right)^2 \right] \right] \\ = \frac{1}{\sqrt{n}} \sum_{i=1}^n (\hat{p}_i - \bar{\hat{p}})(m_i - l \hat{p}_i) \\ = \frac{1}{\sqrt{n}} \sum_{i=1}^n ((\hat{p}_i - \E[\hat{p}_i]) - (\bar{\hat{p}}_i - \E[ \hat{p}_i]))\left( m_i - l \hat{p}_i \right) \\ = \frac{1}{\sqrt{n}} \sum_{i=1}^n \left( \hat{p}_i - \E[\hat{p}_i] \right) (m_i - l \hat{p}_i) - \left(\bar{\hat{p}}_i - \E[ \hat{p}_i ] \right) \frac{1}{\sqrt{n}}\sum_{i=1}^n (m_i - l \hat{p}_i).
+\end{multline}
+We evaluate the two sums of (\ref{limit_1}) separately. First, we have that
+\begin{multline}\label{lim_b}
+\left( \bar{\hat{p}} - \E[\hat{p}_i] \right) \frac{1}{\sqrt{n}} \sum_{i=1}^n (m_i - l \hat{p}_i) \\ = \left( \bar{\hat{p}} - \E[ \hat{p}_i] \right) \frac{1}{\sqrt{n}} \sum_{i=1}^n \left( (m_i - l\hat{p}_i) - \E[m_i - l \hat{p}_i] + \E[m_i - l \hat{p}_i] \right) \\ = \left( \bar{\hat{p}} - \E[ \hat{p}_i] \right) \frac{1}{\sqrt{n}} \left( \sum_{i=1}^n (m_i - l\hat{p}_i) - \E[m_i - l \hat{p}_i] \right) +  \E[m_i - l \hat{p}_i] \sqrt{n} (\bar{\hat{p}} - \E[ \hat{p}_i]).
+\end{multline}
+The first piece of (\ref{lim_b}) converges in probability to $0$, because $\V(m_i - l \hat{p}_i)$ exists. The second piece of (\ref{lim_b}) converges in distribution to $$N(0, \V(\hat{p}_i) \E[ m_i - l \hat{p}_i]^2)$$ by CLT. Returning to (\ref{limit_1}), we evaluate the limit of
+$$ \frac{1}{\sqrt{n}} \sum_{i=1}^n ( \hat{p}_i - \E[ \hat{p}_i])(m_i - l \hat{p}_i) := \frac{1}{\sqrt{n}} \sum_{i=1}^n X_i.$$ First, we compute $\E(X_i)$, which we do in four parts:
+\begin{itemize}
+\item[1.] $$ \E\left[ \hat{p}_i m_i \right] = \beta_0^m \E[\hat{P}_i] + \beta^m_1 \omega \pi = \frac{(1 - \E[\hat{p}_i])( \beta_0^m \E[\hat{p}_i] + \beta^m_1 \omega \pi  )}{(1 - \E[\hat{p}_i])}$$
+\item[2.] $$\E[l \hat{p}_i] = \frac{\beta_1^m \pi(\omega - \E[\hat{p}_i])}{1 - \E[\hat{p}_i]}$$
+\item[3.] $$\E[\hat{p}_i] \E[m_i] = \E[\hat{p}_i] \beta^m_0 + \E[\hat{p}_i] \pi \beta^m_1 = \frac{(1 - \E[\hat{p}_i])( \E[\hat{p}_i] \beta^m_0 + \E[\hat{p}_i] \pi \beta^m_1 )}{(1 - \E[\hat{p}_i])}$$
+\item[4.] $$ l \E[\hat{p}_i]^2 = \frac{ \E[\hat{p}_i] \beta^m_1 \pi \left( \omega - \E[ \hat{p_i}] \right)}{(1 - \E[\hat{p}_i])}$$
+\end{itemize}
+Adding the numerators of these fractions, we get
+\begin{multline*}
+(1 - \E[\hat{p}_i]) \E\left[X_i\right] = \textcolor{blue}{\beta^m_0 \E[ \hat{p}_i]} + \textcolor{red}{\beta^m_1\omega\pi} - \textcolor{green}{\E[\hat{p}_i]^2 \beta^m_0} - \textcolor{teal}{\E[\hat{p}_i] \beta^m_1 \omega \pi} - \textcolor{red}{\beta^m_1 \pi \omega} + \textcolor{violet}{\beta^m_1 \pi \E[\hat{p}_i]} \\ - \textcolor{blue}{\E[\hat{p}_i] \beta_0^m} - \textcolor{violet}{\E[\hat{p}_i] \pi \beta^m_1} + \textcolor{green}{\E[\hat{p}_i]^2 \beta_0^m} + \textcolor{brown}{\E[\hat{p}_i]^2 \pi \beta^m_1} + \textcolor{teal}{\E[\hat{p}_i] \beta^m_1 \pi \omega} - \textcolor{brown}{\E[\hat{p}_i]^2 \beta^m_1 \pi} = 0,
+\end{multline*}
+and so $\E[X_i] = 0.$ Because $\E[X_i] = 0$, we easily can apply CLT to the left side of $(\ref{limit_1})$ (after first computing the variance of $X_i$, which is not too hard).
+
+In conclusion, we can evaluate the distributional limits of the two pieces of (\ref{limit_1}). However, we cannot compute the limit of the sum, because Slutsky's Theorem does not apply to sums of random variables.
+
+% Next, we compute $V(X_i) = \E(X_i^2)$. We have that
+%\begin{multline*}
+%X_i^2 = \hat{p}_i m_i^2 - \textcolor{blue}{l \hat{p}_i m_i} - \E[\hat{p}_i] \hat{p_i} m_i^2 + l \E[\hat{p}_i] \hat{p}_i m_i \\ l \hat{p}_i m_i - l^2 \hat{p}_i - \E[\hat{p}_i] l \hat{p}_i m_i + l^2 \E[\hat{p}_i] \hat{p}_i \\ -\E[\hat{p}_i] \hat{p}_i m_i^2 + \E[\hat{p}_i] l \hat{p}_i m_i + \E[\hat{p}_i]^2 m_i^2 - \E[\hat{p}_i]^2 l m_i \hat{p}_i \\ + \E[ \hat{p}_i ] l \hat{p}_i m_i - l^2 \E[\hat{p}_i] \hat{p}_i- \E[ \hat{p}_i]^2 l m_i \hat{p}_i + l^2\E[\hat{p}_i]^2 \hat{p}_i \\ = 
+% \end{multline*}
+
+% \bibliographystyle{unsrt}
+% \bibliography{/Users/timbarry/Documents/optionFiles/library.bib}
+
+\end{document}

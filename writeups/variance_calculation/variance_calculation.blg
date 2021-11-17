@@ -1,17 +1,17 @@
 This is BibTeX, Version 0.99d (TeX Live 2018)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
-The top-level auxiliary file: unified_estimation_and_inference.aux
+The top-level auxiliary file: variance_calculation.aux
 The style file: unsrt.bst
 I couldn't open database file /Users/timbarry/Documents/optionFiles/library.bib
----line 97 of file unified_estimation_and_inference.aux
+---line 3 of file variance_calculation.aux
  : \bibdata{/Users/timbarry/Documents/optionFiles/library.bib
  :                                                           }
 I'm skipping whatever remains of this command
-I found no database files---while reading file unified_estimation_and_inference.aux
-Warning--I didn't find a database entry for "Louis1982"
+I found no \citation commands---while reading file variance_calculation.aux
+I found no database files---while reading file variance_calculation.aux
 You've used 0 entries,
             1791 wiz_defined-function locations,
-            447 strings with 3629 characters,
+            445 strings with 3587 characters,
 and the built_in function-call counts, 18 in all, are:
 = -- 0
 > -- 0
@@ -50,4 +50,4 @@ warning$ -- 0
 while$ -- 0
 width$ -- 0
 write$ -- 2
-(There were 2 error messages)
+(There were 3 error messages)
