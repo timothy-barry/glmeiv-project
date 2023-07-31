@@ -50,7 +50,9 @@ f(y_i; \beta) = \binom{y_i + r - 1}{y_i} \left( \frac{ e^{\beta} e^{o_i} }{ e^{\
 \end{multline*}
 The likelihood across the samples is
 $$ L(\beta; y) = \prod_{i=1}^n \binom{ y_i + r - 1 }{ y_i }  \frac{ e^{ (\beta \sum y_i)} e^{\left(\sum y_i o_i \right)} }{  \prod_{i} \left[ \left( e^\beta e^{o_i} + r \right)^{y_i} \right] } \frac{ r^{rn} }{ \left[ \prod_i e^{\beta} e^{o_i} + r \right]^r },$$ and the log-likelihood (up to a constant) is
- \begin{multline*} \mathcal{L}(\beta; y) = \beta \sum_i y_i - \sum_{i}  y_i \log\left( e^\beta e^{o_i} + r \right) - r \sum_{i=1}^n \log( e^{\beta} e^{o_i} + r ) \\ = \beta \sum_{i} y_i - \sum_{i} (y_i + r) \log ( e^\beta e^{o_i} + r ). \end{multline*} Differentiating in $\beta$ and setting equal to zero, we obtain the MLE equation
+ \begin{multline*} \mathcal{L}(\beta; y) = \beta \sum_i y_i - \sum_{i}  y_i \log\left( e^\beta e^{o_i} + r \right) - r \sum_{i=1}^n \log( e^{\beta} e^{o_i} + r ) \\ = \beta \sum_{i} y_i - \sum_{i} (y_i + r) \log ( e^\beta e^{o_i} + r ). \end{multline*} Differentiating in $\beta$, we obtain
+ $$S(\beta) := \frac{\partial \mathcal{L}(\beta; y) }{ \partial \beta } = \sum_{i=1}^n  y_i - e^\beta \sum_{i} \frac{(y_i + r)e^{o_i}}{ e^\beta e^{o_i} + r}.$$ 
+ Setting equal to zero, we obtain the MLE equation
  \begin{equation}\label{nb_mle_eq}
    e^\beta \sum_i \frac{ (y_i + r) e^{o_i} }{ e^\beta e^{o_i} + r  }  = \sum_i y_i. 
  \end{equation}
@@ -75,10 +77,18 @@ $$ L(\beta; y) = \prod_{i=1}^n \binom{ y_i + r - 1 }{ y_i }  \frac{ e^{ (\beta \
  $$ \frac{d^2 \mathcal{L}(\beta | y) }{d \beta^2} = - \sum_{i=1}^n \frac{ r e^{o_i + \beta}(r + y_i)}{ \left(e^{o_i + \beta} + r\right)^2 }.$$ Therefore, the Fisher information is
  \begin{multline*} I_n(\beta) = - \E \left[ \frac{d^2 \mathcal{L}(\beta | y) }{d \beta^2}  \right] = \sum_{i=1}^n \frac{ r e^{\beta + o_i} (r + e^{\beta + o_i} )}{ (e^{ \beta + o_i} + r )^2} = \sum_{i=1}^n \frac{ r e^{\beta + o_i} }{r + e^{\beta + o_i}}.
  \end{multline*}
-Interestingly, the Fisher information for $\beta$ depends on $r$, while the approximate MLE does not. The $z$-score for $\hat{\beta}^{(\textrm{NB})}$, computable analytically, is 
+Interestingly, the Fisher information for $\beta$ depends on $r$, while the approximate MLE does not. The Wald $z$-score for $\hat{\beta}^{(\textrm{NB})}$, computable analytically, is 
 \begin{equation}\label{z_score}
-z = \hat{\beta}/\sqrt{ 1 / I_n(\hat{\beta})}.
+z_\textrm{Wald} = \hat{\beta}/\sqrt{ 1 / I_n(\hat{\beta})}.
 \end{equation}
+
+\subsection{Score-based z-score}
+We also can compute the score-based z-score, defined as
+$$ z_\textrm{score} = S(\beta_0)/\sqrt{ I_n(\beta_0)},$$ where $\beta_0$ is the hypothesized value of $\beta$ under the null. We have that
+$$
+z_\textrm{score} = \frac{ \sum_{i=1}^n y_i - \sum_{i=1}^n \frac{y_ie^{o_i} + re^{o_i}}{r + e^{o_i}}}{\sqrt{\sum_{i=1}^n \frac{r e^{o_i}}{r + e^{o_i}}}}.
+$$
+
 \section{Application to SCEPTRE}
 
 For a given gene-gRNA pair, SCEPTRE fits $B = 500$ negative binomial mean-plus-offset models. Currently, SCEPTRE does this by fitting 500 univariate GLMs of expression onto thresholded perturbation (using distillations as offsets). % We might be able to accelerate SCEPTRE by instead using the asymptotic analytic formula (\ref{z_score}) to compute the $z$-score.
